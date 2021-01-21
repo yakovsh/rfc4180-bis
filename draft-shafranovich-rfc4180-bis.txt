@@ -4,8 +4,8 @@
 
 Network Working Group                                    Y. Shafranovich
 Internet-Draft                                  Nightwatch Cybersecurity
-Intended status: Informational                           18 January 2021
-Expires: 22 July 2021
+Intended status: Informational                           20 January 2021
+Expires: 24 July 2021
 
 
    Common Format and MIME Type for Comma-Separated Values (CSV) Files
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 July 2021.
+   This Internet-Draft will expire on 24 July 2021.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Shafranovich              Expires 22 July 2021                  [Page 1]
+Shafranovich              Expires 24 July 2021                  [Page 1]
 
 Internet-Draft                 rfc4180-bis                  January 2021
 
@@ -71,7 +71,7 @@ Table of Contents
      7.2.  Informative References  . . . . . . . . . . . . . . . . .   7
    Appendix A.  Changes since RFC 4180 . . . . . . . . . . . . . . .   7
    Appendix B.  Note to Readers  . . . . . . . . . . . . . . . . . .   7
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   7
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   8
 
 1.  Introduction
 
@@ -85,13 +85,13 @@ Table of Contents
    begun to use different MIME types for this format.  This RFC
    documents the format of comma separated values (CSV) files and
    formally registers the "text/csv" MIME type for CSV in accordance
-   with RFC 2048 [1].
+   with [RFC2048].
 
 2.  Definition of the CSV Format
 
    While there are various specifications and implementations for the
-   CSV format (for ex. [4], [5], [6] and [7])), there is no formal
-   specification in existence, which allows for a wide variety of
+   CSV format (for ex.  [CREATIVYST], [EDOCEO] and [ART])), there is no
+   formal specification in existence, which allows for a wide variety of
    interpretations of CSV files.  This section documents the format that
    seems to be followed by most implementations:
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Shafranovich              Expires 22 July 2021                  [Page 2]
+Shafranovich              Expires 24 July 2021                  [Page 2]
 
 Internet-Draft                 rfc4180-bis                  January 2021
 
@@ -140,14 +140,14 @@ Internet-Draft                 rfc4180-bis                  January 2021
        at all).  If fields are not enclosed with double quotes, then
        double quotes may not appear inside the fields.  For example:
 
-       "aaa","bbb","ccc" CRLF
+       "aaa","bbb","ccc"CRLF
        zzz,yyy,xxx
 
    6.  Fields containing line breaks (CRLF), double quotes, and commas
        should be enclosed in double-quotes.  For example:
 
        "aaa","b CRLF
-       bb","ccc" CRLF
+       bb","ccc"CRLF
        zzz,yyy,xxx
 
    7.  If double-quotes are used to enclose fields, then a double-quote
@@ -156,7 +156,7 @@ Internet-Draft                 rfc4180-bis                  January 2021
 
        "aaa","b""bb","ccc"
 
-   The ABNF grammar [2] appears as follows:
+   The ABNF grammar (as per [RFC5234]) appears as follows:
 
 
 
@@ -165,7 +165,7 @@ Internet-Draft                 rfc4180-bis                  January 2021
 
 
 
-Shafranovich              Expires 22 July 2021                  [Page 3]
+Shafranovich              Expires 24 July 2021                  [Page 3]
 
 Internet-Draft                 rfc4180-bis                  January 2021
 
@@ -186,20 +186,20 @@ Internet-Draft                 rfc4180-bis                  January 2021
 
    COMMA = %x2C
 
-   CR = %x0D ;as per section 6.1 of RFC 2234 {{RFC2234}}
+   CR = %x0D ;as per section B.1 of [RFC5234]
 
-   DQUOTE =  %x22 ;as per section 6.1 of RFC 2234 {{RFC2234}}
+   DQUOTE =  %x22 ;as per section B.1 of [RFC5234]
 
-   LF = %x0A ;as per section 6.1 of RFC 2234 {{RFC2234}}
+   LF = %x0A ;as per section B.1 of [RFC5234]
 
-   CRLF = CR LF ;as per section 6.1 of RFC 2234 {{RFC2234}}
+   CRLF = CR LF ;as per section B.1 of [RFC5234]
 
    TEXTDATA =  %x20-21 / %x23-2B / %x2D-7E
 
 3.  MIME Type Registration of text/csv
 
    This section provides the media-type registration application (as per
-   RFC 2048 [1].
+   [RFC2048].
 
    To: ietf-types@iana.org
 
@@ -221,7 +221,7 @@ Internet-Draft                 rfc4180-bis                  January 2021
 
 
 
-Shafranovich              Expires 22 July 2021                  [Page 4]
+Shafranovich              Expires 24 July 2021                  [Page 4]
 
 Internet-Draft                 rfc4180-bis                  January 2021
 
@@ -233,8 +233,8 @@ Internet-Draft                 rfc4180-bis                  January 2021
 
    Encoding considerations:
 
-      As per section 4.1.1. of RFC 2046 [3], this media type uses CRLF
-      to denote line breaks.  However, implementors should be aware that
+      As per section 4.1.1. of [RFC2046], this media type uses CRLF to
+      denote line breaks.  However, implementors should be aware that
       some implementations may use other values.
 
    Security considerations:
@@ -251,7 +251,7 @@ Internet-Draft                 rfc4180-bis                  January 2021
       Due to lack of a single specification, there are considerable
       differences among implementations.  Implementors should "be
       conservative in what you do, be liberal in what you accept from
-      others" (RFC 793 ([8]) when processing CSV files.  An attempt at a
+      others" ([RFC0793]) when processing CSV files.  An attempt at a
       common definition can be found in Section 2.
 
       Implementations deciding not to use the optional "header"
@@ -277,7 +277,7 @@ Internet-Draft                 rfc4180-bis                  January 2021
 
 
 
-Shafranovich              Expires 22 July 2021                  [Page 5]
+Shafranovich              Expires 24 July 2021                  [Page 5]
 
 Internet-Draft                 rfc4180-bis                  January 2021
 
@@ -318,54 +318,57 @@ Internet-Draft                 rfc4180-bis                  January 2021
 
 7.1.  Normative References
 
-   [1]        Freed, N., Klensin, J., and J. Postel, "Multipurpose
-              Internet Mail Extensions (MIME) Part Four: Registration
-              Procedures", RFC 2048, DOI 10.17487/RFC2048, November
-              1996, <https://www.rfc-editor.org/info/rfc2048>.
-
-   [2]        Crocker, D., Ed. and P. Overell, "Augmented BNF for Syntax
-              Specifications: ABNF", RFC 2234, DOI 10.17487/RFC2234,
-              November 1997, <https://www.rfc-editor.org/info/rfc2234>.
-
-
-
-
-
-
-
-Shafranovich              Expires 22 July 2021                  [Page 6]
-
-Internet-Draft                 rfc4180-bis                  January 2021
-
-
-   [3]        Freed, N. and N. Borenstein, "Multipurpose Internet Mail
+   [RFC2046]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part Two: Media Types", RFC 2046,
               DOI 10.17487/RFC2046, November 1996,
               <https://www.rfc-editor.org/info/rfc2046>.
 
+   [RFC2048]  Freed, N., Klensin, J., and J. Postel, "Multipurpose
+              Internet Mail Extensions (MIME) Part Four: Registration
+              Procedures", RFC 2048, DOI 10.17487/RFC2048, November
+              1996, <https://www.rfc-editor.org/info/rfc2048>.
+
+
+
+
+
+
+Shafranovich              Expires 24 July 2021                  [Page 6]
+
+Internet-Draft                 rfc4180-bis                  January 2021
+
+
+   [RFC5234]  Crocker, D., Ed. and P. Overell, "Augmented BNF for Syntax
+              Specifications: ABNF", STD 68, RFC 5234,
+              DOI 10.17487/RFC5234, January 2008,
+              <https://www.rfc-editor.org/info/rfc5234>.
+
 7.2.  Informative References
 
-   [4]        Repici, J., "HOW-TO: The Comma Separated Value (CSV) File
-              Format", 2010,
-              <http://www.creativyst.com/Doc/Articles/CSV/CSV01.htm>.
-
-   [5]        Edoceo, Inc., "Comma Separated Values (CSV) Standard File
-              Format", 2020, <https://edoceo.com/dev/csv-file-format>.
-
-   [6]        Shanaghy, O., "Documentation for Ricebridge CSV Manager",
-              February 2005,
-              <http://www.ricebridge.com/products/csvman/reference.htm>.
-
-   [7]        Raymond, E., "The Art of Unix Programming, Chapter 5",
+   [ART]      Raymond, E., "The Art of Unix Programming, Chapter 5",
               September 2003,
               <http://www.catb.org/~esr/writings/taoup/html/
               ch05s02.html>.
 
-   [8]        Postel, J., "Transmission Control Protocol", STD 7,
+   [CREATIVYST]
+              Repici, J., "HOW-TO: The Comma Separated Value (CSV) File
+              Format", 2010,
+              <http://www.creativyst.com/Doc/Articles/CSV/CSV01.htm>.
+
+   [EDOCEO]   Edoceo, Inc., "Comma Separated Values (CSV) Standard File
+              Format", 2020, <https://edoceo.com/dev/csv-file-format>.
+
+   [RFC0793]  Postel, J., "Transmission Control Protocol", STD 7,
               RFC 793, DOI 10.17487/RFC0793, September 1981,
               <https://www.rfc-editor.org/info/rfc793>.
 
 Appendix A.  Changes since RFC 4180
+
+   *  Updating RFC references to newever versions
+
+   *  Removing dead references
+
+   *  Incorporating existing errata
 
    *  TBD
 
@@ -383,16 +386,15 @@ Appendix B.  Note to Readers
    Full list of changes can be viewed via the IETF document tracker:
    https://tools.ietf.org/html/draft-shafranovich-rfc4180-bis
 
-Author's Address
 
 
 
-
-
-Shafranovich              Expires 22 July 2021                  [Page 7]
+Shafranovich              Expires 24 July 2021                  [Page 7]
 
 Internet-Draft                 rfc4180-bis                  January 2021
 
+
+Author's Address
 
    Yakov Shafranovich
    Nightwatch Cybersecurity
@@ -443,6 +445,4 @@ Internet-Draft                 rfc4180-bis                  January 2021
 
 
 
-
-
-Shafranovich              Expires 22 July 2021                  [Page 8]
+Shafranovich              Expires 24 July 2021                  [Page 8]

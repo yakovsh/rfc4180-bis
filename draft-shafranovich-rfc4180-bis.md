@@ -7,7 +7,7 @@ cat: info
 pi:
   sortrefs: 'yes'
   strict: 'yes'
-  symrefs: 'no'
+  symrefs: 'yes'
   toc: 'yes'
 author:
 - ins: Y. Shafranovich
@@ -29,14 +29,6 @@ informative:
         org: Edoceo, Inc.
     date: 2020
     target: https://edoceo.com/dev/csv-file-format
-  RICE:
-    title: Documentation for Ricebridge CSV Manager
-    author:
-        name: R. Rodger
-    author:
-        name: O. Shanaghy
-    date: February 2005
-    target: http://www.ricebridge.com/products/csvman/reference.htm
   ART:
     title: The Art of Unix Programming, Chapter 5
     author:
@@ -61,11 +53,11 @@ registered with IANA for CSV.  At the same time, various programs and
 operating systems have begun to use different MIME types for this
 format.  This RFC documents the format of comma separated values
 (CSV) files and formally registers the "text/csv" MIME type for CSV
-in accordance with RFC 2048 {{!RFC2048}}.
+in accordance with {{!RFC2048}}.
 
 # Definition of the CSV Format {#format}
 While there are various specifications and implementations for the
-CSV format (for ex. {{CREATIVYST}}, {{EDOCEO}}, {{RICE}} and {{ART}})), there is no formal
+CSV format (for ex. {{CREATIVYST}}, {{EDOCEO}} and {{ART}})), there is no formal
 specification in existence, which allows for a wide variety of
 interpretations of CSV files.  This section documents the format that
 seems to be followed by most implementations:
@@ -105,14 +97,14 @@ some programs, such as Microsoft Excel, do not use double quotes
 at all). If fields are not enclosed with double quotes, then
 double quotes may not appear inside the fields. For example:
 
-   "aaa","bbb","ccc" CRLF<br/>
+   "aaa","bbb","ccc"CRLF<br/>
    zzz,yyy,xxx
 
 6. Fields containing line breaks (CRLF), double quotes, and commas
 should be enclosed in double-quotes. For example:
 
    "aaa","b CRLF<br/>
-   bb","ccc" CRLF<br/>
+   bb","ccc"CRLF<br/>
    zzz,yyy,xxx
 
 7. If double-quotes are used to enclose fields, then a double-quote
@@ -121,7 +113,7 @@ another double quote. For example:
 
    "aaa","b""bb","ccc"
 
-The ABNF grammar {{!RFC2234}} appears as follows:
+The ABNF grammar (as per {{!RFC5234}}) appears as follows:
 
 ~~~~~~~~~~
 file = [header CRLF] record *(CRLF record) [CRLF]
@@ -140,13 +132,13 @@ non-escaped = *TEXTDATA
 
 COMMA = %x2C
 
-CR = %x0D ;as per section 6.1 of RFC 2234 {{!RFC2234}}
+CR = %x0D ;as per section B.1 of [RFC5234]
 
-DQUOTE =  %x22 ;as per section 6.1 of RFC 2234 {{!RFC2234}}
+DQUOTE =  %x22 ;as per section B.1 of [RFC5234]
 
-LF = %x0A ;as per section 6.1 of RFC 2234 {{!RFC2234}}
+LF = %x0A ;as per section B.1 of [RFC5234]
 
-CRLF = CR LF ;as per section 6.1 of RFC 2234 {{!RFC2234}}
+CRLF = CR LF ;as per section B.1 of [RFC5234]
 
 TEXTDATA =  %x20-21 / %x23-2B / %x2D-7E
 ~~~~~~~~~~
@@ -154,7 +146,7 @@ TEXTDATA =  %x20-21 / %x23-2B / %x2D-7E
 # MIME Type Registration of text/csv {#registration}
 
 This section provides the media-type registration application (as per
-RFC 2048 {{!RFC2048}}.
+{{!RFC2048}}.
 
 To: ietf-types@iana.org
 
@@ -179,7 +171,7 @@ Optional parameters: charset, header
 
 Encoding considerations:
 
-> As per section 4.1.1. of RFC 2046 {{!RFC2046}}, this media type uses CRLF
+> As per section 4.1.1. of {{!RFC2046}}, this media type uses CRLF
 > to denote line breaks. However, implementors should be aware that
 > some implementations may use other values.
 
@@ -197,7 +189,7 @@ Interoperability considerations:
 > Due to lack of a single specification, there are considerable
 > differences among implementations. Implementors should "be
 > conservative in what you do, be liberal in what you accept from
-> others" (RFC 793 ({{?RFC0793}}) when processing CSV files. An attempt at a
+> others" ({{?RFC0793}}) when processing CSV files. An attempt at a
 > common definition can be found in {{format}}. 
 
 > Implementations deciding not to use the optional "header"
@@ -254,6 +246,9 @@ A special thank you goes to L.T.S.
 
 --- back
 # Changes since RFC 4180
+- Updating RFC references to newever versions
+- Removing dead references
+- Incorporating existing errata
 - TBD
 
 # Note to Readers
