@@ -1,0 +1,22 @@
+name: build
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install build packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y make python3-pip git ruby-dev
+          sudo pip3 install xml2rfc
+          sudo gem install kramdown-rfc2629
+      - name: Build text output
+        run: make txt
+      - name: Build html output
+        run: make html
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: output
+          path: draft-shafranovich-rfc4180-bis.{txt,html}
