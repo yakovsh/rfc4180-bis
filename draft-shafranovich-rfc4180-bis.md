@@ -80,12 +80,12 @@ changes since the publication of {{!RFC4180}}):
    aaa,bbb,cccCRLF<br/>
    zzz,yyy,xxxCRLF
 
-2. The last record in the file may or may not have an ending line break. For example:
+2. The last record in the file MAY or MAY NOT have an ending line break. For example:
 
    aaa,bbb,cccCRLF<br/>
    zzz,yyy,xxx
 
-3. There may be an optional header line appearing as the first line
+3. There MAY be an optional header line appearing as the first line
 of the file with the same format as normal record lines. This
 header will contain names corresponding to the fields in the file
 and SHOULD contain the same number of fields as the records in
@@ -97,7 +97,7 @@ MIME type). For example:
    aaa,bbb,cccCRLF<br/>
    zzz,yyy,xxxCRLF
 
-4. Within the header and each record, there may be one or more
+4. Within the header and each record, there MAY be one or more
 fields, separated by commas. Each line SHOULD contain the same
 number of fields throughout the file. Spaces are considered part
 of a field and SHOULD NOT be ignored. The last field in the
@@ -105,9 +105,9 @@ record MUST NOT be followed by a comma. For example:
 
    aaa,bbb,ccc
 
-5. Each field may or may not be enclosed in double quotes (however
+5. Each field MAY or MAY not be enclosed in double quotes (however
 some programs, do not use double quotes at all). If fields are not
-enclosed with double quotes, then double quotes may not appear inside the fields.
+enclosed with double quotes, then double quotes MAY not appear inside the fields.
 Whitespace is allowed between the double quotes and commas/line breaks, and SHOULD
 BE ignored. For example:
 
@@ -134,7 +134,7 @@ has been changed to UTF-8 (as per {{!RFC6657}}).
 
 Although section 4.1.1. of {{!RFC2046}} defines CRLF to denote line breaks,
 implementers MAY recognize a single LF as a line break.
-However, some implementations may use other values.
+However, some implementations MAY use other values.
 
 ## ABNF Grammar
 
