@@ -207,12 +207,12 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.
 A special thank you to L.T.S.
 
 --- back
-# Changes since RFC 4180
-- Removing dead references and updating references to newer versions
-- Incorporating existing errata
-- Changing text to reflect the previous publication
-- Changing default encoding to UTF-8, and allowing both LF and CRLF for line breaks
-- Allowing whitespace with double quotes
+# Major format changes since {{!RFC4180}}
+- Changing default encoding to UTF-8
+- Allowing both LF and CRLF for line breaks
+- Allowing whitespace between the double quotes and comma/line breaks
+- Mandating a line break at the end of the last line in the file
+- Making records and headers optional, thus allowing for an empty file
 
 # Note to Readers
 

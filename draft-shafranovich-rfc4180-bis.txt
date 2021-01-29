@@ -61,7 +61,7 @@ Table of Contents
    7.  References
      7.1.  Normative References
      7.2.  Informative References
-   Appendix A.  Changes since RFC 4180
+   Appendix A.  Major format changes since RFC4180
    Appendix B.  Note to Readers
    Author's Address
 
@@ -290,18 +290,19 @@ TEXTDATA =  %x20-21 / %x23-2B / %x2D-7E
    [EDOCEO]   Edoceo, Inc., "Comma Separated Values (CSV) Standard File
               Format", 2020, <https://edoceo.com/dev/csv-file-format>.
 
-Appendix A.  Changes since RFC 4180
+Appendix A.  Major format changes since [RFC4180]
 
-   *  Removing dead references and updating references to newer versions
+   *  Changing default encoding to UTF-8
 
-   *  Incorporating existing errata
+   *  Allowing both LF and CRLF for line breaks
 
-   *  Changing text to reflect the previous publication
+   *  Allowing whitespace between the double quotes and comma/line
+      breaks
 
-   *  Changing default encoding to UTF-8, and allowing both LF and CRLF
-      for line breaks
+   *  Mandating a line break at the end of the last line in the file
 
-   *  Allowing whitespace with double quotes
+   *  Making records and headers optional, thus allowing for an empty
+      file
 
 Appendix B.  Note to Readers
 
