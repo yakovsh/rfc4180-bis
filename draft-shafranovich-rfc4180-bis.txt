@@ -50,6 +50,7 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
+     1.1.  Terminology
    2.  Definition of the CSV Format
      2.1.  Default charset and line break values
      2.2.  ABNF Grammar
@@ -76,6 +77,14 @@ Table of Contents
    Since the publication of [RFC4180], the CSV format has evolved and
    this specification seeks to reflect these changes as well as update
    the "text/csv" media type registration.
+
+1.1.  Terminology
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in BCP
+   14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
 
 2.  Definition of the CSV Format
 
@@ -105,10 +114,10 @@ Table of Contents
    3.  There maybe an optional header line appearing as the first line
        of the file with the same format as normal record lines.  This
        header will contain names corresponding to the fields in the file
-       and should contain the same number of fields as the records in
+       and SHOULD contain the same number of fields as the records in
        the rest of the file (the presence or absence of the header line
-       should be indicated via the optional "header" parameter of this
-       MIME type).  For example:
+       MAY be indicated via the optional "header" parameter of this MIME
+       type).  For example:
 
        field_name,field_name,field_name CRLF
 
@@ -116,10 +125,10 @@ Table of Contents
        zzz,yyy,xxx CRLF
 
    4.  Within the header and each record, there may be one or more
-       fields, separated by commas.  Each line should contain the same
+       fields, separated by commas.  Each line SHOULD contain the same
        number of fields throughout the file.  Spaces are considered part
-       of a field and should not be ignored.  The last field in the
-       record must not be followed by a comma.  For example:
+       of a field and SHOULD NOT be ignored.  The last field in the
+       record MUST NOT be followed by a comma.  For example:
 
        aaa,bbb,ccc
 
@@ -127,21 +136,22 @@ Table of Contents
        some programs, do not use double quotes at all).  If fields are
        not enclosed with double quotes, then double quotes may not
        appear inside the fields.  Whitespace is allowed between the
-       double quotes and commas/line breaks.  For example:
+       double quotes and commas/line breaks, and SHOULD BE ignored.  For
+       example:
 
        "aaa","bbb","ccc"CRLF
        "aaa","bbb", "ccc" CRLF
        zzz,yyy,xxx
 
    6.  Fields containing line breaks (CR or CRLF), double quotes, and
-       commas must be enclosed in double-quotes.  For example:
+       commas MUST be enclosed in double-quotes.  For example:
 
        "aaa","b CRLF
        bb","ccc"CRLF
        zzz,yyy,xxx
 
    7.  If double-quotes are used to enclose fields, then a double-quote
-       appearing inside a field must be escaped by preceding it with
+       appearing inside a field MUST be escaped by preceding it with
        another double quote.  For example:
 
        "aaa","b""bb","ccc"
@@ -233,6 +243,11 @@ TEXTDATA =  %x20-21 / %x23-2B / %x2D-7E
               DOI 10.17487/RFC2046, November 1996,
               <https://www.rfc-editor.org/info/rfc2046>.
 
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
    [RFC4180]  Shafranovich, Y., "Common Format and MIME Type for Comma-
               Separated Values (CSV) Files", RFC 4180,
               DOI 10.17487/RFC4180, October 2005,
@@ -252,6 +267,10 @@ TEXTDATA =  %x20-21 / %x23-2B / %x2D-7E
               Specifications and Registration Procedures", BCP 13,
               RFC 6838, DOI 10.17487/RFC6838, January 2013,
               <https://www.rfc-editor.org/info/rfc6838>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
 7.2.  Informative References
 

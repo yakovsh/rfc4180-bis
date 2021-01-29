@@ -58,6 +58,13 @@ of {{!RFC4180}} and the concurrent registration of the "text/csv" media type.
 Since the publication of {{!RFC4180}}, the CSV format has evolved and this specification
 seeks to reflect these changes as well as update the "text/csv" media type registration.
 
+## Terminology
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+"SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+"OPTIONAL" in this document are to be interpreted as described in
+BCP 14 {{!RFC2119}} {{!RFC8174}} when, and only when, they appear in all
+capitals, as shown here.
+
 # Definition of the CSV Format {#format}
 While there had been various specifications and implementations for the
 CSV format (for ex. {{CREATIVYST}}, {{EDOCEO}} and {{ART}})), prior to publication
@@ -81,9 +88,9 @@ changes since the publication of {{!RFC4180}}):
 3. There maybe an optional header line appearing as the first line
 of the file with the same format as normal record lines. This
 header will contain names corresponding to the fields in the file
-and should contain the same number of fields as the records in
+and SHOULD contain the same number of fields as the records in
 the rest of the file (the presence or absence of the header line
-should be indicated via the optional "header" parameter of this
+MAY be indicated via the optional "header" parameter of this
 MIME type). For example:
 
    field_name,field_name,field_name CRLF<br/>   
@@ -91,31 +98,32 @@ MIME type). For example:
    zzz,yyy,xxx CRLF
 
 4. Within the header and each record, there may be one or more
-fields, separated by commas. Each line should contain the same
+fields, separated by commas. Each line SHOULD contain the same
 number of fields throughout the file. Spaces are considered part
-of a field and should not be ignored. The last field in the
-record must not be followed by a comma. For example:
+of a field and SHOULD NOT be ignored. The last field in the
+record MUST NOT be followed by a comma. For example:
 
    aaa,bbb,ccc
 
 5. Each field may or may not be enclosed in double quotes (however
 some programs, do not use double quotes at all). If fields are not
 enclosed with double quotes, then double quotes may not appear inside the fields.
-Whitespace is allowed between the double quotes and commas/line breaks. For example:
+Whitespace is allowed between the double quotes and commas/line breaks, and SHOULD
+BE ignored. For example:
 
    "aaa","bbb","ccc"CRLF<br/>
    "aaa","bbb", "ccc" CRLF<br/>
    zzz,yyy,xxx
 
 6. Fields containing line breaks (CR or CRLF), double quotes, and commas
-must be enclosed in double-quotes. For example:
+MUST be enclosed in double-quotes. For example:
 
    "aaa","b CRLF<br/>
    bb","ccc"CRLF<br/>
    zzz,yyy,xxx
 
 7. If double-quotes are used to enclose fields, then a double-quote
-appearing inside a field must be escaped by preceding it with
+appearing inside a field MUST be escaped by preceding it with
 another double quote. For example:
 
    "aaa","b""bb","ccc"
