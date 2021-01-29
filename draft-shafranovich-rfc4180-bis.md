@@ -73,7 +73,7 @@ changes since the publication of {{!RFC4180}}):
    aaa,bbb,cccCRLF<br/>
    zzz,yyy,xxxCRLF
 
-2. The last record in the file must have an ending line break. For example:
+2. The last record in the file MUST have an ending line break. For example:
 
    aaa,bbb,cccCRLF<br/>
    zzz,yyy,xxxCRLF
