@@ -73,10 +73,10 @@ changes since the publication of {{!RFC4180}}):
    aaa,bbb,cccCRLF<br/>
    zzz,yyy,xxxCRLF
 
-2. The last record in the file may or may not have an ending line break. For example:
+2. The last record in the file must have an ending line break. For example:
 
    aaa,bbb,cccCRLF<br/>
-   zzz,yyy,xxx
+   zzz,yyy,xxxCRLF
 
 3. There maybe an optional header line appearing as the first line
 of the file with the same format as normal record lines. This
@@ -133,7 +133,7 @@ However, some implementations may use other values.
 The ABNF grammar (as per {{!RFC5234}}) appears as follows:
 
 ~~~~~~~~~~
-file = [header [CR]LF] record *([CR]LF record) [ [CR]LF ]
+file = [header [CR]LF] 1*(record [CR]LF)
 
 header = name *(COMMA name)
 
