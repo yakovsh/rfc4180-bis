@@ -77,15 +77,15 @@ changes since the publication of {{!RFC4180}}):
 
 1. Each record is located on a separate line, delimited by a line break (CRLF or LF). For example:
 
-   aaa,bbb,ccc CRLF<br/>
-   zzz,yyy,xxx CRLF
+   aaa,bbb,cccCRLF<br/>
+   zzz,yyy,xxxCRLF
 
 2. The last record in the file may or may not have an ending line break. For example:
 
-   aaa,bbb,ccc CRLF<br/>
+   aaa,bbb,cccCRLF<br/>
    zzz,yyy,xxx
 
-3. There maybe an optional header line appearing as the first line
+3. There may be an optional header line appearing as the first line
 of the file with the same format as normal record lines. This
 header will contain names corresponding to the fields in the file
 and SHOULD contain the same number of fields as the records in
@@ -93,9 +93,9 @@ the rest of the file (the presence or absence of the header line
 MAY be indicated via the optional "header" parameter of this
 MIME type). For example:
 
-   field_name,field_name,field_name CRLF<br/>   
-   aaa,bbb,ccc CRLF<br/>
-   zzz,yyy,xxx CRLF
+   field_name,field_name,field_nameCRLF<br/>   
+   aaa,bbb,cccCRLF<br/>
+   zzz,yyy,xxxCRLF
 
 4. Within the header and each record, there may be one or more
 fields, separated by commas. Each line SHOULD contain the same
