@@ -109,7 +109,7 @@ record MUST NOT be followed by a comma. For example:
 some programs, do not use double quotes at all). If fields are not
 enclosed with double quotes, then double quotes MAY not appear inside the fields.
 Whitespace is allowed between the double quotes and commas/line breaks, and SHOULD
-BE ignored. For example:
+be ignored. For example:
 
    "aaa","bbb","ccc"CRLF<br/>
    "aaa","bbb", "ccc" CRLF<br/>
@@ -189,7 +189,7 @@ Published specification:
   
 # IANA Considerations
 
-IANA is directed to update the the MIME type registration for "text/csv"
+IANA is directed to update the MIME type registration for "text/csv"
 as per instructions provided in {{registration}} of this document
 and include a reference to this document within the registration.
 
