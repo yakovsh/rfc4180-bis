@@ -115,7 +115,7 @@ BE ignored. For example:
    "aaa","bbb", "ccc" CRLF<br/>
    zzz,yyy,xxx
 
-6. Fields containing line breaks (CR or CRLF), double quotes, and commas
+6. Fields containing line breaks (CR or LF), double quotes, or commas
 MUST be enclosed in double-quotes. For example:
 
    "aaa","b CRLF<br/>
