@@ -4,8 +4,8 @@
 
 Network Working Group                                    Y. Shafranovich
 Internet-Draft                                  Nightwatch Cybersecurity
-Intended status: Informational                           28 January 2021
-Expires: 1 August 2021
+Intended status: Informational                           29 January 2021
+Expires: 2 August 2021
 
 
    Common Format and MIME Type for Comma-Separated Values (CSV) Files
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 August 2021.
+   This Internet-Draft will expire on 2 August 2021.
 
 Copyright Notice
 
@@ -47,33 +47,22 @@ Copyright Notice
    as described in Section 4.e of the Trust Legal Provisions and are
    provided without warranty as described in the Simplified BSD License.
 
-
-
-
-
-
-
-Shafranovich              Expires 1 August 2021                 [Page 1]
-
-Internet-Draft                 rfc4180-bis                  January 2021
-
-
 Table of Contents
 
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-   2.  Definition of the CSV Format  . . . . . . . . . . . . . . . .   2
-     2.1.  Default charset and line break values . . . . . . . . . .   4
-     2.2.  ABNF Grammar  . . . . . . . . . . . . . . . . . . . . . .   4
-   3.  Update to MIME Type Registration of text/csv  . . . . . . . .   4
-   4.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   5
-   5.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
-   6.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   5
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   5
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .   5
-     7.2.  Informative References  . . . . . . . . . . . . . . . . .   6
-   Appendix A.  Changes since RFC 4180 . . . . . . . . . . . . . . .   6
-   Appendix B.  Note to Readers  . . . . . . . . . . . . . . . . . .   6
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   7
+   1.  Introduction
+   2.  Definition of the CSV Format
+     2.1.  Default charset and line break values
+     2.2.  ABNF Grammar
+   3.  Update to MIME Type Registration of text/csv
+   4.  IANA Considerations
+   5.  Security Considerations
+   6.  Acknowledgments
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
+   Appendix A.  Changes since RFC 4180
+   Appendix B.  Note to Readers
+   Author's Address
 
 1.  Introduction
 
@@ -106,13 +95,6 @@ Table of Contents
 
        aaa,bbb,ccc CRLF
        zzz,yyy,xxx CRLF
-
-
-
-Shafranovich              Expires 1 August 2021                 [Page 2]
-
-Internet-Draft                 rfc4180-bis                  January 2021
-
 
    2.  The last record in the file may or may not have an ending line
        break.  For example:
@@ -152,7 +134,7 @@ Internet-Draft                 rfc4180-bis                  January 2021
        zzz,yyy,xxx
 
    6.  Fields containing line breaks (CR or CRLF), double quotes, and
-       commas should be enclosed in double-quotes.  For example:
+       commas must be enclosed in double-quotes.  For example:
 
        "aaa","b CRLF
        bb","ccc"CRLF
@@ -161,14 +143,6 @@ Internet-Draft                 rfc4180-bis                  January 2021
    7.  If double-quotes are used to enclose fields, then a double-quote
        appearing inside a field must be escaped by preceding it with
        another double quote.  For example:
-
-
-
-
-Shafranovich              Expires 1 August 2021                 [Page 3]
-
-Internet-Draft                 rfc4180-bis                  January 2021
-
 
        "aaa","b""bb","ccc"
 
@@ -218,14 +192,6 @@ TEXTDATA =  %x20-21 / %x23-2B / %x2D-7E
 
    Encoding considerations:
 
-
-
-
-Shafranovich              Expires 1 August 2021                 [Page 4]
-
-Internet-Draft                 rfc4180-bis                  January 2021
-
-
       CSV MIME entities can consist of binary data as per section 4.8 of
       [RFC6838].  Although section 4.1.1. of [RFC2046] defines CRLF to
       denote line breaks, implementers MAY recognize a single LF as a
@@ -271,16 +237,6 @@ Internet-Draft                 rfc4180-bis                  January 2021
               Separated Values (CSV) Files", RFC 4180,
               DOI 10.17487/RFC4180, October 2005,
               <https://www.rfc-editor.org/info/rfc4180>.
-
-
-
-
-
-
-Shafranovich              Expires 1 August 2021                 [Page 5]
-
-Internet-Draft                 rfc4180-bis                  January 2021
-
 
    [RFC5234]  Crocker, D., Ed. and P. Overell, "Augmented BNF for Syntax
               Specifications: ABNF", STD 68, RFC 5234,
@@ -330,14 +286,6 @@ Appendix A.  Changes since RFC 4180
 
 Appendix B.  Note to Readers
 
-
-
-
-Shafranovich              Expires 1 August 2021                 [Page 6]
-
-Internet-Draft                 rfc4180-bis                  January 2021
-
-
       *Note to the RFC Editor:* Please remove this section prior to
       publication.
 
@@ -356,37 +304,3 @@ Author's Address
    Nightwatch Cybersecurity
 
    Email: yakov+ietf@nightwatchcybersecurity.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Shafranovich              Expires 1 August 2021                 [Page 7]
