@@ -89,7 +89,7 @@ changes since the publication of {{!RFC4180}}):
 of the file with the same format as normal record lines. This
 header will contain names corresponding to the fields in the file
 and SHOULD contain the same number of fields as the records in
-the rest of the file. Every name MUST be unique, if not empty.
+the rest of the file. Every name SHOULD be unique, if not empty.
 The presence or absence of the header line MAY be indicated via the
 optional "header" parameter of this MIME type. For example:
 
