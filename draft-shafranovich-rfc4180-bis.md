@@ -89,11 +89,12 @@ changes since the publication of {{!RFC4180}}):
 of the file with the same format as normal record lines. This
 header will contain names corresponding to the fields in the file
 and SHOULD contain the same number of fields as the records in
-the rest of the file (the presence or absence of the header line
-MAY be indicated via the optional "header" parameter of this
-MIME type). For example:
+the rest of the file. Implementers should be aware that some
+applications may treat header values as unique.
+The presence or absence of the header line MAY be indicated via the
+optional "header" parameter of this MIME type. For example:
 
-   field_name,field_name,field_nameCRLF<br/>   
+   field_name_1,field_name_2,field_name_3CRLF<br/>
    aaa,bbb,cccCRLF<br/>
    zzz,yyy,xxxCRLF
 
