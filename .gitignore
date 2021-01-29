@@ -1,4 +1,5 @@
 .idea/
 lib/
 .refcache/
+.targets.mk
 .targets.mkmake
