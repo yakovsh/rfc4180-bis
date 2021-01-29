@@ -78,7 +78,7 @@ changes since the publication of {{!RFC4180}}):
    aaa,bbb,ccc CRLF<br/>
    zzz,yyy,xxx
 
-3. There maybe an optional header line appearing as the first line
+3. There may be an optional header line appearing as the first line
 of the file with the same format as normal record lines. This
 header will contain names corresponding to the fields in the file
 and should contain the same number of fields as the records in
