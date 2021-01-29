@@ -16,6 +16,12 @@ author:
   email: yakov+ietf@nightwatchcybersecurity.com
   
 informative:
+  ART:
+    title: The Art of Unix Programming, Chapter 5
+    author:
+        name: E. Raymond
+    date: September 2003
+    target: http://www.catb.org/~esr/writings/taoup/html/ch05s02.html
   CREATIVYST:
     title: 'HOW-TO: The Comma Separated Value (CSV) File Format'
     author:
@@ -23,46 +29,46 @@ informative:
         org: Creativyst, Inc.
     date: 2010
     target: http://www.creativyst.com/Doc/Articles/CSV/CSV01.htm
+  CSVW:
+    title: CSV on the Web Working Group
+    author:
+        org: W3C
+    date: 2016
+    target: https://www.w3.org/2013/csvw/wiki/Main_Page
   EDOCEO:
     title: Comma Separated Values (CSV) Standard File Format
     author:
         org: Edoceo, Inc.
     date: 2020
     target: https://edoceo.com/dev/csv-file-format
-  ART:
-    title: The Art of Unix Programming, Chapter 5
-    author:
-        name: E. Raymond
-    date: September 2003
-    target: http://www.catb.org/~esr/writings/taoup/html/ch05s02.html
 
 --- abstract
-This RFC documents the format used for Comma-Separated Values (CSV)
-files and registers the associated MIME type "text/csv".
+This RFC documents the common format used for Comma-Separated Values (CSV)
+files and updates the associated MIME type "text/csv".
 
 --- middle
 
 # Introduction
-The comma separated values format (CSV) has been used for exchanging
-and converting data between various spreadsheet programs for quite
-some time.  Surprisingly, while this format is very common, it has
-never been formally documented.  Additionally, while the IANA MIME
-registration tree includes a registration for
-"text/tab-separated-values" type, no MIME types have ever been
-registered with IANA for CSV.  At the same time, various programs and
-operating systems have begun to use different MIME types for this
-format.  This RFC documents the format of comma separated values
-(CSV) files and formally registers the "text/csv" MIME type for CSV
-in accordance with {{!RFC2048}}.
+The comma separated values format (CSV) has been used as a common way
+to exchange data between disparate systems and applications for many years.
+Surprisingly, while this format is very popular, it has never been formally
+documented and didn't have a media type registered. This was addressed in 2005 via publication
+of {{!RFC4180}} and the concurrent registration of the "text/csv" media type.
+ 
+Since the publication of {{!RFC4180}}, the CSV format has evolved and this specification
+seeks to reflect these changes as well as update the "text/csv" media type registration.
 
 # Definition of the CSV Format {#format}
-While there are various specifications and implementations for the
-CSV format (for ex. {{CREATIVYST}}, {{EDOCEO}} and {{ART}})), there is no formal
-specification in existence, which allows for a wide variety of
-interpretations of CSV files.  This section documents the format that
-seems to be followed by most implementations:
+While there had been various specifications and implementations for the
+CSV format (for ex. {{CREATIVYST}}, {{EDOCEO}} and {{ART}})), prior to publication
+of {{!RFC4180}} there is no attempt to provide a common specification. Since then,
+the CSV format has evolved and there had also been additional attempts to formally
+document this format (such as the past work of the W3C's {{CSVW}} group).
+ 
+This section documents the format that seems to be followed by most implementations (incorporating
+changes since the publication of {{!RFC4180}}):
 
-1. Each record is located on a separate line, delimited by a line break (CRLF). For example:
+1. Each record is located on a separate line, delimited by a line break (CRLF or LF). For example:
 
    aaa,bbb,ccc CRLF<br/>
    zzz,yyy,xxx CRLF
@@ -93,14 +99,15 @@ record must not be followed by a comma. For example:
    aaa,bbb,ccc
 
 5. Each field may or may not be enclosed in double quotes (however
-some programs, such as Microsoft Excel, do not use double quotes
-at all). If fields are not enclosed with double quotes, then
-double quotes may not appear inside the fields. For example:
+some programs, do not use double quotes at all). If fields are not
+enclosed with double quotes, then double quotes may not appear inside the fields.
+Whitespace is allowed between the double quotes and commas/line breaks. For example:
 
    "aaa","bbb","ccc"CRLF<br/>
+   "aaa","bbb", "ccc" CRLF<br/>
    zzz,yyy,xxx
 
-6. Fields containing line breaks (CRLF), double quotes, and commas
+6. Fields containing line breaks (CR or CRLF), double quotes, and commas
 should be enclosed in double-quotes. For example:
 
    "aaa","b CRLF<br/>
@@ -113,10 +120,20 @@ another double quote. For example:
 
    "aaa","b""bb","ccc"
 
+## Default charset and line break values
+Since the initial publication of {{!RFC4180}}, the default charset for "text/*" media types
+has been changed to UTF-8 (as per {{!RFC6657}}).
+
+Although section 4.1.1. of {{!RFC2046}} defines CRLF to denote line breaks,
+implementers MAY recognize a single LF as a line break.
+However, some implementations may use other values.
+
+## ABNF Grammar
+
 The ABNF grammar (as per {{!RFC5234}}) appears as follows:
 
 ~~~~~~~~~~
-file = [header CRLF] record *(CRLF record) [CRLF]
+file = [header [CR]LF] record *([CR]LF record) [ [CR]LF ]
 
 header = name *(COMMA name)
 
@@ -126,7 +143,7 @@ name = field
 
 field = (escaped / non-escaped)
 
-escaped = DQUOTE *(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE
+escaped = *(WSP) DQUOTE *(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE *(WSP)
 
 non-escaped = *TEXTDATA
 
@@ -143,113 +160,51 @@ CRLF = CR LF ;as per section B.1 of [RFC5234]
 TEXTDATA =  %x20-21 / %x23-2B / %x2D-7E
 ~~~~~~~~~~
 
-# MIME Type Registration of text/csv {#registration}
+# Update to MIME Type Registration of text/csv {#registration}
 
-This section provides the media-type registration application (as per
-{{!RFC2048}}.
-
-To: ietf-types@iana.org
-
-Subject: Registration of MIME media type text/csv
-
-MIME media type name: text
-
-MIME subtype name: csv
-
-Required parameters: none
-
-Optional parameters: charset, header
-
-> Common usage of CSV is US-ASCII, but other character sets defined
-> by IANA for the "text" tree may be used in conjunction with the
-> "charset" parameter.
-
-> The "header" parameter indicates the presence or absence of the
-> header line. Valid values are "present" or "absent".
-> Implementors choosing not to use this parameter must make their
-> own decisions as to whether the header line is present or absent.
+The media type registration of "text/csv" should be updated as per specific
+fields below: 
 
 Encoding considerations:
 
-> As per section 4.1.1. of {{!RFC2046}}, this media type uses CRLF
-> to denote line breaks. However, implementors should be aware that
-> some implementations may use other values.
-
-Security considerations:
-
-> CSV files contain passive text data that should not pose any
-> risks. However, it is possible in theory that malicious binary
-> data may be included in order to exploit potential buffer overruns
-> in the program processing CSV data. Additionally, private data
-> may be shared via this format (which of course applies to any text
-> data).
-
-Interoperability considerations:
-
-> Due to lack of a single specification, there are considerable
-> differences among implementations. Implementors should "be
-> conservative in what you do, be liberal in what you accept from
-> others" ({{?RFC0793}}) when processing CSV files. An attempt at a
-> common definition can be found in {{format}}. 
-
-> Implementations deciding not to use the optional "header"
-> parameter must make their own decision as to whether the header is
-> absent or present.
+> CSV MIME entities can consist of binary data
+> as per section 4.8 of {{!RFC6838}}. Although section 4.1.1. of {{!RFC2046}} defines
+> CRLF to denote line breaks, implementers MAY recognize a single LF
+> as a line break. However, some implementations may use other values.
 
 Published specification:
 
 > While numerous private specifications exist for various programs
 > and systems, there is no single "master" specification for this
-> format. An attempt at a common definition can be found in {{format}}.
+> format. An attempt at a common definition can be found in {{!RFC4180}}
+> and this document.
   
-Applications that use this media type:
-
-> Spreadsheet programs and various data conversion utilities
-
-Additional information:
-
-> Magic number(s): none
-
-> File extension(s): CSV
-
->> Macintosh File Type Code(s): TEXT
-
-Person & email address to contact for further information:
-
-> Yakov Shafranovich &lt;ietf@shaftek.org&gt;
-
-Intended usage: COMMON
-
-Author/Change controller: IESG
-
 # IANA Considerations
 
-The IANA has registered the MIME type "text/csv" using the
-application provided in {{registration}} of this document.
+IANA is directed to update the the MIME type registration for "text/csv"
+as per instructions provided in {{registration}} of this document
+and include a reference to this document within the registration.
 
 # Security Considerations
 
-See discussion above in {{registration}}.
+All security considerations as discussed in {{!RFC4180}} still apply.
 
 # Acknowledgments
 
-The author would like to thank Dave Crocker, Martin Duerst, Joel M.
-Halpern, Clyde Ingram, Graham Klyne, Bruce Lilly, Chris Lilley, and
-members of the IESG for their helpful suggestions. A special word of
-thanks goes to Dave for helping with the ABNF grammar.
+In addition to everyone thanked previously in {{!RFC4180}}, the author would like to thank
+acknowledge the contributions of the following people to this document:
+Alperen Belgic, Abed BenBrahim, Benjamin Kaduk, Damon Koach, Barry Leiba,
+Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.
 
-The author would also like to thank Henrik Lefkowetz, Marshall Rose,
-and the folks at xml.resource.org for providing many of the tools
-used for preparing RFCs and Internet drafts.
-
-A special thank you goes to L.T.S.
+A special thank you to L.T.S.
 
 --- back
 # Changes since RFC 4180
-- Updating RFC references to newever versions
-- Removing dead references
+- Removing dead references and updating references to newer versions
 - Incorporating existing errata
-- TBD
+- Changing text to reflect the previous publication
+- Changing default encoding to UTF-8, and allowing both LF and CRLF for line breaks
+- Allowing whitespace with double quotes
 
 # Note to Readers
 

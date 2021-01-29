@@ -4,8 +4,8 @@
 
 Network Working Group                                    Y. Shafranovich
 Internet-Draft                                  Nightwatch Cybersecurity
-Intended status: Informational                           20 January 2021
-Expires: 24 July 2021
+Intended status: Informational                           28 January 2021
+Expires: 1 August 2021
 
 
    Common Format and MIME Type for Comma-Separated Values (CSV) Files
@@ -13,8 +13,8 @@ Expires: 24 July 2021
 
 Abstract
 
-   This RFC documents the format used for Comma-Separated Values (CSV)
-   files and registers the associated MIME type "text/csv".
+   This RFC documents the common format used for Comma-Separated Values
+   (CSV) files and updates the associated MIME type "text/csv".
 
 Status of This Memo
 
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 July 2021.
+   This Internet-Draft will expire on 1 August 2021.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Shafranovich              Expires 24 July 2021                  [Page 1]
+Shafranovich              Expires 1 August 2021                 [Page 1]
 
 Internet-Draft                 rfc4180-bis                  January 2021
 
@@ -62,57 +62,63 @@ Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
    2.  Definition of the CSV Format  . . . . . . . . . . . . . . . .   2
-   3.  MIME Type Registration of text/csv  . . . . . . . . . . . . .   4
-   4.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
-   5.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
-   6.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   6
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   6
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .   6
-     7.2.  Informative References  . . . . . . . . . . . . . . . . .   7
-   Appendix A.  Changes since RFC 4180 . . . . . . . . . . . . . . .   7
-   Appendix B.  Note to Readers  . . . . . . . . . . . . . . . . . .   7
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   8
+     2.1.  Default charset and line break values . . . . . . . . . .   4
+     2.2.  ABNF Grammar  . . . . . . . . . . . . . . . . . . . . . .   4
+   3.  Update to MIME Type Registration of text/csv  . . . . . . . .   4
+   4.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   5
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
+   6.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   5
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   5
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .   5
+     7.2.  Informative References  . . . . . . . . . . . . . . . . .   6
+   Appendix A.  Changes since RFC 4180 . . . . . . . . . . . . . . .   6
+   Appendix B.  Note to Readers  . . . . . . . . . . . . . . . . . .   6
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   7
 
 1.  Introduction
 
-   The comma separated values format (CSV) has been used for exchanging
-   and converting data between various spreadsheet programs for quite
-   some time.  Surprisingly, while this format is very common, it has
-   never been formally documented.  Additionally, while the IANA MIME
-   registration tree includes a registration for "text/tab-separated-
-   values" type, no MIME types have ever been registered with IANA for
-   CSV.  At the same time, various programs and operating systems have
-   begun to use different MIME types for this format.  This RFC
-   documents the format of comma separated values (CSV) files and
-   formally registers the "text/csv" MIME type for CSV in accordance
-   with [RFC2048].
+   The comma separated values format (CSV) has been used as a common way
+   to exchange data between disparate systems and applications for many
+   years.  Surprisingly, while this format is very popular, it has never
+   been formally documented and didn't have a media type registered.
+   This was addressed in 2005 via publication of [RFC4180] and the
+   concurrent registration of the "text/csv" media type.
+
+   Since the publication of [RFC4180], the CSV format has evolved and
+   this specification seeks to reflect these changes as well as update
+   the "text/csv" media type registration.
 
 2.  Definition of the CSV Format
 
-   While there are various specifications and implementations for the
-   CSV format (for ex.  [CREATIVYST], [EDOCEO] and [ART])), there is no
-   formal specification in existence, which allows for a wide variety of
-   interpretations of CSV files.  This section documents the format that
-   seems to be followed by most implementations:
+   While there had been various specifications and implementations for
+   the CSV format (for ex.  [CREATIVYST], [EDOCEO] and [ART])), prior to
+   publication of [RFC4180] there is no attempt to provide a common
+   specification.  Since then, the CSV format has evolved and there had
+   also been additional attempts to formally document this format (such
+   as the past work of the W3C's [CSVW] group).
+
+   This section documents the format that seems to be followed by most
+   implementations (incorporating changes since the publication of
+   [RFC4180]):
 
    1.  Each record is located on a separate line, delimited by a line
-       break (CRLF).  For example:
+       break (CRLF or LF).  For example:
 
        aaa,bbb,ccc CRLF
        zzz,yyy,xxx CRLF
+
+
+
+Shafranovich              Expires 1 August 2021                 [Page 2]
+
+Internet-Draft                 rfc4180-bis                  January 2021
+
 
    2.  The last record in the file may or may not have an ending line
        break.  For example:
 
        aaa,bbb,ccc CRLF
        zzz,yyy,xxx
-
-
-
-Shafranovich              Expires 24 July 2021                  [Page 2]
-
-Internet-Draft                 rfc4180-bis                  January 2021
-
 
    3.  There maybe an optional header line appearing as the first line
        of the file with the same format as normal record lines.  This
@@ -136,15 +142,17 @@ Internet-Draft                 rfc4180-bis                  January 2021
        aaa,bbb,ccc
 
    5.  Each field may or may not be enclosed in double quotes (however
-       some programs, such as Microsoft Excel, do not use double quotes
-       at all).  If fields are not enclosed with double quotes, then
-       double quotes may not appear inside the fields.  For example:
+       some programs, do not use double quotes at all).  If fields are
+       not enclosed with double quotes, then double quotes may not
+       appear inside the fields.  Whitespace is allowed between the
+       double quotes and commas/line breaks.  For example:
 
        "aaa","bbb","ccc"CRLF
+       "aaa","bbb", "ccc" CRLF
        zzz,yyy,xxx
 
-   6.  Fields containing line breaks (CRLF), double quotes, and commas
-       should be enclosed in double-quotes.  For example:
+   6.  Fields containing line breaks (CR or CRLF), double quotes, and
+       commas should be enclosed in double-quotes.  For example:
 
        "aaa","b CRLF
        bb","ccc"CRLF
@@ -154,165 +162,101 @@ Internet-Draft                 rfc4180-bis                  January 2021
        appearing inside a field must be escaped by preceding it with
        another double quote.  For example:
 
+
+
+
+Shafranovich              Expires 1 August 2021                 [Page 3]
+
+Internet-Draft                 rfc4180-bis                  January 2021
+
+
        "aaa","b""bb","ccc"
+
+2.1.  Default charset and line break values
+
+   Since the initial publication of [RFC4180], the default charset for
+   "text/*" media types has been changed to UTF-8 (as per [RFC6657]).
+
+   Although section 4.1.1. of [RFC2046] defines CRLF to denote line
+   breaks, implementers MAY recognize a single LF as a line break.
+   However, some implementations may use other values.
+
+2.2.  ABNF Grammar
 
    The ABNF grammar (as per [RFC5234]) appears as follows:
 
+file = [header [CR]LF] record *([CR]LF record) [ [CR]LF ]
 
+header = name *(COMMA name)
 
+record = field *(COMMA field)
 
+name = field
 
+field = (escaped / non-escaped)
 
+escaped = *(WSP) DQUOTE *(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE *(WSP)
 
+non-escaped = *TEXTDATA
 
-Shafranovich              Expires 24 July 2021                  [Page 3]
-
-Internet-Draft                 rfc4180-bis                  January 2021
+COMMA = %x2C
 
+CR = %x0D ;as per section B.1 of [RFC5234]
 
-   file = [header CRLF] record *(CRLF record) [CRLF]
+DQUOTE =  %x22 ;as per section B.1 of [RFC5234]
 
-   header = name *(COMMA name)
+LF = %x0A ;as per section B.1 of [RFC5234]
 
-   record = field *(COMMA field)
+CRLF = CR LF ;as per section B.1 of [RFC5234]
 
-   name = field
+TEXTDATA =  %x20-21 / %x23-2B / %x2D-7E
 
-   field = (escaped / non-escaped)
+3.  Update to MIME Type Registration of text/csv
 
-   escaped = DQUOTE *(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE
-
-   non-escaped = *TEXTDATA
-
-   COMMA = %x2C
-
-   CR = %x0D ;as per section B.1 of [RFC5234]
-
-   DQUOTE =  %x22 ;as per section B.1 of [RFC5234]
-
-   LF = %x0A ;as per section B.1 of [RFC5234]
-
-   CRLF = CR LF ;as per section B.1 of [RFC5234]
-
-   TEXTDATA =  %x20-21 / %x23-2B / %x2D-7E
-
-3.  MIME Type Registration of text/csv
-
-   This section provides the media-type registration application (as per
-   [RFC2048].
-
-   To: ietf-types@iana.org
-
-   Subject: Registration of MIME media type text/csv
-
-   MIME media type name: text
-
-   MIME subtype name: csv
-
-   Required parameters: none
-
-   Optional parameters: charset, header
-
-      Common usage of CSV is US-ASCII, but other character sets defined
-      by IANA for the "text" tree may be used in conjunction with the
-      "charset" parameter.
-
-
-
-
-
-Shafranovich              Expires 24 July 2021                  [Page 4]
-
-Internet-Draft                 rfc4180-bis                  January 2021
-
-
-      The "header" parameter indicates the presence or absence of the
-      header line.  Valid values are "present" or "absent".
-      Implementors choosing not to use this parameter must make their
-      own decisions as to whether the header line is present or absent.
+   The media type registration of "text/csv" should be updated as per
+   specific fields below:
 
    Encoding considerations:
 
-      As per section 4.1.1. of [RFC2046], this media type uses CRLF to
-      denote line breaks.  However, implementors should be aware that
-      some implementations may use other values.
 
-   Security considerations:
 
-      CSV files contain passive text data that should not pose any
-      risks.  However, it is possible in theory that malicious binary
-      data may be included in order to exploit potential buffer overruns
-      in the program processing CSV data.  Additionally, private data
-      may be shared via this format (which of course applies to any text
-      data).
 
-   Interoperability considerations:
+Shafranovich              Expires 1 August 2021                 [Page 4]
+
+Internet-Draft                 rfc4180-bis                  January 2021
 
-      Due to lack of a single specification, there are considerable
-      differences among implementations.  Implementors should "be
-      conservative in what you do, be liberal in what you accept from
-      others" ([RFC0793]) when processing CSV files.  An attempt at a
-      common definition can be found in Section 2.
 
-      Implementations deciding not to use the optional "header"
-      parameter must make their own decision as to whether the header is
-      absent or present.
+      CSV MIME entities can consist of binary data as per section 4.8 of
+      [RFC6838].  Although section 4.1.1. of [RFC2046] defines CRLF to
+      denote line breaks, implementers MAY recognize a single LF as a
+      line break.  However, some implementations may use other values.
 
    Published specification:
 
       While numerous private specifications exist for various programs
       and systems, there is no single "master" specification for this
       format.  An attempt at a common definition can be found in
-      Section 2.
-
-   Applications that use this media type:
-
-      Spreadsheet programs and various data conversion utilities
-
-   Additional information:
-
-      Magic number(s): none
-
-      File extension(s): CSV
-
-
-
-Shafranovich              Expires 24 July 2021                  [Page 5]
-
-Internet-Draft                 rfc4180-bis                  January 2021
-
-
-         Macintosh File Type Code(s): TEXT
-
-   Person & email address to contact for further information:
-
-      Yakov Shafranovich <ietf@shaftek.org>
-
-   Intended usage: COMMON
-
-   Author/Change controller: IESG
+      [RFC4180] and this document.
 
 4.  IANA Considerations
 
-   The IANA has registered the MIME type "text/csv" using the
-   application provided in Section 3 of this document.
+   IANA is directed to update the the MIME type registration for "text/
+   csv" as per instructions provided in Section 3 of this document and
+   include a reference to this document within the registration.
 
 5.  Security Considerations
 
-   See discussion above in Section 3.
+   All security considerations as discussed in [RFC4180] still apply.
 
 6.  Acknowledgments
 
-   The author would like to thank Dave Crocker, Martin Duerst, Joel M.
-   Halpern, Clyde Ingram, Graham Klyne, Bruce Lilly, Chris Lilley, and
-   members of the IESG for their helpful suggestions.  A special word of
-   thanks goes to Dave for helping with the ABNF grammar.
+   In addition to everyone thanked previously in [RFC4180], the author
+   would like to thank acknowledge the contributions of the following
+   people to this document: Alperen Belgic, Abed BenBrahim, Benjamin
+   Kaduk, Damon Koach, Barry Leiba, Oliver Siegmar, Marco Diniz Sousa
+   and Greg Skinner.
 
-   The author would also like to thank Henrik Lefkowetz, Marshall Rose,
-   and the folks at xml.resource.org for providing many of the tools
-   used for preparing RFCs and Internet drafts.
-
-   A special thank you goes to L.T.S.
+   A special thank you to L.T.S.
 
 7.  References
 
@@ -323,17 +267,17 @@ Internet-Draft                 rfc4180-bis                  January 2021
               DOI 10.17487/RFC2046, November 1996,
               <https://www.rfc-editor.org/info/rfc2046>.
 
-   [RFC2048]  Freed, N., Klensin, J., and J. Postel, "Multipurpose
-              Internet Mail Extensions (MIME) Part Four: Registration
-              Procedures", RFC 2048, DOI 10.17487/RFC2048, November
-              1996, <https://www.rfc-editor.org/info/rfc2048>.
+   [RFC4180]  Shafranovich, Y., "Common Format and MIME Type for Comma-
+              Separated Values (CSV) Files", RFC 4180,
+              DOI 10.17487/RFC4180, October 2005,
+              <https://www.rfc-editor.org/info/rfc4180>.
 
 
 
 
 
 
-Shafranovich              Expires 24 July 2021                  [Page 6]
+Shafranovich              Expires 1 August 2021                 [Page 5]
 
 Internet-Draft                 rfc4180-bis                  January 2021
 
@@ -342,6 +286,16 @@ Internet-Draft                 rfc4180-bis                  January 2021
               Specifications: ABNF", STD 68, RFC 5234,
               DOI 10.17487/RFC5234, January 2008,
               <https://www.rfc-editor.org/info/rfc5234>.
+
+   [RFC6657]  Melnikov, A. and J. Reschke, "Update to MIME regarding
+              "charset" Parameter Handling in Textual Media Types",
+              RFC 6657, DOI 10.17487/RFC6657, July 2012,
+              <https://www.rfc-editor.org/info/rfc6657>.
+
+   [RFC6838]  Freed, N., Klensin, J., and T. Hansen, "Media Type
+              Specifications and Registration Procedures", BCP 13,
+              RFC 6838, DOI 10.17487/RFC6838, January 2013,
+              <https://www.rfc-editor.org/info/rfc6838>.
 
 7.2.  Informative References
 
@@ -355,24 +309,34 @@ Internet-Draft                 rfc4180-bis                  January 2021
               Format", 2010,
               <http://www.creativyst.com/Doc/Articles/CSV/CSV01.htm>.
 
+   [CSVW]     W3C, "CSV on the Web Working Group", 2016,
+              <https://www.w3.org/2013/csvw/wiki/Main_Page>.
+
    [EDOCEO]   Edoceo, Inc., "Comma Separated Values (CSV) Standard File
               Format", 2020, <https://edoceo.com/dev/csv-file-format>.
 
-   [RFC0793]  Postel, J., "Transmission Control Protocol", STD 7,
-              RFC 793, DOI 10.17487/RFC0793, September 1981,
-              <https://www.rfc-editor.org/info/rfc793>.
-
 Appendix A.  Changes since RFC 4180
 
-   *  Updating RFC references to newever versions
-
-   *  Removing dead references
+   *  Removing dead references and updating references to newer versions
 
    *  Incorporating existing errata
 
-   *  TBD
+   *  Changing text to reflect the previous publication
+
+   *  Changing default encoding to UTF-8, and allowing both LF and CRLF
+      for line breaks
+
+   *  Allowing whitespace with double quotes
 
 Appendix B.  Note to Readers
+
+
+
+
+Shafranovich              Expires 1 August 2021                 [Page 6]
+
+Internet-Draft                 rfc4180-bis                  January 2021
+
 
       *Note to the RFC Editor:* Please remove this section prior to
       publication.
@@ -385,14 +349,6 @@ Appendix B.  Note to Readers
 
    Full list of changes can be viewed via the IETF document tracker:
    https://tools.ietf.org/html/draft-shafranovich-rfc4180-bis
-
-
-
-
-Shafranovich              Expires 24 July 2021                  [Page 7]
-
-Internet-Draft                 rfc4180-bis                  January 2021
-
 
 Author's Address
 
@@ -433,16 +389,4 @@ Author's Address
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-Shafranovich              Expires 24 July 2021                  [Page 8]
+Shafranovich              Expires 1 August 2021                 [Page 7]
