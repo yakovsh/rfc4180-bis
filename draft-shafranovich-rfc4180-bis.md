@@ -141,7 +141,7 @@ However, some implementations MAY use other values.
 The ABNF grammar (as per {{!RFC5234}}) appears as follows:
 
 ~~~~~~~~~~
-file = [header [CR]LF] 1*(record [CR]LF)
+file = [header [CR]LF] *(record [CR]LF)
 
 header = name *(COMMA name)
 
