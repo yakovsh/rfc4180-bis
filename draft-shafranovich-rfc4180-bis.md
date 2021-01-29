@@ -160,6 +160,12 @@ COMMA = %x2C
 
 CR = %x0D ;as per section B.1 of [RFC5234]
 
+HTAB = %x09 ;as per section B.1 of [RFC5234]
+
+SP = %x20 ;as per section B.1 of [RFC5234]
+
+WSP = SP / HTAB ;as per section B.1 of [RFC5234]
+
 DQUOTE =  %x22 ;as per section B.1 of [RFC5234]
 
 LF = %x0A ;as per section B.1 of [RFC5234]
