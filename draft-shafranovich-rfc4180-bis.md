@@ -108,7 +108,7 @@ Whitespace is allowed between the double quotes and commas/line breaks. For exam
    zzz,yyy,xxx
 
 6. Fields containing line breaks (CR or CRLF), double quotes, and commas
-should be enclosed in double-quotes. For example:
+must be enclosed in double-quotes. For example:
 
    "aaa","b CRLF<br/>
    bb","ccc"CRLF<br/>
