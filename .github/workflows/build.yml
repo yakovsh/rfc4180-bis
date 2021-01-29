@@ -19,4 +19,6 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: output
-          path: draft-shafranovich-rfc4180-bis.{txt,html}
+          path: |
+             draft-shafranovich-rfc4180-bis.html
+             draft-shafranovich-rfc4180-bis.txt
