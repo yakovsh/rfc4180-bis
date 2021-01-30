@@ -172,7 +172,7 @@ SP = %x20 ;as per section B.1 of [RFC5234]
 
 HTAB = %x09 ;as per section B.1 of [RFC5234]
 
-TEXTDATA =  %x20-21 / %x23-2B / %x2D-7E
+TEXTDATA =  WSP / %x21 / %x23-2B / %x2D-7E
 ~~~~~~~~~~
 
 # Update to MIME Type Registration of text/csv {#registration}
