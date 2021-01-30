@@ -146,8 +146,6 @@ file = *(record [CR]LF)
 
 record = field *(COMMA field)
 
-name = field
-
 field = (escaped / non-escaped)
 
 escaped = *(WSP) DQUOTE *(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE *(WSP)
