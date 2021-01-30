@@ -129,6 +129,15 @@ another double quote. For example:
 
    "aaa","b""bb","ccc"
 
+8. A hash sign MAY be used to mark lines that are meant to be commented lines. 
+A commented line can basically contain any character until it is terminated by CRLF. 
+For example:
+
+    #commentCRLF<br/>
+    aaa,bbb,cccCRLF<br/>
+    #comment 2CRLF<br/>
+    zzz,yyy,xxxCRLF
+
 ## Default charset and line break values
 Since the initial publication of {{!RFC4180}}, the default charset for "text/*" media types
 has been changed to UTF-8 (as per {{!RFC6657}}).
@@ -142,7 +151,7 @@ However, some implementations MAY use other values.
 The ABNF grammar (as per {{!RFC5234}}) appears as follows:
 
 ~~~~~~~~~~
-file = [header [CR]LF] *(record [CR]LF)
+file = [(comment / header) [CR]LF] *((comment / record) [CR]LF)
 
 header = name *(COMMA name)
 
@@ -154,7 +163,9 @@ field = (escaped / non-escaped)
 
 escaped = *(WSP) DQUOTE *(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE *(WSP)
 
-non-escaped = *TEXTDATA
+non-escaped = [NOCOMMENTTEXTDATA *TEXTDATA]
+
+comment = HASH *COMMENTDATA
 
 COMMA = %x2C
 
@@ -168,7 +179,13 @@ CRLF = CR LF ;as per section B.1 of [RFC5234]
 
 WSP = SP / HTAB ;as per section B.1 of [RFC5234]
 
+HASH = %x23
+
+COMMENTDATA = %x20-7E
+
 TEXTDATA =  %x20-21 / %x23-2B / %x2D-7E
+
+NOCOMMENTTEXTDATA =  %x20-21 / %x24-2B / %x2D-7E
 ~~~~~~~~~~
 
 # Update to MIME Type Registration of text/csv {#registration}
@@ -216,6 +233,7 @@ A special thank you to L.T.S.
 - Allowing whitespace between the double quotes and comma/line breaks
 - Mandating a line break at the end of the last line in the file
 - Making records and headers optional, thus allowing for an empty file
+- Adding definition of commented lines
 
 # Note to Readers
 
