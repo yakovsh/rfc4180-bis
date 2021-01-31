@@ -65,17 +65,26 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 BCP 14 {{!RFC2119}} {{!RFC8174}} when, and only when, they appear in all
 capitals, as shown here.
 
+## Motivation For and Status of This Document
+The original motivation of {{!RFC4180}} was to provide a reference
+in order to register the media type "text/csv". It tried to document 
+existing practices at the time based on the approaches used by most implementations.
+This document continues to do the same, and updates the original document to reflect
+current practices for generating and consuming of CSV files.
+ 
+Both {{!RFC4180}} and this document are published as informational RFC for the benefit
+of the Internet community and and not intended to be used as formal standards.
+Implementers should consult {{?RFC1796}} and {{?RFC2026}} for crucial differences
+between IETF standards and informational RFCs.
+
 # Definition of the CSV Format {#format}
 While there had been various specifications and implementations for the
-CSV format (for ex. {{CREATIVYST}}, {{EDOCEO}} and {{ART}})), prior to publication
-of {{!RFC4180}} there is no attempt to provide a common specification. Since then,
-the CSV format has evolved and there had also been additional attempts to formally
-document this format (such as the past work of the W3C's {{CSVW}} group).
- 
-This section documents the format that seems to be followed by most implementations (incorporating
+CSV format (for ex. {{CREATIVYST}}, {{EDOCEO}}, {{CSVW}} and {{ART}})), prior to publication
+of {{!RFC4180}} there is no attempt to provide a common specification. This section documents
+the format that seems to be followed by most implementations (incorporating
 changes since the publication of {{!RFC4180}}):
 
-1. Each record is located on a separate line, delimited by a line break (CRLF or LF). For example:
+1. Each record is located on a separate line, ended by a line break (CR, LF or CRLF). For example:
 
    aaa,bbb,cccCRLF<br/>
    zzz,yyy,xxxCRLF
@@ -85,52 +94,51 @@ changes since the publication of {{!RFC4180}}):
    aaa,bbb,cccCRLF<br/>
    zzz,yyy,xxxCRLF
 
-3. There MAY be an optional header line appearing as the first line
-of the file with the same format as normal record lines. This
+3. The first record in the file MAY be an optional header
+with the same format as normal records. This
 header will contain names corresponding to the fields in the file
 and SHOULD contain the same number of fields as the records in
 the rest of the file. Implementers should be aware that some
 applications may treat header values as unique.
-The presence or absence of the header line MAY be indicated via the
+The presence or absence of the header MAY be indicated via the
 optional "header" parameter of this MIME type. For example:
 
    field_name_1,field_name_2,field_name_3CRLF<br/>
    aaa,bbb,cccCRLF<br/>
    zzz,yyy,xxxCRLF
 
-4. Within the header and each record, there MAY be one or more
-fields, separated by commas. Each line SHOULD contain the same
+4. Within each record, there MAY be one or more
+fields, separated by commas. Each record SHOULD contain the same
 number of fields throughout the file. Spaces are considered part
 of a field and SHOULD NOT be ignored. The last field in the
 record MUST NOT be followed by a comma. For example:
 
-   aaa,bbb,ccc
+   aaa,bbb,cccCRLF
 
-5. Each field MAY or MAY not be enclosed in double quotes (however
+5. Each field MAY be enclosed in double quotes (however
 some programs, do not use double quotes at all). If fields are not
-enclosed with double quotes, then double quotes MAY not appear inside the fields.
-Whitespace is allowed between the double quotes and commas/line breaks, and SHOULD
-be ignored. For example:
+enclosed with double quotes, then double quotes MUST NOT appear inside the fields.
+For example:
 
    "aaa","bbb","ccc"CRLF<br/>
-   "aaa","bbb", "ccc" CRLF<br/>
-   zzz,yyy,xxx
+   zzz,yyy,xxxCRLF
 
-6. Fields containing line breaks (CR or CRLF), double quotes, and commas
+6. Fields containing line breaks (CR, LF or CRLF), double quotes, or commas
 MUST be enclosed in double-quotes. For example:
 
    "aaa","b CRLF<br/>
    bb","ccc"CRLF<br/>
-   zzz,yyy,xxx
+   zzz,yyy,xxxCRLF
 
 7. If double-quotes are used to enclose fields, then a double-quote
 appearing inside a field MUST be escaped by preceding it with
 another double quote. For example:
 
-   "aaa","b""bb","ccc"
+   "aaa","b""bb","ccc"CRLF
 
-8. A hash sign MAY be used to mark lines that are meant to be commented lines. 
-A commented line can basically contain any character until it is terminated by CRLF. 
+8. A hash sign MAY be used to mark lines that are meant to be commented lines.
+A commented line can basically contain any character until it is terminated by
+a line break (CR, LF or CRLF).
 For example:
 
     #commentCRLF<br/>
@@ -140,32 +148,31 @@ For example:
 
 ## Default charset and line break values
 Since the initial publication of {{!RFC4180}}, the default charset for "text/*" media types
-has been changed to UTF-8 (as per {{!RFC6657}}).
+has been changed to UTF-8 (as per {{!RFC6657}}). This document reflects this change and
+the default charset for CSV files is now UTF-8.
 
 Although section 4.1.1. of {{!RFC2046}} defines CRLF to denote line breaks,
-implementers MAY recognize a single LF as a line break.
-However, some implementations MAY use other values.
+implementers MAY recognize a single CR or LF as a line break (similar to section 3.1.1.3 
+of {{?RFC7231}}). However, some implementations MAY use other values.
 
 ## ABNF Grammar
 
 The ABNF grammar (as per {{!RFC5234}}) appears as follows:
 
 ~~~~~~~~~~
-file = [(comment / header) [CR]LF] *((comment / record) [CR]LF)
-
-header = name *(COMMA name)
+file = *((record / comment) linebreak)
 
 record = field *(COMMA field)
 
-name = field
+comment = HASH *COMMENTDATA
+
+linebreak = CR / LF / CRLF
 
 field = (escaped / non-escaped)
 
-escaped = *(WSP) DQUOTE *(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE *(WSP)
+escaped = DQUOTE *(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE
 
 non-escaped = [NOCOMMENTTEXTDATA *TEXTDATA]
-
-comment = HASH *COMMENTDATA
 
 COMMA = %x2C
 
@@ -176,12 +183,6 @@ DQUOTE =  %x22 ;as per section B.1 of [RFC5234]
 LF = %x0A ;as per section B.1 of [RFC5234]
 
 CRLF = CR LF ;as per section B.1 of [RFC5234]
-
-WSP = SP / HTAB ;as per section B.1 of [RFC5234]
-
-HASH = %x23
-
-COMMENTDATA = %x20-7E
 
 TEXTDATA =  %x20-21 / %x23-2B / %x2D-7E
 
@@ -197,15 +198,17 @@ Encoding considerations:
 
 > CSV MIME entities can consist of binary data
 > as per section 4.8 of {{!RFC6838}}. Although section 4.1.1. of {{!RFC2046}} defines
-> CRLF to denote line breaks, implementers MAY recognize a single LF
-> as a line break. However, some implementations may use other values.
+> CRLF to denote line breaks, implementers MAY recognize a single CR or LF
+> as a line break (similar to section 3.1.1.3 of {{!RFC7231}}).
+> However, some implementations may use other values.
 
 Published specification:
 
 > While numerous private specifications exist for various programs
 > and systems, there is no single "master" specification for this
 > format. An attempt at a common definition can be found in {{!RFC4180}}
-> and this document.
+> and this document. Implementers should note that both documents are informational
+> in nature and are not standards.
   
 # IANA Considerations
 
@@ -228,9 +231,9 @@ A special thank you to L.T.S.
 
 --- back
 # Major format changes since {{!RFC4180}}
+- Added a section clarifying motivation for this document and standards status
 - Changing default encoding to UTF-8
-- Allowing both LF and CRLF for line breaks
-- Allowing whitespace between the double quotes and comma/line breaks
+- Allowing CR, LF and CRLF for line breaks
 - Mandating a line break at the end of the last line in the file
 - Making records and headers optional, thus allowing for an empty file
 - Adding definition of commented lines
