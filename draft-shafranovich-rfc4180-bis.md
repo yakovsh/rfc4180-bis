@@ -164,25 +164,31 @@ The ABNF grammar (as per {{!RFC5234}}) appears as follows:
 ~~~~~~~~~~
 file = *((comment / record) linebreak)
 
-comment = HASH *COMMENTDATA
+comment = hash *comment-data
 
-record = field *(COMMA field)
+record = first-field *(comma field)
 
 linebreak = CR / LF / CRLF
 
+first-field = (escaped / first-non-escaped)
+
 field = (escaped / non-escaped)
 
-escaped = DQUOTE *(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE
+escaped = DQUOTE *(textdata-with-hash / comma / CR / LF / 2DQUOTE) DQUOTE
 
-non-escaped = *TEXTDATA
+first-non-escaped = [textdata *textdata-with-hash]
 
-COMMA = %x2C
+non-escaped = *textdata-with-hash
 
-HASH = %x23
+comma = %x2C
 
-COMMENTDATA = WSP / VCHAR
+hash = %x23
 
-TEXTDATA = WSP / %x21 / %x23-2B / %x2D-7E ;WSP / VCHAR without COMMA and DQUOTE
+comment-data = WSP / VCHAR
+
+textdata = WSP / %x21 / %x24-2B / %x2D-7E ;WSP / VCHAR without comma, hash and DQUOTE
+
+textdata-with-hash = textdata / hash
 
 CR = %x0D ;as per section B.1 of [RFC5234]
 
