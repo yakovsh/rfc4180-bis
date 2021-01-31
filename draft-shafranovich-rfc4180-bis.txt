@@ -4,8 +4,8 @@
 
 Network Working Group                                    Y. Shafranovich
 Internet-Draft                                  Nightwatch Cybersecurity
-Intended status: Informational                           29 January 2021
-Expires: 2 August 2021
+Intended status: Informational                           31 January 2021
+Expires: 4 August 2021
 
 
    Common Format and MIME Type for Comma-Separated Values (CSV) Files
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 August 2021.
+   This Internet-Draft will expire on 4 August 2021.
 
 Copyright Notice
 
@@ -100,7 +100,7 @@ Table of Contents
    [RFC4180]):
 
    1.  Each record is located on a separate line, delimited by a line
-       break (CRLF or LF).  For example:
+       break (CR, LF or CRLF).  For example:
 
        aaa,bbb,cccCRLF
        zzz,yyy,xxxCRLF
@@ -143,8 +143,8 @@ Table of Contents
        "aaa","bbb", "ccc" CRLF
        zzz,yyy,xxx
 
-   6.  Fields containing line breaks (CR or CRLF), double quotes, and
-       commas MUST be enclosed in double-quotes.  For example:
+   6.  Fields containing line breaks (CR, LF or CRLF), double quotes,
+       and commas MUST be enclosed in double-quotes.  For example:
 
        "aaa","b CRLF
        bb","ccc"CRLF
@@ -169,11 +169,13 @@ Table of Contents
 
    The ABNF grammar (as per [RFC5234]) appears as follows:
 
-file = [header [CR]LF] *(record [CR]LF)
+file = [header linebreak *(record linebreak)
 
 header = name *(COMMA name)
 
 record = field *(COMMA field)
+
+linebreak = CR / LF / CRLF
 
 name = field
 
@@ -206,8 +208,9 @@ TEXTDATA =  %x20-21 / %x23-2B / %x2D-7E
 
       CSV MIME entities can consist of binary data as per section 4.8 of
       [RFC6838].  Although section 4.1.1. of [RFC2046] defines CRLF to
-      denote line breaks, implementers MAY recognize a single LF as a
-      line break.  However, some implementations may use other values.
+      denote line breaks, implementers MAY recognize a single CR or LF
+      as a line break.  However, some implementations may use other
+      values.
 
    Published specification:
 

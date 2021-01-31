@@ -75,7 +75,7 @@ document this format (such as the past work of the W3C's {{CSVW}} group).
 This section documents the format that seems to be followed by most implementations (incorporating
 changes since the publication of {{!RFC4180}}):
 
-1. Each record is located on a separate line, delimited by a line break (CRLF or LF). For example:
+1. Each record is located on a separate line, delimited by a line break (CR, LF or CRLF). For example:
 
    aaa,bbb,cccCRLF<br/>
    zzz,yyy,xxxCRLF
@@ -116,7 +116,7 @@ be ignored. For example:
    "aaa","bbb", "ccc" CRLF<br/>
    zzz,yyy,xxx
 
-6. Fields containing line breaks (CR or CRLF), double quotes, and commas
+6. Fields containing line breaks (CR, LF or CRLF), double quotes, and commas
 MUST be enclosed in double-quotes. For example:
 
    "aaa","b CRLF<br/>
@@ -142,11 +142,13 @@ However, some implementations MAY use other values.
 The ABNF grammar (as per {{!RFC5234}}) appears as follows:
 
 ~~~~~~~~~~
-file = [header [CR]LF] *(record [CR]LF)
+file = [header linebreak *(record linebreak)
 
 header = name *(COMMA name)
 
 record = field *(COMMA field)
+
+linebreak = CR / LF / CRLF
 
 name = field
 
@@ -180,7 +182,7 @@ Encoding considerations:
 
 > CSV MIME entities can consist of binary data
 > as per section 4.8 of {{!RFC6838}}. Although section 4.1.1. of {{!RFC2046}} defines
-> CRLF to denote line breaks, implementers MAY recognize a single LF
+> CRLF to denote line breaks, implementers MAY recognize a single CR or LF
 > as a line break. However, some implementations may use other values.
 
 Published specification:
