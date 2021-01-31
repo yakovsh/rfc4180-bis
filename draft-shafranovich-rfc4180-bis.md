@@ -109,11 +109,9 @@ record MUST NOT be followed by a comma. For example:
 5. Each field MAY be enclosed in double quotes (however
 some programs, do not use double quotes at all). If fields are not
 enclosed with double quotes, then double quotes MUST NOT appear inside the fields.
-Whitespace is allowed between the double quotes and commas/line breaks, and SHOULD
-be ignored. For example:
+For example:
 
    "aaa","bbb","ccc"CRLF<br/>
-   "aaa","bbb", "ccc" CRLF<br/>
    zzz,yyy,xxx
 
 6. Fields containing line breaks (CR, LF or CRLF), double quotes, and commas
@@ -154,7 +152,7 @@ name = field
 
 field = (escaped / non-escaped)
 
-escaped = *(WSP) DQUOTE *(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE *(WSP)
+escaped = DQUOTE *(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE
 
 non-escaped = *TEXTDATA
 
@@ -167,8 +165,6 @@ DQUOTE =  %x22 ;as per section B.1 of [RFC5234]
 LF = %x0A ;as per section B.1 of [RFC5234]
 
 CRLF = CR LF ;as per section B.1 of [RFC5234]
-
-WSP = SP / HTAB ;as per section B.1 of [RFC5234]
 
 TEXTDATA =  %x20-21 / %x23-2B / %x2D-7E
 ~~~~~~~~~~
@@ -215,7 +211,6 @@ A special thank you to L.T.S.
 # Major format changes since {{!RFC4180}}
 - Changing default encoding to UTF-8
 - Allowing CR, LF and CRLF for line breaks
-- Allowing whitespace between the double quotes and comma/line breaks
 - Mandating a line break at the end of the last line in the file
 - Making records and headers optional, thus allowing for an empty file
 

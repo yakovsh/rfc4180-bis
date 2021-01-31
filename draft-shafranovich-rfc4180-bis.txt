@@ -132,15 +132,12 @@ Table of Contents
 
        aaa,bbb,ccc
 
-   5.  Each field MAY or MAY not be enclosed in double quotes (however
-       some programs, do not use double quotes at all).  If fields are
-       not enclosed with double quotes, then double quotes MAY not
-       appear inside the fields.  Whitespace is allowed between the
-       double quotes and commas/line breaks, and SHOULD be ignored.  For
-       example:
+   5.  Each field MAY be enclosed in double quotes (however some
+       programs, do not use double quotes at all).  If fields are not
+       enclosed with double quotes, then double quotes MUST NOT appear
+       inside the fields.  For example:
 
        "aaa","bbb","ccc"CRLF
-       "aaa","bbb", "ccc" CRLF
        zzz,yyy,xxx
 
    6.  Fields containing line breaks (CR, LF or CRLF), double quotes,
@@ -169,35 +166,33 @@ Table of Contents
 
    The ABNF grammar (as per [RFC5234]) appears as follows:
 
-file = [header linebreak *(record linebreak)
+   file = [header linebreak *(record linebreak)
 
-header = name *(COMMA name)
+   header = name *(COMMA name)
 
-record = field *(COMMA field)
+   record = field *(COMMA field)
 
-linebreak = CR / LF / CRLF
+   linebreak = CR / LF / CRLF
 
-name = field
+   name = field
 
-field = (escaped / non-escaped)
+   field = (escaped / non-escaped)
 
-escaped = *(WSP) DQUOTE *(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE *(WSP)
+   escaped = DQUOTE *(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE
 
-non-escaped = *TEXTDATA
+   non-escaped = *TEXTDATA
 
-COMMA = %x2C
+   COMMA = %x2C
 
-CR = %x0D ;as per section B.1 of [RFC5234]
+   CR = %x0D ;as per section B.1 of [RFC5234]
 
-DQUOTE =  %x22 ;as per section B.1 of [RFC5234]
+   DQUOTE =  %x22 ;as per section B.1 of [RFC5234]
 
-LF = %x0A ;as per section B.1 of [RFC5234]
+   LF = %x0A ;as per section B.1 of [RFC5234]
 
-CRLF = CR LF ;as per section B.1 of [RFC5234]
+   CRLF = CR LF ;as per section B.1 of [RFC5234]
 
-WSP = SP / HTAB ;as per section B.1 of [RFC5234]
-
-TEXTDATA =  %x20-21 / %x23-2B / %x2D-7E
+   TEXTDATA =  %x20-21 / %x23-2B / %x2D-7E
 
 3.  Update to MIME Type Registration of text/csv
 
@@ -300,9 +295,6 @@ Appendix A.  Major format changes since [RFC4180]
    *  Changing default encoding to UTF-8
 
    *  Allowing CR, LF and CRLF for line breaks
-
-   *  Allowing whitespace between the double quotes and comma/line
-      breaks
 
    *  Mandating a line break at the end of the last line in the file
 
