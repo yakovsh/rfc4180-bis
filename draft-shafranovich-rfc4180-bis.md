@@ -113,7 +113,7 @@ number of fields throughout the file. Spaces are considered part
 of a field and SHOULD NOT be ignored. The last field in the
 record MUST NOT be followed by a comma. For example:
 
-   aaa,bbb,ccc
+   aaa,bbb,cccCRLF
 
 5. Each field MAY be enclosed in double quotes (however
 some programs, do not use double quotes at all). If fields are not
@@ -121,20 +121,20 @@ enclosed with double quotes, then double quotes MUST NOT appear inside the field
 For example:
 
    "aaa","bbb","ccc"CRLF<br/>
-   zzz,yyy,xxx
+   zzz,yyy,xxxCRLF
 
 6. Fields containing line breaks (CR, LF or CRLF), double quotes, or commas
 MUST be enclosed in double-quotes. For example:
 
    "aaa","b CRLF<br/>
    bb","ccc"CRLF<br/>
-   zzz,yyy,xxx
+   zzz,yyy,xxxCRLF
 
 7. If double-quotes are used to enclose fields, then a double-quote
 appearing inside a field MUST be escaped by preceding it with
 another double quote. For example:
 
-   "aaa","b""bb","ccc"
+   "aaa","b""bb","ccc"CRLF
 
 ## Default charset and line break values
 Since the initial publication of {{!RFC4180}}, the default charset for "text/*" media types
