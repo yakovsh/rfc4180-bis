@@ -172,7 +172,9 @@ LF = %x0A ;as per section B.1 of [RFC5234]
 
 CRLF = CR LF ;as per section B.1 of [RFC5234]
 
-TEXTDATA =  %x20-21 / %x23-2B / %x2D-7E
+TEXTDATA =  HTAB / %x20-21 / %x23-2B / %x2D-7E
+
+HTAB = %x09 ;as per section B.1 of [RFC5234]
 ~~~~~~~~~~
 
 # Update to MIME Type Registration of text/csv {#registration}
@@ -220,6 +222,7 @@ A special thank you to L.T.S.
 - Added a section clarifying motivation for this document and standards status
 - Changing default encoding to UTF-8
 - Allowing CR, LF and CRLF for line breaks
+- Allowing HTAB in text data
 - Mandating a line break at the end of the last line in the file
 - Making records and headers optional, thus allowing for an empty file
 

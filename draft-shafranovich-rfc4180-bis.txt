@@ -123,26 +123,26 @@ Table of Contents
        aaa,bbb,cccCRLF
        zzz,yyy,xxxCRLF
 
-   3.  There MAY be an optional header line appearing as the first line
-       of the file with the same format as normal record lines.  This
-       header will contain names corresponding to the fields in the file
-       and SHOULD contain the same number of fields as the records in
-       the rest of the file.  Implementers should be aware that some
-       applications may treat header values as unique.  The presence or
-       absence of the header line MAY be indicated via the optional
-       "header" parameter of this MIME type.  For example:
+   3.  The first record in the file MAY be an optional header with the
+       same format as normal records.  This header will contain names
+       corresponding to the fields in the file and SHOULD contain the
+       same number of fields as the records in the rest of the file.
+       Implementers should be aware that some applications may treat
+       header values as unique.  The presence or absence of the header
+       MAY be indicated via the optional "header" parameter of this MIME
+       type.  For example:
 
        field_name_1,field_name_2,field_name_3CRLF
        aaa,bbb,cccCRLF
        zzz,yyy,xxxCRLF
 
-   4.  Within the header and each record, there MAY be one or more
-       fields, separated by commas.  Each line SHOULD contain the same
-       number of fields throughout the file.  Spaces are considered part
-       of a field and SHOULD NOT be ignored.  The last field in the
-       record MUST NOT be followed by a comma.  For example:
+   4.  Within each record, there MAY be one or more fields, separated by
+       commas.  Each record SHOULD contain the same number of fields
+       throughout the file.  Spaces are considered part of a field and
+       SHOULD NOT be ignored.  The last field in the record MUST NOT be
+       followed by a comma.  For example:
 
-       aaa,bbb,ccc
+       aaa,bbb,cccCRLF
 
    5.  Each field MAY be enclosed in double quotes (however some
        programs, do not use double quotes at all).  If fields are not
@@ -150,20 +150,20 @@ Table of Contents
        inside the fields.  For example:
 
        "aaa","bbb","ccc"CRLF
-       zzz,yyy,xxx
+       zzz,yyy,xxxCRLF
 
    6.  Fields containing line breaks (CR, LF or CRLF), double quotes, or
        commas MUST be enclosed in double-quotes.  For example:
 
        "aaa","b CRLF
        bb","ccc"CRLF
-       zzz,yyy,xxx
+       zzz,yyy,xxxCRLF
 
    7.  If double-quotes are used to enclose fields, then a double-quote
        appearing inside a field MUST be escaped by preceding it with
        another double quote.  For example:
 
-       "aaa","b""bb","ccc"
+       "aaa","b""bb","ccc"CRLF
 
 2.1.  Default charset and line break values
 
@@ -181,15 +181,11 @@ Table of Contents
 
    The ABNF grammar (as per [RFC5234]) appears as follows:
 
-   file = [header linebreak *(record linebreak)
-
-   header = name *(COMMA name)
+   file = *(record linebreak)
 
    record = field *(COMMA field)
 
    linebreak = CR / LF / CRLF
-
-   name = field
 
    field = (escaped / non-escaped)
 
@@ -207,7 +203,9 @@ Table of Contents
 
    CRLF = CR LF ;as per section B.1 of [RFC5234]
 
-   TEXTDATA =  %x20-21 / %x23-2B / %x2D-7E
+   TEXTDATA =  HTAB / %x20-21 / %x23-2B / %x2D-7E
+
+   HTAB = %x09 ;as per section B.1 of [RFC5234]
 
 3.  Update to MIME Type Registration of text/csv
 
@@ -327,6 +325,8 @@ Appendix A.  Major format changes since [RFC4180]
    *  Changing default encoding to UTF-8
 
    *  Allowing CR, LF and CRLF for line breaks
+
+   *  Allowing HTAB in text data
 
    *  Mandating a line break at the end of the last line in the file
 
