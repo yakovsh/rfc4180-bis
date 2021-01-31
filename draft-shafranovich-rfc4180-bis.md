@@ -94,21 +94,21 @@ changes since the publication of {{!RFC4180}}):
    aaa,bbb,cccCRLF<br/>
    zzz,yyy,xxxCRLF
 
-3. There MAY be an optional header line appearing as the first line
-of the file with the same format as normal record lines. This
+3. The first record in the file MAY be an optional header
+with the same format as normal records. This
 header will contain names corresponding to the fields in the file
 and SHOULD contain the same number of fields as the records in
 the rest of the file. Implementers should be aware that some
 applications may treat header values as unique.
-The presence or absence of the header line MAY be indicated via the
+The presence or absence of the header MAY be indicated via the
 optional "header" parameter of this MIME type. For example:
 
    field_name_1,field_name_2,field_name_3CRLF<br/>
    aaa,bbb,cccCRLF<br/>
    zzz,yyy,xxxCRLF
 
-4. Within the header and each record, there MAY be one or more
-fields, separated by commas. Each line SHOULD contain the same
+4. Within each record, there MAY be one or more
+fields, separated by commas. Each record SHOULD contain the same
 number of fields throughout the file. Spaces are considered part
 of a field and SHOULD NOT be ignored. The last field in the
 record MUST NOT be followed by a comma. For example:
@@ -150,15 +150,11 @@ of {{?RFC7231}}). However, some implementations MAY use other values.
 The ABNF grammar (as per {{!RFC5234}}) appears as follows:
 
 ~~~~~~~~~~
-file = [header linebreak *(record linebreak)
-
-header = name *(COMMA name)
+file = *(record linebreak)
 
 record = field *(COMMA field)
 
 linebreak = CR / LF / CRLF
-
-name = field
 
 field = (escaped / non-escaped)
 
