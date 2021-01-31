@@ -160,11 +160,11 @@ of {{?RFC7231}}). However, some implementations MAY use other values.
 The ABNF grammar (as per {{!RFC5234}}) appears as follows:
 
 ~~~~~~~~~~
-file = *((record / comment) linebreak)
-
-record = field *(COMMA field)
+file = *((comment / record) linebreak)
 
 comment = HASH *COMMENTDATA
+
+record = field *(COMMA field)
 
 linebreak = CR / LF / CRLF
 
@@ -172,17 +172,15 @@ field = (escaped / non-escaped)
 
 escaped = DQUOTE *(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE
 
-non-escaped = [NOCOMMENTTEXTDATA *TEXTDATA]
+non-escaped = *TEXTDATA
 
 COMMA = %x2C
 
 HASH = %x23
 
-NOCOMMENTTEXTDATA = WSP / %x21 / %x24-2B / %x2D-7E ;WSP / VCHAR without COMMA, HASH and DQUOTE
-
-TEXTDATA = NOCOMMENTTEXTDATA / HASH
-
 COMMENTDATA = WSP / VCHAR
+
+TEXTDATA = WSP / %x21 / %x23-2B / %x2D-7E ;WSP / VCHAR without COMMA and DQUOTE
 
 CR = %x0D ;as per section B.1 of [RFC5234]
 
