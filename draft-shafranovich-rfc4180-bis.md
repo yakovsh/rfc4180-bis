@@ -137,8 +137,8 @@ another double quote. For example:
    "aaa","b""bb","ccc"CRLF
 
 8. A hash sign MAY be used to mark lines that are meant to be commented lines.
-A commented line can basically contain any character until it is terminated by
-a line break (CR, LF or CRLF).
+A commented line can contain any whitespace or visible character until it is
+terminated by a line break (CR, LF or CRLF).
 For example:
 
     #commentCRLF<br/>
