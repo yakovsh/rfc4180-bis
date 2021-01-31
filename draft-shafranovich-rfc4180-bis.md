@@ -134,7 +134,7 @@ Since the initial publication of {{!RFC4180}}, the default charset for "text/*" 
 has been changed to UTF-8 (as per {{!RFC6657}}).
 
 Although section 4.1.1. of {{!RFC2046}} defines CRLF to denote line breaks,
-implementers MAY recognize a single LF as a line break.
+implementers MAY recognize a single CR or LF as a line break.
 However, some implementations MAY use other values.
 
 ## ABNF Grammar
