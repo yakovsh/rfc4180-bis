@@ -106,9 +106,9 @@ record MUST NOT be followed by a comma. For example:
 
    aaa,bbb,ccc
 
-5. Each field MAY or MAY not be enclosed in double quotes (however
+5. Each field MAY be enclosed in double quotes (however
 some programs, do not use double quotes at all). If fields are not
-enclosed with double quotes, then double quotes MAY not appear inside the fields.
+enclosed with double quotes, then double quotes MUST NOT appear inside the fields.
 Whitespace is allowed between the double quotes and commas/line breaks, and SHOULD
 be ignored. For example:
 
