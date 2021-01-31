@@ -74,7 +74,7 @@ current practices for generating and consuming of CSV files.
  
 Both {{!RFC4180}} and this document are published as informational RFC for the benefit
 of the Internet community and and not intended to be used as formal standards.
-Implementers should consult {{!RFC1796}} and {{!RFC2026}} for crucial differences
+Implementers should consult {{?RFC1796}} and {{?RFC2026}} for crucial differences
 between IETF standards and informational RFCs.
 
 # Definition of the CSV Format {#format}
@@ -143,7 +143,7 @@ the default charset for CSV files is now UTF-8.
 
 Although section 4.1.1. of {{!RFC2046}} defines CRLF to denote line breaks,
 implementers MAY recognize a single CR or LF as a line break (similar to section 3.1.1.3 
-of {{!RFC7231}}). However, some implementations MAY use other values.
+of {{?RFC7231}}). However, some implementations MAY use other values.
 
 ## ABNF Grammar
 

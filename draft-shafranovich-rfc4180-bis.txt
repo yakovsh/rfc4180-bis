@@ -254,14 +254,6 @@ Table of Contents
 
 7.1.  Normative References
 
-   [RFC1796]  Huitema, C., Postel, J., and S. Crocker, "Not All RFCs are
-              Standards", RFC 1796, DOI 10.17487/RFC1796, April 1995,
-              <https://www.rfc-editor.org/info/rfc1796>.
-
-   [RFC2026]  Bradner, S., "The Internet Standards Process -- Revision
-              3", BCP 9, RFC 2026, DOI 10.17487/RFC2026, October 1996,
-              <https://www.rfc-editor.org/info/rfc2026>.
-
    [RFC2046]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part Two: Media Types", RFC 2046,
               DOI 10.17487/RFC2046, November 1996,
@@ -318,6 +310,14 @@ Table of Contents
 
    [EDOCEO]   Edoceo, Inc., "Comma Separated Values (CSV) Standard File
               Format", 2020, <https://edoceo.com/dev/csv-file-format>.
+
+   [RFC1796]  Huitema, C., Postel, J., and S. Crocker, "Not All RFCs are
+              Standards", RFC 1796, DOI 10.17487/RFC1796, April 1995,
+              <https://www.rfc-editor.org/info/rfc1796>.
+
+   [RFC2026]  Bradner, S., "The Internet Standards Process -- Revision
+              3", BCP 9, RFC 2026, DOI 10.17487/RFC2026, October 1996,
+              <https://www.rfc-editor.org/info/rfc2026>.
 
 Appendix A.  Major format changes since [RFC4180]
 
