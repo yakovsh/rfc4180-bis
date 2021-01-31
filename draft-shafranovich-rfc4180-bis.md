@@ -176,19 +176,27 @@ non-escaped = [NOCOMMENTTEXTDATA *TEXTDATA]
 
 COMMA = %x2C
 
+HASH = %x23
+
+NOCOMMENTTEXTDATA = WSP / %x21 / %x24-2B / %x2D-7E ;WSP / VCHAR without COMMA, HASH and DQUOTE
+
+TEXTDATA = NOCOMMENTTEXTDATA / HASH
+
+COMMENTDATA = WSP / VCHAR
+
 CR = %x0D ;as per section B.1 of [RFC5234]
 
-DQUOTE =  %x22 ;as per section B.1 of [RFC5234]
+DQUOTE = %x22 ;as per section B.1 of [RFC5234]
 
 LF = %x0A ;as per section B.1 of [RFC5234]
 
 CRLF = CR LF ;as per section B.1 of [RFC5234]
 
-NOCOMMENTTEXTDATA =  HTAB / %x20-21 / %x24-2B / %x2D-7E
-
-TEXTDATA =  HTAB / %x20-21 / %x23-2B / %x2D-7E
-
 HTAB = %x09 ;as per section B.1 of [RFC5234]
+
+SP = %x20 ;as per section B.1 of [RFC5234]
+
+WSP = SP / HTAB ;as per section B.1 of [RFC5234]
 ~~~~~~~~~~
 
 # Update to MIME Type Registration of text/csv {#registration}
