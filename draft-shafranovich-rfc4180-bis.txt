@@ -299,7 +299,7 @@ Appendix A.  Major format changes since [RFC4180]
 
    *  Changing default encoding to UTF-8
 
-   *  Allowing both LF and CRLF for line breaks
+   *  Allowing CR, LF and CRLF for line breaks
 
    *  Allowing whitespace between the double quotes and comma/line
       breaks

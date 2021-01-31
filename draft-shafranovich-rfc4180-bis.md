@@ -214,7 +214,7 @@ A special thank you to L.T.S.
 --- back
 # Major format changes since {{!RFC4180}}
 - Changing default encoding to UTF-8
-- Allowing both LF and CRLF for line breaks
+- Allowing CR, LF and CRLF for line breaks
 - Allowing whitespace between the double quotes and comma/line breaks
 - Mandating a line break at the end of the last line in the file
 - Making records and headers optional, thus allowing for an empty file
