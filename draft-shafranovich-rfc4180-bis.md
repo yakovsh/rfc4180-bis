@@ -124,11 +124,13 @@ For example:
    zzz,yyy,xxxCRLF
 
 6. Fields containing line breaks (CR, LF or CRLF), double quotes, or commas
-MUST be enclosed in double-quotes. For example:
+MUST be enclosed in double-quotes. The same applies for the first field of
+a record that starts with a hash. For example:
 
    "aaa","b CRLF<br/>
    bb","ccc"CRLF<br/>
    zzz,yyy,xxxCRLF
+   "#aaa",#bbb,cccCRLF
 
 7. If double-quotes are used to enclose fields, then a double-quote
 appearing inside a field MUST be escaped by preceding it with
