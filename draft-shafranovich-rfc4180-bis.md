@@ -146,12 +146,12 @@ OPTIONAL header) but MUST NOT be mistaken with a subsequent line of a multi-line
 field. Subsequent lines of multi-line fields can start with a hash sign and
 MUST NOT interpreted as comments. For example:
 
-    #comment 1CRLF<br/>
-    aaa,bbb,cccCRLF<br/>
-    #comment 2CRLF<br/>
-    "aaa","this is CRLF<br/>
-    # not a comment","ccc"CRLF<br/>
-    zzz,yyy,xxxCRLF
+   #commentCRLF<br/>
+   aaa,bbb,cccCRLF<br/>
+   #comment 2CRLF<br/>
+   "aaa","this is CRLF<br/>
+   # not a comment","ccc"CRLF<br/>
+   zzz,yyy,xxxCRLF
 
 ## Default charset and line break values
 Since the initial publication of {{!RFC4180}}, the default charset for "text/*" media types
