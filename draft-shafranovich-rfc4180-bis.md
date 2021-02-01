@@ -129,7 +129,7 @@ a record that starts with a hash. For example:
 
    "aaa","b CRLF<br/>
    bb","ccc"CRLF<br/>
-   zzz,yyy,xxxCRLF
+   zzz,yyy,xxxCRLF<br/>
    "#aaa",#bbb,cccCRLF
 
 7. If double-quotes are used to enclose fields, then a double-quote
@@ -141,12 +141,17 @@ another double quote. For example:
 8. A hash sign MAY be used to mark lines that are meant to be commented lines.
 A commented line can contain any whitespace or visible character until it is
 terminated by a line break (CR, LF or CRLF).
-For example:
+A comment line MAY appear in every line of the file (before or after an
+OPTIONAL header) but MUST NOT be mistaken with a subsequent line of a multi-line
+field. Subsequent lines of multi-line fields can start with a hash sign and
+MUST NOT interpreted as comments. For example:
 
-    #commentCRLF<br/>
-    aaa,bbb,cccCRLF<br/>
-    #comment 2CRLF<br/>
-    zzz,yyy,xxxCRLF
+   #commentCRLF<br/>
+   aaa,bbb,cccCRLF<br/>
+   #comment 2CRLF<br/>
+   "aaa","this is CRLF<br/>
+   # not a comment","ccc"CRLF<br/>
+   zzz,yyy,xxxCRLF
 
 ## Default charset and line break values
 Since the initial publication of {{!RFC4180}}, the default charset for "text/*" media types
