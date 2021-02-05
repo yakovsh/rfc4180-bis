@@ -124,17 +124,34 @@ For example:
    zzz,yyy,xxxCRLF
 
 6. Fields containing line breaks (CR, LF or CRLF), double quotes, or commas
-MUST be enclosed in double-quotes. For example:
+MUST be enclosed in double-quotes. The same applies for the first field of
+a record that starts with a hash. For example:
 
    "aaa","b CRLF<br/>
    bb","ccc"CRLF<br/>
-   zzz,yyy,xxxCRLF
+   zzz,yyy,xxxCRLF<br/>
+   "#aaa",#bbb,cccCRLF
 
 7. If double-quotes are used to enclose fields, then a double-quote
 appearing inside a field MUST be escaped by preceding it with
 another double quote. For example:
 
    "aaa","b""bb","ccc"CRLF
+
+8. A hash sign MAY be used to mark lines that are meant to be commented lines.
+A commented line can contain any whitespace or visible character until it is
+terminated by a line break (CR, LF or CRLF).
+A comment line MAY appear in every line of the file (before or after an
+OPTIONAL header) but MUST NOT be mistaken with a subsequent line of a multi-line
+field. Subsequent lines of multi-line fields can start with a hash sign and
+MUST NOT interpreted as comments. For example:
+
+    #commentCRLF<br/>
+    aaa,bbb,cccCRLF<br/>
+    #comment 2CRLF<br/>
+    "aaa","this is CRLF<br/>
+    # not a comment","ccc"CRLF<br/>
+    zzz,yyy,xxxCRLF
 
 ## Default charset and line break values
 Since the initial publication of {{!RFC4180}}, the default charset for "text/*" media types
@@ -150,31 +167,47 @@ of {{?RFC7231}}). However, some implementations MAY use other values.
 The ABNF grammar (as per {{!RFC5234}}) appears as follows:
 
 ~~~~~~~~~~
-file = *(record linebreak)
+file = *((comment / record) linebreak)
 
-record = field *(COMMA field)
+comment = hash *comment-data
+
+record = first-field *(comma field)
 
 linebreak = CR / LF / CRLF
 
+first-field = (escaped / first-non-escaped)
+
 field = (escaped / non-escaped)
 
-escaped = DQUOTE *(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE
+escaped = DQUOTE *(textdata-with-hash / comma / CR / LF / 2DQUOTE) DQUOTE
 
-non-escaped = *TEXTDATA
+first-non-escaped = [textdata *textdata-with-hash]
 
-COMMA = %x2C
+non-escaped = *textdata-with-hash
+
+comma = %x2C
+
+hash = %x23
+
+comment-data = WSP / VCHAR
+
+textdata = WSP / %x21 / %x24-2B / %x2D-7E ;WSP / VCHAR without comma, hash and DQUOTE
+
+textdata-with-hash = textdata / hash
 
 CR = %x0D ;as per section B.1 of [RFC5234]
 
-DQUOTE =  %x22 ;as per section B.1 of [RFC5234]
+DQUOTE = %x22 ;as per section B.1 of [RFC5234]
 
 LF = %x0A ;as per section B.1 of [RFC5234]
 
 CRLF = CR LF ;as per section B.1 of [RFC5234]
 
-TEXTDATA =  HTAB / %x20-21 / %x23-2B / %x2D-7E
-
 HTAB = %x09 ;as per section B.1 of [RFC5234]
+
+SP = %x20 ;as per section B.1 of [RFC5234]
+
+WSP = SP / HTAB ;as per section B.1 of [RFC5234]
 ~~~~~~~~~~
 
 # Update to MIME Type Registration of text/csv {#registration}
@@ -225,6 +258,7 @@ A special thank you to L.T.S.
 - Allowing HTAB in text data
 - Mandating a line break at the end of the last line in the file
 - Making records and headers optional, thus allowing for an empty file
+- Adding definition of commented lines
 
 # Note to Readers
 
