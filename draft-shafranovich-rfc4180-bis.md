@@ -208,6 +208,8 @@ HTAB = %x09 ;as per section B.1 of [RFC5234]
 SP = %x20 ;as per section B.1 of [RFC5234]
 
 WSP = SP / HTAB ;as per section B.1 of [RFC5234]
+
+VCHAR =  %x21-7E ;as per section B.1 of [RFC5234]
 ~~~~~~~~~~
 
 # Update to MIME Type Registration of text/csv {#registration}

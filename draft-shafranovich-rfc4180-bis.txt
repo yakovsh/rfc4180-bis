@@ -4,8 +4,8 @@
 
 Network Working Group                                    Y. Shafranovich
 Internet-Draft                                  Nightwatch Cybersecurity
-Intended status: Informational                           31 January 2021
-Expires: 4 August 2021
+Intended status: Informational                           5 February 2021
+Expires: 9 August 2021
 
 
    Common Format and MIME Type for Comma-Separated Values (CSV) Files
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 August 2021.
+   This Internet-Draft will expire on 9 August 2021.
 
 Copyright Notice
 
@@ -153,17 +153,36 @@ Table of Contents
        zzz,yyy,xxxCRLF
 
    6.  Fields containing line breaks (CR, LF or CRLF), double quotes, or
-       commas MUST be enclosed in double-quotes.  For example:
+       commas MUST be enclosed in double-quotes.  The same applies for
+       the first field of a record that starts with a hash.  For
+       example:
 
        "aaa","b CRLF
        bb","ccc"CRLF
        zzz,yyy,xxxCRLF
+       "#aaa",#bbb,cccCRLF
 
    7.  If double-quotes are used to enclose fields, then a double-quote
        appearing inside a field MUST be escaped by preceding it with
        another double quote.  For example:
 
        "aaa","b""bb","ccc"CRLF
+
+   8.  A hash sign MAY be used to mark lines that are meant to be
+       commented lines.  A commented line can contain any whitespace or
+       visible character until it is terminated by a line break (CR, LF
+       or CRLF).  A comment line MAY appear in every line of the file
+       (before or after an OPTIONAL header) but MUST NOT be mistaken
+       with a subsequent line of a multi-line field.  Subsequent lines
+       of multi-line fields can start with a hash sign and MUST NOT
+       interpreted as comments.  For example:
+
+       #commentCRLF
+       aaa,bbb,cccCRLF
+       #comment 2CRLF
+       "aaa","this is CRLF
+       # not a comment","ccc"CRLF
+       zzz,yyy,xxxCRLF
 
 2.1.  Default charset and line break values
 
@@ -181,31 +200,49 @@ Table of Contents
 
    The ABNF grammar (as per [RFC5234]) appears as follows:
 
-   file = *(record linebreak)
+file = *((comment / record) linebreak)
 
-   record = field *(COMMA field)
+comment = hash *comment-data
 
-   linebreak = CR / LF / CRLF
+record = first-field *(comma field)
 
-   field = (escaped / non-escaped)
+linebreak = CR / LF / CRLF
 
-   escaped = DQUOTE *(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE
+first-field = (escaped / first-non-escaped)
 
-   non-escaped = *TEXTDATA
+field = (escaped / non-escaped)
 
-   COMMA = %x2C
+escaped = DQUOTE *(textdata-with-hash / comma / CR / LF / 2DQUOTE) DQUOTE
 
-   CR = %x0D ;as per section B.1 of [RFC5234]
+first-non-escaped = [textdata *textdata-with-hash]
 
-   DQUOTE =  %x22 ;as per section B.1 of [RFC5234]
+non-escaped = *textdata-with-hash
 
-   LF = %x0A ;as per section B.1 of [RFC5234]
+comma = %x2C
 
-   CRLF = CR LF ;as per section B.1 of [RFC5234]
+hash = %x23
 
-   TEXTDATA =  HTAB / %x20-21 / %x23-2B / %x2D-7E
+comment-data = WSP / VCHAR
 
-   HTAB = %x09 ;as per section B.1 of [RFC5234]
+textdata = WSP / %x21 / %x24-2B / %x2D-7E ;WSP / VCHAR without comma, hash and DQUOTE
+
+textdata-with-hash = textdata / hash
+
+CR = %x0D ;as per section B.1 of [RFC5234]
+
+DQUOTE = %x22 ;as per section B.1 of [RFC5234]
+
+LF = %x0A ;as per section B.1 of [RFC5234]
+
+CRLF = CR LF ;as per section B.1 of [RFC5234]
+
+HTAB = %x09 ;as per section B.1 of [RFC5234]
+
+SP = %x20 ;as per section B.1 of [RFC5234]
+
+WSP = SP / HTAB ;as per section B.1 of [RFC5234]
+
+VCHAR =  %x21-7E ;as per section B.1 of [RFC5234]
 
 3.  Update to MIME Type Registration of text/csv
 
@@ -332,6 +369,8 @@ Appendix A.  Major format changes since [RFC4180]
 
    *  Making records and headers optional, thus allowing for an empty
       file
+
+   *  Adding definition of commented lines
 
 Appendix B.  Note to Readers
 
