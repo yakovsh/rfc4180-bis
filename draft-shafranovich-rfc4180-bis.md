@@ -189,9 +189,9 @@ comma = %x2C
 
 hash = %x23
 
-comment-data = WSP / VCHAR
+comment-data = WSP / %x21-10FFFF ;characters without control characters
 
-textdata = WSP / %x21 / %x24-2B / %x2D-7E ;WSP / VCHAR without comma, hash and DQUOTE
+textdata = WSP / %x21 / %x24-2B / %x2D-10FFFF ;characters without control characters, comma, hash and DQUOTE
 
 textdata-with-hash = textdata / hash
 
@@ -208,8 +208,6 @@ HTAB = %x09 ;as per section B.1 of [RFC5234]
 SP = %x20 ;as per section B.1 of [RFC5234]
 
 WSP = SP / HTAB ;as per section B.1 of [RFC5234]
-
-VCHAR =  %x21-7E ;as per section B.1 of [RFC5234]
 ~~~~~~~~~~
 
 # Update to MIME Type Registration of text/csv {#registration}
