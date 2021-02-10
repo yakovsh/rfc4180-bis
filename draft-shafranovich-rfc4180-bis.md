@@ -189,9 +189,9 @@ comma = %x2C
 
 hash = %x23
 
-comment-data = WSP / %x21-10FFFF ;characters without control characters
+comment-data = WSP / %x21-7E / %x80-10FFFF ;characters without control characters
 
-textdata = WSP / %x21 / %x24-2B / %x2D-10FFFF ;characters without control characters, comma, hash and DQUOTE
+textdata = WSP / %x21 / %x24-2B / %x2D-7E / %x80-10FFFF ;characters without control characters, comma, hash and DQUOTE
 
 textdata-with-hash = textdata / hash
 
