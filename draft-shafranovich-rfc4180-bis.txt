@@ -4,8 +4,8 @@
 
 Network Working Group                                    Y. Shafranovich
 Internet-Draft                                  Nightwatch Cybersecurity
-Intended status: Informational                           5 February 2021
-Expires: 9 August 2021
+Intended status: Informational                          10 February 2021
+Expires: 14 August 2021
 
 
    Common Format and MIME Type for Comma-Separated Values (CSV) Files
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 August 2021.
+   This Internet-Draft will expire on 14 August 2021.
 
 Copyright Notice
 
@@ -222,9 +222,9 @@ comma = %x2C
 
 hash = %x23
 
-comment-data = WSP / VCHAR
+comment-data = WSP / %x21-7E / %x80-10FFFF ;characters without control characters
 
-textdata = WSP / %x21 / %x24-2B / %x2D-7E ;WSP / VCHAR without comma, hash and DQUOTE
+textdata = WSP / %x21 / %x24-2B / %x2D-7E / %x80-10FFFF ;characters without control characters, comma, hash and DQUOTE
 
 textdata-with-hash = textdata / hash
 
@@ -241,8 +241,6 @@ HTAB = %x09 ;as per section B.1 of [RFC5234]
 SP = %x20 ;as per section B.1 of [RFC5234]
 
 WSP = SP / HTAB ;as per section B.1 of [RFC5234]
-
-VCHAR =  %x21-7E ;as per section B.1 of [RFC5234]
 
 3.  Update to MIME Type Registration of text/csv
 
