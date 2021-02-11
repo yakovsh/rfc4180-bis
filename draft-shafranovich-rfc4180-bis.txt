@@ -4,8 +4,8 @@
 
 Network Working Group                                    Y. Shafranovich
 Internet-Draft                                  Nightwatch Cybersecurity
-Intended status: Informational                          10 February 2021
-Expires: 14 August 2021
+Intended status: Informational                          11 February 2021
+Expires: 15 August 2021
 
 
    Common Format and MIME Type for Comma-Separated Values (CSV) Files
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 August 2021.
+   This Internet-Draft will expire on 15 August 2021.
 
 Copyright Notice
 
@@ -257,7 +257,7 @@ WSP = SP / HTAB ;as per section B.1 of [RFC5234]
 
 3.1.  Null values
 
-   Some implementations (such as databases) treat empty records and null
+   Some implementations (such as databases) treat empty fields and null
    values differently.  For these implementations, there is a need to
    define a special value representing a null.
 
@@ -269,9 +269,9 @@ WSP = SP / HTAB ;as per section B.1 of [RFC5234]
 
 3.2.  Empty lines
 
-   This specification recommends but doesn't require keeping the number
-   of records the same in every line.  This allows CSV files to have
-   empty lines without any records at all.  Some implementations can be
+   This specification recommends but doesn't require having the same
+   number of fields in every line.  This allows CSV files to have empty
+   lines without any records at all.  Some implementations can be
    configured to skip empty lines instead of parsing them.
 
    Example of a CSV file with empty lines:

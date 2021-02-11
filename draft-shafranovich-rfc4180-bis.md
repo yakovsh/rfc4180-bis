@@ -219,7 +219,7 @@ and are included for awareness. Implementers may also use other means to handle
 these use cases such as {{!CSVW}}.
 
 ## Null values
-Some implementations (such as databases) treat empty records and null values differently.
+Some implementations (such as databases) treat empty fields and null values differently.
 For these implementations, there is a need to define a special value representing
 a null.
 
@@ -230,8 +230,8 @@ Example of a CSV file with nulls (if "NULL" is used to mark nulls):
    zzz,NULL,xxxCRLF
 
 ## Empty lines
-This specification recommends but doesn't require keeping the number of records
-the same in every line. This allows CSV files to have empty lines without
+This specification recommends but doesn't require having the same number of fields
+in every line. This allows CSV files to have empty lines without
 any records at all. Some implementations can be configured to skip empty lines
 instead of parsing them.
 
