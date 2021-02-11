@@ -164,36 +164,6 @@ Although section 4.1.1. of {{!RFC2046}} defines CRLF to denote line breaks,
 implementers MAY recognize a single CR or LF as a line break (similar to section 3.1.1.3
 of {{?RFC7231}}). However, some implementations MAY use other values.
 
-## Common implementation concerns
-This section describes some common concerns that may arise when
-producing or parsing CSV files. All of these remain out of scope for this document
-and are included for awareness. Implementers may also use other means to handle
-these use cases such as {{!CSVW}}.
-
-### Null valus
-Some implementations (such as databases) treat empty records and null values differently.
-For these implementations, there is a need to define a special value representing
-a null.
-
-Example of a CSV file with nulls (if "NULL" is used to mark nulls):
-
-   field_name_1,field_name_2,field_name_3CRLF<br/>
-   aaa,bbb,cccCRLF<br/>
-   zzz,NULL,xxxCRLF
-
-### Empty lines
-This specification recommends but doesn't require keeping the number of records
-the same in every line. This allows CSV files to have empty lines without
-any records at all. Some implementations can be configured to skip empty lines
-instead of parsing them.
-
-Example of a CSV file with empty lines:
-
-   field_name_1,field_name_2,field_name_3CRLF<br/>
-   aaa,bbb,cccCRLF<br/>
-   CRLF<br/>
-   zzz,yyy,xxxCRLF
-
 ## ABNF Grammar
 
 The ABNF grammar (as per {{!RFC5234}}) appears as follows:
@@ -242,6 +212,36 @@ SP = %x20 ;as per section B.1 of [RFC5234]
 WSP = SP / HTAB ;as per section B.1 of [RFC5234]
 ~~~~~~~~~~
 
+# Common implementation concerns
+This section describes some common concerns that may arise when
+producing or parsing CSV files. All of these remain out of scope for this document
+and are included for awareness. Implementers may also use other means to handle
+these use cases such as {{!CSVW}}.
+
+## Null values
+Some implementations (such as databases) treat empty records and null values differently.
+For these implementations, there is a need to define a special value representing
+a null.
+
+Example of a CSV file with nulls (if "NULL" is used to mark nulls):
+
+   field_name_1,field_name_2,field_name_3CRLF<br/>
+   aaa,bbb,cccCRLF<br/>
+   zzz,NULL,xxxCRLF
+
+## Empty lines
+This specification recommends but doesn't require keeping the number of records
+the same in every line. This allows CSV files to have empty lines without
+any records at all. Some implementations can be configured to skip empty lines
+instead of parsing them.
+
+Example of a CSV file with empty lines:
+
+   field_name_1,field_name_2,field_name_3CRLF<br/>
+   aaa,bbb,cccCRLF<br/>
+   CRLF<br/>
+   zzz,yyy,xxxCRLF
+
 # Update to MIME Type Registration of text/csv {#registration}
 
 The media type registration of "text/csv" should be updated as per specific
@@ -263,7 +263,7 @@ Published specification:
 > and this document. Implementers should note that both documents are informational
 > in nature and are not standards.
 
-# IANA Considerations
+## IANA Considerations
 
 IANA is directed to update the MIME type registration for "text/csv"
 as per instructions provided in {{registration}} of this document
