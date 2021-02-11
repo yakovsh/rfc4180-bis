@@ -14,7 +14,7 @@ author:
   name: Yakov Shafranovich
   organization: Nightwatch Cybersecurity
   email: yakov+ietf@nightwatchcybersecurity.com
-  
+
 informative:
   ART:
     title: The Art of Unix Programming, Chapter 5
@@ -54,7 +54,7 @@ to exchange data between disparate systems and applications for many years.
 Surprisingly, while this format is very popular, it has never been formally
 documented and didn't have a media type registered. This was addressed in 2005 via publication
 of {{!RFC4180}} and the concurrent registration of the "text/csv" media type.
- 
+
 Since the publication of {{!RFC4180}}, the CSV format has evolved and this specification
 seeks to reflect these changes as well as update the "text/csv" media type registration.
 
@@ -67,11 +67,11 @@ capitals, as shown here.
 
 ## Motivation For and Status of This Document
 The original motivation of {{!RFC4180}} was to provide a reference
-in order to register the media type "text/csv". It tried to document 
+in order to register the media type "text/csv". It tried to document
 existing practices at the time based on the approaches used by most implementations.
 This document continues to do the same, and updates the original document to reflect
 current practices for generating and consuming of CSV files.
- 
+
 Both {{!RFC4180}} and this document are published as informational RFC for the benefit
 of the Internet community and and not intended to be used as formal standards.
 Implementers should consult {{?RFC1796}} and {{?RFC2026}} for crucial differences
@@ -82,7 +82,9 @@ While there had been various specifications and implementations for the
 CSV format (for ex. {{CREATIVYST}}, {{EDOCEO}}, {{CSVW}} and {{ART}})), prior to publication
 of {{!RFC4180}} there is no attempt to provide a common specification. This section documents
 the format that seems to be followed by most implementations (incorporating
-changes since the publication of {{!RFC4180}}):
+changes since the publication of {{!RFC4180}}).
+
+## High level description
 
 1. Each record is located on a separate line, ended by a line break (CR, LF or CRLF). For example:
 
@@ -159,8 +161,38 @@ has been changed to UTF-8 (as per {{!RFC6657}}). This document reflects this cha
 the default charset for CSV files is now UTF-8.
 
 Although section 4.1.1. of {{!RFC2046}} defines CRLF to denote line breaks,
-implementers MAY recognize a single CR or LF as a line break (similar to section 3.1.1.3 
+implementers MAY recognize a single CR or LF as a line break (similar to section 3.1.1.3
 of {{?RFC7231}}). However, some implementations MAY use other values.
+
+## Common implementation concerns
+This section describes some common concerns that may arise when
+producing or parsing CSV files. All of these remain out of scope for this document
+and are included for awareness. Implementers may also use other means to handle
+these use cases such as {{!CSVW}}.
+
+### Null valus
+Some implementations (such as databases) treat empty records and null values differently.
+For these implementations, there is a need to define a special value representing
+a null.
+
+Example of a CSV file with nulls (if "NULL" is used to mark nulls):
+
+   field_name_1,field_name_2,field_name_3CRLF<br/>
+   aaa,bbb,cccCRLF<br/>
+   zzz,NULL,xxxCRLF
+
+### Empty lines
+This specification recommends but doesn't require keeping the number of records
+the same in every line. This allows CSV files to have empty lines without
+any records at all. Some implementations can be configured to skip empty lines
+instead of parsing them.
+
+Example of a CSV file with empty lines:
+
+   field_name_1,field_name_2,field_name_3CRLF<br/>
+   aaa,bbb,cccCRLF<br/>
+   CRLF<br/>
+   zzz,yyy,xxxCRLF
 
 ## ABNF Grammar
 
@@ -213,7 +245,7 @@ WSP = SP / HTAB ;as per section B.1 of [RFC5234]
 # Update to MIME Type Registration of text/csv {#registration}
 
 The media type registration of "text/csv" should be updated as per specific
-fields below: 
+fields below:
 
 Encoding considerations:
 
@@ -230,7 +262,7 @@ Published specification:
 > format. An attempt at a common definition can be found in {{!RFC4180}}
 > and this document. Implementers should note that both documents are informational
 > in nature and are not standards.
-  
+
 # IANA Considerations
 
 IANA is directed to update the MIME type registration for "text/csv"
@@ -253,12 +285,13 @@ A special thank you to L.T.S.
 --- back
 # Major format changes since {{!RFC4180}}
 - Added a section clarifying motivation for this document and standards status
-- Changing default encoding to UTF-8
+- Changing default encoding to UTF-8 and adding Unicode to the ABNF grammar
 - Allowing CR, LF and CRLF for line breaks
 - Allowing HTAB in text data
 - Mandating a line break at the end of the last line in the file
 - Making records and headers optional, thus allowing for an empty file
 - Adding definition of commented lines
+- Adding a section on common implementation concerns
 
 # Note to Readers
 
