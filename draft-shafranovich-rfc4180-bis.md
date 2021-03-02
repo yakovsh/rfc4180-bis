@@ -100,8 +100,7 @@ changes since the publication of {{!RFC4180}}).
 with the same format as normal records. This
 header will contain names corresponding to the fields in the file
 and SHOULD contain the same number of fields as the records in
-the rest of the file. Implementers should be aware that some
-applications may treat header values as unique.
+the rest of the file.
 The presence or absence of the header MAY be indicated via the
 optional "header" parameter of this MIME type. For example:
 
@@ -143,7 +142,7 @@ another double quote. For example:
 8. A hash sign MAY be used to mark lines that are meant to be commented lines.
 A commented line can contain any whitespace or visible character until it is
 terminated by a line break (CR, LF or CRLF).
-A comment line MAY appear in every line of the file (before or after an
+A comment line MAY appear in any line of the file (before or after an
 OPTIONAL header) but MUST NOT be mistaken with a subsequent line of a multi-line
 field. Subsequent lines of multi-line fields can start with a hash sign and
 MUST NOT interpreted as comments. For example:
@@ -152,8 +151,7 @@ MUST NOT interpreted as comments. For example:
     aaa,bbb,cccCRLF<br/>
     #comment 2CRLF<br/>
     "aaa","this is CRLF<br/>
-    # not a comment","ccc"CRLF<br/>
-    zzz,yyy,xxxCRLF
+    # not a comment","ccc"CRLF
 
 ## Default charset and line break values
 Since the initial publication of {{!RFC4180}}, the default charset for "text/*" media types
@@ -241,6 +239,10 @@ Example of a CSV file with empty lines:
    aaa,bbb,cccCRLF<br/>
    CRLF<br/>
    zzz,yyy,xxxCRLF
+
+## Unique header names
+Implementers should be aware that some applications may treat header values as unique
+(either case-sensitive or case-insensitive).
 
 # Update to MIME Type Registration of text/csv {#registration}
 
