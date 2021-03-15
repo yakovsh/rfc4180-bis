@@ -1,5 +1,6 @@
 .idea/
 lib/
+.DS_Store
 .refcache/
 .targets.mk
 .targets.mkmake

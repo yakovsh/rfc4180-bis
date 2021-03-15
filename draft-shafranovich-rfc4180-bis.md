@@ -100,9 +100,7 @@ changes since the publication of {{!RFC4180}}).
 with the same format as normal records. This
 header will contain names corresponding to the fields in the file
 and SHOULD contain the same number of fields as the records in
-the rest of the file.
-The presence or absence of the header MAY be indicated via the
-optional "header" parameter of this MIME type. For example:
+the rest of the file. For example:
 
    field_name_1,field_name_2,field_name_3CRLF<br/>
    aaa,bbb,cccCRLF<br/>
@@ -126,15 +124,15 @@ For example:
 
 6. Fields containing line breaks (CR, LF or CRLF), double quotes, or commas
 MUST be enclosed in double-quotes. The same applies for the first field of
-a record that starts with a hash. For example:
+a record that starts with a hash to avoid the field from being parsed as a comment.
+For example:
 
    "aaa","b CRLF<br/>
    bb","ccc"CRLF<br/>
    zzz,yyy,xxxCRLF<br/>
    "#aaa",#bbb,cccCRLF
 
-7. If double-quotes are used to enclose fields, then a double-quote
-appearing inside a field MUST be escaped by preceding it with
+7. A double-quote appearing inside a field MUST be escaped by preceding it with
 another double quote. For example:
 
    "aaa","b""bb","ccc"CRLF
@@ -240,9 +238,29 @@ Example of a CSV file with empty lines:
    CRLF<br/>
    zzz,yyy,xxxCRLF
 
+## Fields spanning multiple lines
+When quoted fields are used, it is possible for a field to span multiple lines,
+even when line breaks appear within such field.
+
 ## Unique header names
 Implementers should be aware that some applications may treat header values as unique
 (either case-sensitive or case-insensitive).
+
+## Whitespace outside of quoted fields
+When quoted fields are used, this document does not allow whitespace
+between double quotes and commas. Implementers should be aware that some applications
+may be more lenient and allow whitespace outside the double quotes.
+
+## Other field separators
+This document defines a comma as a field separator but implementers should be aware
+that some applications may use different values, especially with non-English languages.
+Those are outside the scope of this document and implementers should consult other
+efforts such as {{CSVW}}.
+
+## Escaping double quotes
+This document prescribes that a double-quote appearing inside a field
+must be escaped by preceding it with another double quote. Implementers should
+be aware that some applications may choose to use a different escaping mechanism.
 
 # Update to MIME Type Registration of text/csv {#registration}
 
@@ -264,6 +282,24 @@ Published specification:
 > format. An attempt at a common definition can be found in {{!RFC4180}}
 > and this document. Implementers should note that both documents are informational
 > in nature and are not standards.
+
+Optional parameters:  charset
+
+> The "charset" parameter specifies the charset employed by the
+> CSV content. In accordance with RFC 6657 [RFC6657], the
+> charset parameter SHOULD be used, and if it is not present,
+> UTF-8 SHOULD be assumed as the default (this implies that US-
+> ASCII CSV will work, even when not specifying the "charset"
+> parameter). Any charset defined by IANA for the "text" tree
+> may be used in conjunction with the "charset" parameter.
+
+Interoperability considerations:
+
+> Due to lack of a single specification, there are considerable differences among
+> implementations. Implementers should "be conservative in what you
+> do, be liberal in what you accept from others" (RFC 793 [RFC0793])
+> when processing CSV files. An attempt at a common definition can
+> be found in Section 2.
 
 ## IANA Considerations
 
@@ -294,6 +330,7 @@ A special thank you to L.T.S.
 - Making records and headers optional, thus allowing for an empty file
 - Adding definition of commented lines
 - Adding a section on common implementation concerns
+- Removed "header" parameter for the MIME type
 
 # Note to Readers
 
