@@ -41,6 +41,12 @@ informative:
         org: Edoceo, Inc.
     date: 2020
     target: https://edoceo.com/dev/csv-file-format
+  UNICODE:
+    title: The Unicode Standard
+    author:
+      org: The Unicode Consortium
+    date: March 2020
+    target: https://www.unicode.org/versions/Unicode13.0.0/
 
 --- abstract
 This RFC documents the common format used for Comma-Separated Values (CSV)
@@ -187,9 +193,9 @@ comma = %x2C
 
 hash = %x23
 
-comment-data = WSP / %x21-7E / %x80-10FFFF ;characters without control characters
+comment-data = WSP / %x21-7E / UTF8-data ;characters without control characters
 
-textdata = WSP / %x21 / %x24-2B / %x2D-7E / %x80-10FFFF ;characters without control characters, comma, hash and DQUOTE
+textdata = WSP / %x21 / %x24-2B / %x2D-7E / UTF8-data ;characters without control characters, comma, hash and DQUOTE
 
 textdata-with-hash = textdata / hash
 
@@ -206,7 +212,11 @@ HTAB = %x09 ;as per section B.1 of [RFC5234]
 SP = %x20 ;as per section B.1 of [RFC5234]
 
 WSP = SP / HTAB ;as per section B.1 of [RFC5234]
+
+UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ;as per section 4 of [RFC3629]
 ~~~~~~~~~~
+
+Note that the authoritative definition of UTF-8 is in {{UNICODE}}.
 
 # Common implementation concerns
 This section describes some common concerns that may arise when
