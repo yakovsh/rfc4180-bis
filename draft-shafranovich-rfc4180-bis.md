@@ -228,7 +228,7 @@ Example of a CSV file with nulls (if "NULL" is used to mark nulls):
 ## Empty lines
 This specification recommends but doesn't require having the same number of fields
 in every line. This allows CSV files to have empty lines without
-any records at all. Some implementations can be configured to skip empty lines
+any fields at all. Some implementations can be configured to skip empty lines
 instead of parsing them.
 
 Example of a CSV file with empty lines:
