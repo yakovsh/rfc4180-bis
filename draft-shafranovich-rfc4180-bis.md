@@ -296,7 +296,7 @@ Published specification:
 Optional parameters:  charset
 
 > The "charset" parameter specifies the charset employed by the
-> CSV content. In accordance with RFC 6657 [RFC6657], the
+> CSV content. In accordance with {{?RFC6657}}, the
 > charset parameter SHOULD be used, and if it is not present,
 > UTF-8 SHOULD be assumed as the default (this implies that US-
 > ASCII CSV will work, even when not specifying the "charset"
@@ -307,7 +307,7 @@ Interoperability considerations:
 
 > Due to lack of a single specification, there are considerable differences among
 > implementations. Implementers should "be conservative in what you
-> do, be liberal in what you accept from others" (RFC 793 [RFC0793])
+> do, be liberal in what you accept from others" ({{?RFC0793}})
 > when processing CSV files. An attempt at a common definition can
 > be found in Section 2.
 

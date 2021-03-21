@@ -4,8 +4,8 @@
 
 Network Working Group                                    Y. Shafranovich
 Internet-Draft                                  Nightwatch Cybersecurity
-Intended status: Informational                             15 March 2021
-Expires: 16 September 2021
+Intended status: Informational                             21 March 2021
+Expires: 22 September 2021
 
 
    Common Format and MIME Type for Comma-Separated Values (CSV) Files
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 September 2021.
+   This Internet-Draft will expire on 22 September 2021.
 
 Copyright Notice
 
@@ -228,9 +228,9 @@ comma = %x2C
 
 hash = %x23
 
-comment-data = WSP / %x21-7E / %x80-10FFFF ;characters without control characters
+comment-data = WSP / %x21-7E / UTF8-data ;characters without control characters
 
-textdata = WSP / %x21 / %x24-2B / %x2D-7E / %x80-10FFFF ;characters without control characters, comma, hash and DQUOTE
+textdata = WSP / %x21 / %x24-2B / %x2D-7E / UTF8-data ;characters without control characters, comma, hash and DQUOTE
 
 textdata-with-hash = textdata / hash
 
@@ -247,6 +247,10 @@ HTAB = %x09 ;as per section B.1 of [RFC5234]
 SP = %x20 ;as per section B.1 of [RFC5234]
 
 WSP = SP / HTAB ;as per section B.1 of [RFC5234]
+
+UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ;as per section 4 of [RFC3629]
+
+   Note that the authoritative definition of UTF-8 is in [UNICODE].
 
 3.  Common implementation concerns
 
@@ -271,7 +275,7 @@ WSP = SP / HTAB ;as per section B.1 of [RFC5234]
 
    This specification recommends but doesn't require having the same
    number of fields in every line.  This allows CSV files to have empty
-   lines without any records at all.  Some implementations can be
+   lines without any fields at all.  Some implementations can be
    configured to skip empty lines instead of parsing them.
 
    Example of a CSV file with empty lines:
@@ -337,20 +341,20 @@ WSP = SP / HTAB ;as per section B.1 of [RFC5234]
    Optional parameters: charset
 
       The "charset" parameter specifies the charset employed by the CSV
-      content.  In accordance with RFC 6657 [RFC6657], the charset
-      parameter SHOULD be used, and if it is not present, UTF-8 SHOULD
-      be assumed as the default (this implies that US- ASCII CSV will
-      work, even when not specifying the "charset" parameter).  Any
-      charset defined by IANA for the "text" tree may be used in
-      conjunction with the "charset" parameter.
+      content.  In accordance with [RFC6657], the charset parameter
+      SHOULD be used, and if it is not present, UTF-8 SHOULD be assumed
+      as the default (this implies that US- ASCII CSV will work, even
+      when not specifying the "charset" parameter).  Any charset defined
+      by IANA for the "text" tree may be used in conjunction with the
+      "charset" parameter.
 
    Interoperability considerations:
 
       Due to lack of a single specification, there are considerable
       differences among implementations.  Implementers should "be
       conservative in what you do, be liberal in what you accept from
-      others" (RFC 793 [RFC0793]) when processing CSV files.  An attempt
-      at a common definition can be found in Section 2.
+      others" ([RFC0793]) when processing CSV files.  An attempt at a
+      common definition can be found in Section 2.
 
 4.1.  IANA Considerations
 
@@ -433,6 +437,10 @@ WSP = SP / HTAB ;as per section B.1 of [RFC5234]
    [EDOCEO]   Edoceo, Inc., "Comma Separated Values (CSV) Standard File
               Format", 2020, <https://edoceo.com/dev/csv-file-format>.
 
+   [RFC0793]  Postel, J., "Transmission Control Protocol", STD 7,
+              RFC 793, DOI 10.17487/RFC0793, September 1981,
+              <https://www.rfc-editor.org/info/rfc793>.
+
    [RFC1796]  Huitema, C., Postel, J., and S. Crocker, "Not All RFCs are
               Standards", RFC 1796, DOI 10.17487/RFC1796, April 1995,
               <https://www.rfc-editor.org/info/rfc1796>.
@@ -440,6 +448,9 @@ WSP = SP / HTAB ;as per section B.1 of [RFC5234]
    [RFC2026]  Bradner, S., "The Internet Standards Process -- Revision
               3", BCP 9, RFC 2026, DOI 10.17487/RFC2026, October 1996,
               <https://www.rfc-editor.org/info/rfc2026>.
+
+   [UNICODE]  The Unicode Consortium, "The Unicode Standard", March
+              2020, <https://www.unicode.org/versions/Unicode13.0.0/>.
 
 Appendix A.  Major format changes since [RFC4180]
 
