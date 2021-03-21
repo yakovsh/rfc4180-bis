@@ -227,7 +227,7 @@ Example of a CSV file with nulls (if "NULL" is used to mark nulls):
 
 ## Empty files
 Implementers should be aware that in accordance to this specification a file
-does not need to contain any comment or record (empty file with zero bytes).
+does not need to contain any comments or records (empty file with zero bytes).
 
 ## Empty lines
 This specification recommends but doesn't require having the same number of fields
