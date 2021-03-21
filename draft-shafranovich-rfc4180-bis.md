@@ -235,6 +235,10 @@ Example of a CSV file with nulls (if "NULL" is used to mark nulls):
    aaa,bbb,cccCRLF<br/>
    zzz,NULL,xxxCRLF
 
+## Empty files
+Implementers should be aware that in accordance to this specification a file
+does not need to contain any comments or records (empty file with zero bytes).
+
 ## Empty lines
 This specification recommends but doesn't require having the same number of fields
 in every line. This allows CSV files to have empty lines without
