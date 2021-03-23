@@ -42,7 +42,7 @@ informative:
     date: 2020
     target: https://edoceo.com/dev/csv-file-format
   UNICODE:
-    title: The Unicode Standard
+    title: The Unicode Standard, Version 13.0.0
     author:
       org: The Unicode Consortium
     date: March 2020
