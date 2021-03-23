@@ -280,9 +280,8 @@ be aware that some applications may choose to use a different escaping mechanism
 Applications that create text files with unicode character encoding might write
 a BOM (byte order mark) header in order to support multiple unicode encodings
 (like UTF-16 and UTF-32). Some applications might be able to read and properly
-interpret such a header, others could break. With the default encoding of UTF-8
-specified by this document a BOM header is unnecessary and is out of scope of
-this specification.
+interpret such a header, others could break. Implementors should review
+section 6 of {{?RFC3629}} and section 23.8 of {{UNICODE}}.
 
 # Update to MIME Type Registration of text/csv {#registration}
 
