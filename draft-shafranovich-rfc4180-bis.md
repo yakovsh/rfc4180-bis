@@ -254,7 +254,8 @@ Example of a CSV file with empty lines:
 
 However, if the records are only made up of one field it is not possible to
 differentiate between an empty line, and an empty and unquoted field. This
-differentiation might play an important role on database exports/imports.
+differentiation might play an important role in some implementations such
+as database exports/imports.
 
 Example of a CSV file with empty lines and only one field per record:
 
