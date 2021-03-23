@@ -252,6 +252,17 @@ Example of a CSV file with empty lines:
    CRLF<br/>
    zzz,yyy,xxxCRLF
 
+However, if the records are only made up of one field it is not possible to
+differentiate between an empty line, and an empty and unquoted field. This
+differentiation might play an important role in some implementations such
+as database exports/imports.
+
+Example of a CSV file with empty lines and only one field per record:
+
+aaa<br/>
+CRLF<br/>
+bbbCRLF
+
 ## Fields spanning multiple lines
 When quoted fields are used, it is possible for a field to span multiple lines,
 even when line breaks appear within such field.
