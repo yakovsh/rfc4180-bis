@@ -287,6 +287,13 @@ This document prescribes that a double-quote appearing inside a field
 must be escaped by preceding it with another double quote. Implementers should
 be aware that some applications may choose to use a different escaping mechanism.
 
+## BOM header
+Applications that create text files with unicode character encoding might write
+a BOM (byte order mark) header in order to support multiple unicode encodings
+(like UTF-16 and UTF-32). Some applications might be able to read and properly
+interpret such a header, others could break. Implementors should review
+section 6 of {{?RFC3629}} and section 23.8 of {{UNICODE}}.
+
 # Update to MIME Type Registration of text/csv {#registration}
 
 The media type registration of "text/csv" should be updated as per specific
