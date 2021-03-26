@@ -1,6 +1,17 @@
 # RFC 4180 Update (rfc4180-bis)
+This repository contains work on updating RFC 4180 - MIME Type for CSV Files.
 
-This folder contains the updated version of RFC 4180 - MIME Type for CSV Files.
+# Internet Draft
+The Internet draft can be found at the IETF:
+https://tools.ietf.org/html/draft-shafranovich-rfc4180-bis
+
+# Contributions and discussion
+You can contribute to development of this draft via standard GitHub processes
+(pull requests and opening issues).
+
+Discussion of this draft takes place on the IETF's Applications and Real-Time Area
+(art) discussion list:
+https://www.ietf.org/mailman/listinfo/art
 
 # License
 All content in this repository is subject to IETF IPR terms.
