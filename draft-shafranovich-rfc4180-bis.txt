@@ -521,7 +521,7 @@ Appendix C.  Note to Readers
       publication.
 
    Development of this draft takes place on Github at:
-   https://github.com/nightwatchcyber/rfc4180-bis
+   https://github.com/nightwatchcybersecurity/rfc4180-bis
 
    Comments can also be sent to the ART mailing list at:
    https://www.ietf.org/mailman/listinfo/art

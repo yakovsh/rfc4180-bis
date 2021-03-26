@@ -374,7 +374,7 @@ A special thank you to L.T.S.
 > **Note to the RFC Editor:** Please remove this section prior
 > to publication.
 
-Development of this draft takes place on Github at: https://github.com/nightwatchcyber/rfc4180-bis
+Development of this draft takes place on Github at: https://github.com/nightwatchcybersecurity/rfc4180-bis
 
 Comments can also be sent to the ART mailing list at: https://www.ietf.org/mailman/listinfo/art
 
