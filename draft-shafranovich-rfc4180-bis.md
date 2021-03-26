@@ -183,37 +183,39 @@ first-field = (escaped / first-non-escaped)
 
 field = (escaped / non-escaped)
 
-escaped = DQUOTE *(textdata-with-hash / comma / CR / LF / 2DQUOTE) DQUOTE
+escaped = DQUOTE *(data-with-hash / comma / CR / LF / 2DQUOTE) DQUOTE
 
-first-non-escaped = [textdata *textdata-with-hash]
+first-non-escaped = [data *data-with-hash]
 
-non-escaped = *textdata-with-hash
+non-escaped = *data-with-hash
 
 comma = %x2C
 
 hash = %x23
 
-comment-data = WSP / %x21-7E / UTF8-data ;characters without control characters
+comment-data = WSP / %x21-7E / UTF8-data
+         ; characters without control characters
 
-textdata = WSP / %x21 / %x24-2B / %x2D-7E / UTF8-data ;characters without control characters, comma, hash and DQUOTE
+data = WSP / %x21 / %x24-2B / %x2D-7E / UTF8-data
+         ; characters without control characters, comma, hash and DQUOTE
 
-textdata-with-hash = textdata / hash
+data-with-hash = data / hash
 
-CR = %x0D ;as per section B.1 of [RFC5234]
+CR = %x0D ; as per section B.1 of [RFC5234]
 
-DQUOTE = %x22 ;as per section B.1 of [RFC5234]
+DQUOTE = %x22 ; as per section B.1 of [RFC5234]
 
-LF = %x0A ;as per section B.1 of [RFC5234]
+LF = %x0A ; as per section B.1 of [RFC5234]
 
-CRLF = CR LF ;as per section B.1 of [RFC5234]
+CRLF = CR LF ; as per section B.1 of [RFC5234]
 
-HTAB = %x09 ;as per section B.1 of [RFC5234]
+HTAB = %x09 ; as per section B.1 of [RFC5234]
 
-SP = %x20 ;as per section B.1 of [RFC5234]
+SP = %x20 ; as per section B.1 of [RFC5234]
 
-WSP = SP / HTAB ;as per section B.1 of [RFC5234]
+WSP = SP / HTAB ; as per section B.1 of [RFC5234]
 
-UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ;as per section 4 of [RFC3629]
+UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
 ~~~~~~~~~~
 
 Note that the authoritative definition of UTF-8 is in {{UNICODE}}.
@@ -222,7 +224,7 @@ Note that the authoritative definition of UTF-8 is in {{UNICODE}}.
 This section describes some common concerns that may arise when
 producing or parsing CSV files. All of these remain out of scope for this document
 and are included for awareness. Implementers may also use other means to handle
-these use cases such as {{!CSVW}}.
+these use cases such as {{CSVW}}.
 
 ## Null values
 Some implementations (such as databases) treat empty fields and null values differently.
@@ -353,7 +355,7 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.
 A special thank you to L.T.S.
 
 --- back
-# Major format changes since {{!RFC4180}}
+# Major changes since {{!RFC4180}}
 - Added a section clarifying motivation for this document and standards status
 - Changing default encoding to UTF-8 and adding Unicode to the ABNF grammar
 - Allowing CR, LF and CRLF for line breaks
