@@ -327,6 +327,35 @@ Optional parameters:  charset
 > parameter). Any charset defined by IANA for the "text" tree
 > may be used in conjunction with the "charset" parameter.
 
+Security considerations:
+
+> Text/csv consists of nothing but passive text data that should
+> not pose any direct risks.  However, it is possible that
+> malicious data may be included in order to exploit buffer
+> overruns or other bugs in the program processing the text/csv
+> data.
+
+> Implementers and users should also be aware that some software
+> applications may interpret certain characters in the beginning of CSV
+> fields as referring to code or formulas, thus resulting in malicious
+> code execution. This is known as "CSV injection" and users consuming
+> CSV files should filter out such characters.
+
+> The text/csv format provides no confidentiality or integrity
+> protection, so if such protections are needed they must be
+> supplied externally.
+
+> The fact that software implementing fragment identifiers for
+> CSV and software not implementing them differs in behavior, and
+> the fact that different software may show documents or
+> fragments to users in different ways, can lead to
+> misunderstandings on the part of users.  Such misunderstandings
+> might be exploited in a way similar to spoofing or phishing.
+
+> Implementers and users of fragment identifiers for CSV text
+> should also be aware of the security considerations in RFC 3986
+> {{?RFC3986}} and RFC 3987 {{?RFC3987}}.
+
 Interoperability considerations:
 
 > Due to lack of a single specification, there are considerable differences among
@@ -343,13 +372,13 @@ and include a reference to this document within the registration.
 
 # Security Considerations
 
-All security considerations as discussed in {{!RFC4180}} still apply.
+All security considerations discussed in {{registration}} still apply.
 
 # Acknowledgments
 
 In addition to everyone thanked previously in {{!RFC4180}}, the author would like to thank
 acknowledge the contributions of the following people to this document:
-Alperen Belgic, Abed BenBrahim, Benjamin Kaduk, Damon Koach, Barry Leiba,
+Alperen Belgic, Abed BenBrahim, Damon Koach, Barry Leiba,
 Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.
 
 A special thank you to L.T.S.
@@ -367,7 +396,7 @@ A special thank you to L.T.S.
 - Removed "header" parameter for the MIME type
 
 # Changes since the -00 draft
-- TBD
+- Added CSV injection to security considerations (#30)
 
 # Note to Readers
 

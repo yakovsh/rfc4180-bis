@@ -4,8 +4,8 @@
 
 Network Working Group                                    Y. Shafranovich
 Internet-Draft                                  Nightwatch Cybersecurity
-Intended status: Informational                             26 March 2021
-Expires: 27 September 2021
+Intended status: Informational                         19 September 2021
+Expires: 23 March 2022
 
 
    Common Format and MIME Type for Comma-Separated Values (CSV) Files
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 September 2021.
+   This Internet-Draft will expire on 23 March 2022.
 
 Copyright Notice
 
@@ -379,6 +379,34 @@ UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
       by IANA for the "text" tree may be used in conjunction with the
       "charset" parameter.
 
+   Security considerations:
+
+      Text/csv consists of nothing but passive text data that should not
+      pose any direct risks.  However, it is possible that malicious
+      data may be included in order to exploit buffer overruns or other
+      bugs in the program processing the text/csv data.
+
+      Implementers and users should also be aware that some software
+      applications may interpret certain characters in the beginning of
+      CSV fields as referring to code or formulas, thus resulting in
+      malicious code execution.  This is known as "CSV injection" and
+      users consuming CSV files should filter out such characters.
+
+      The text/csv format provides no confidentiality or integrity
+      protection, so if such protections are needed they must be
+      supplied externally.
+
+      The fact that software implementing fragment identifiers for CSV
+      and software not implementing them differs in behavior, and the
+      fact that different software may show documents or fragments to
+      users in different ways, can lead to misunderstandings on the part
+      of users.  Such misunderstandings might be exploited in a way
+      similar to spoofing or phishing.
+
+      Implementers and users of fragment identifiers for CSV text should
+      also be aware of the security considerations in RFC 3986 [RFC3986]
+      and RFC 3987 [RFC3987].
+
    Interoperability considerations:
 
       Due to lack of a single specification, there are considerable
@@ -395,15 +423,14 @@ UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
 
 5.  Security Considerations
 
-   All security considerations as discussed in [RFC4180] still apply.
+   All security considerations discussed in Section 4 still apply.
 
 6.  Acknowledgments
 
    In addition to everyone thanked previously in [RFC4180], the author
    would like to thank acknowledge the contributions of the following
-   people to this document: Alperen Belgic, Abed BenBrahim, Benjamin
-   Kaduk, Damon Koach, Barry Leiba, Oliver Siegmar, Marco Diniz Sousa
-   and Greg Skinner.
+   people to this document: Alperen Belgic, Abed BenBrahim, Damon Koach,
+   Barry Leiba, Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.
 
    A special thank you to L.T.S.
 
@@ -484,6 +511,15 @@ UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
               10646", STD 63, RFC 3629, DOI 10.17487/RFC3629, November
               2003, <https://www.rfc-editor.org/info/rfc3629>.
 
+   [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
+              Resource Identifier (URI): Generic Syntax", STD 66,
+              RFC 3986, DOI 10.17487/RFC3986, January 2005,
+              <https://www.rfc-editor.org/info/rfc3986>.
+
+   [RFC3987]  Duerst, M. and M. Suignard, "Internationalized Resource
+              Identifiers (IRIs)", RFC 3987, DOI 10.17487/RFC3987,
+              January 2005, <https://www.rfc-editor.org/info/rfc3987>.
+
    [UNICODE]  The Unicode Consortium, "The Unicode Standard, Version
               13.0.0", March 2020,
               <https://www.unicode.org/versions/Unicode13.0.0/>.
@@ -513,7 +549,7 @@ Appendix A.  Major changes since [RFC4180]
 
 Appendix B.  Changes since the -00 draft
 
-   *  TBD
+   *  Added CSV injection to security considerations (#30)
 
 Appendix C.  Note to Readers
 
