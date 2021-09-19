@@ -159,8 +159,8 @@ MUST NOT interpreted as comments. For example:
 
 ## Default charset and line break values
 Since the initial publication of {{!RFC4180}}, the default charset for "text/*" media types
-has been changed to UTF-8 (as per {{!RFC6657}}). This document reflects this change and
-the default charset for CSV files is now UTF-8.
+has been changed to UTF-8 (as per {{!RFC6657}}) and {{!RFC7111}}.
+This document reflects this change and the default charset for CSV files is now UTF-8.
 
 Although section 4.1.1. of {{!RFC2046}} defines CRLF to denote line breaks,
 implementers MAY recognize a single CR or LF as a line break (similar to section 3.1.1.3
@@ -396,7 +396,8 @@ A special thank you to L.T.S.
 - Removed "header" parameter for the MIME type
 
 # Changes since the -00 draft
-- Added CSV injection to security considerations (#30)
+- Added CSV injection to security considerations (#30
+- Added a reference to RFC 7111 (#27)
 
 # Note to Readers
 

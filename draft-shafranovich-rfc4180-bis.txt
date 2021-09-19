@@ -196,9 +196,9 @@ Table of Contents
 2.2.  Default charset and line break values
 
    Since the initial publication of [RFC4180], the default charset for
-   "text/*" media types has been changed to UTF-8 (as per [RFC6657]).
-   This document reflects this change and the default charset for CSV
-   files is now UTF-8.
+   "text/*" media types has been changed to UTF-8 (as per [RFC6657]) and
+   [RFC7111].  This document reflects this change and the default
+   charset for CSV files is now UTF-8.
 
    Although section 4.1.1. of [RFC2046] defines CRLF to denote line
    breaks, implementers MAY recognize a single CR or LF as a line break
@@ -468,6 +468,11 @@ UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
               RFC 6838, DOI 10.17487/RFC6838, January 2013,
               <https://www.rfc-editor.org/info/rfc6838>.
 
+   [RFC7111]  Hausenblas, M., Wilde, E., and J. Tennison, "URI Fragment
+              Identifiers for the text/csv Media Type", RFC 7111,
+              DOI 10.17487/RFC7111, January 2014,
+              <https://www.rfc-editor.org/info/rfc7111>.
+
    [RFC7231]  Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
               Protocol (HTTP/1.1): Semantics and Content", RFC 7231,
               DOI 10.17487/RFC7231, June 2014,
@@ -549,7 +554,9 @@ Appendix A.  Major changes since [RFC4180]
 
 Appendix B.  Changes since the -00 draft
 
-   *  Added CSV injection to security considerations (#30)
+   *  Added CSV injection to security considerations (#30
+
+   *  Added a reference to RFC 7111 (#27)
 
 Appendix C.  Note to Readers
 
