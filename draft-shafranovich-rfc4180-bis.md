@@ -393,7 +393,7 @@ A special thank you to L.T.S.
 - Making records and headers optional, thus allowing for an empty file
 - Adding definition of commented lines
 - Adding a section on common implementation concerns
-- Removed "header" parameter for the MIME type
+- Removed "header" parameter for the MIME type since it is not used
 
 # Changes since the -00 draft
 - Added CSV injection to security considerations (#30

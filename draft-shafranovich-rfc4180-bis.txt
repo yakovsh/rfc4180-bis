@@ -550,7 +550,7 @@ Appendix A.  Major changes since [RFC4180]
 
    *  Adding a section on common implementation concerns
 
-   *  Removed "header" parameter for the MIME type
+   *  Removed "header" parameter for the MIME type since it is not used
 
 Appendix B.  Changes since the -00 draft
 
