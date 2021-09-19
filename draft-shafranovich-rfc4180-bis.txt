@@ -9,7 +9,7 @@ Expires: 23 March 2022
 
 
    Common Format and MIME Type for Comma-Separated Values (CSV) Files
-                   draft-shafranovich-rfc4180-bis-01
+                   draft-shafranovich-rfc4180-bis-02
 
 Abstract
 
@@ -75,7 +75,8 @@ Table of Contents
      7.2.  Informative References
    Appendix A.  Major changes since RFC4180
    Appendix B.  Changes since the -00 draft
-   Appendix C.  Note to Readers
+   Appendix C.  Changes since the -01 draft
+   Appendix D.  Note to Readers
    Author's Address
 
 1.  Introduction
@@ -558,7 +559,11 @@ Appendix B.  Changes since the -00 draft
 
    *  Added a reference to RFC 7111 (#27)
 
-Appendix C.  Note to Readers
+Appendix C.  Changes since the -01 draft
+
+   *  TBD
+
+Appendix D.  Note to Readers
 
       *Note to the RFC Editor:* Please remove this section prior to
       publication.

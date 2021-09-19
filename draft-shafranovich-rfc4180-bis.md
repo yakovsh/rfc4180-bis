@@ -1,7 +1,7 @@
 ---
 title: Common Format and MIME Type for Comma-Separated Values (CSV) Files
 abbrev: rfc4180-bis
-docname: draft-shafranovich-rfc4180-bis-01
+docname: draft-shafranovich-rfc4180-bis-02
 ipr: trust200902
 cat: info
 pi:
@@ -398,6 +398,9 @@ A special thank you to L.T.S.
 # Changes since the -00 draft
 - Added CSV injection to security considerations (#30
 - Added a reference to RFC 7111 (#27)
+
+# Changes since the -01 draft
+- TBD
 
 # Note to Readers
 
