@@ -4,6 +4,7 @@ abbrev: rfc4180-bis
 docname: draft-shafranovich-rfc4180-bis-02
 ipr: trust200902
 cat: info
+submissionType: independent
 pi:
   sortrefs: 'yes'
   strict: 'yes'
@@ -400,7 +401,7 @@ A special thank you to L.T.S.
 - Added a reference to RFC 7111 (#27)
 
 # Changes since the -01 draft
-- TBD
+- No changes yet, refreshed to keep draft alive
 
 # Note to Readers
 
