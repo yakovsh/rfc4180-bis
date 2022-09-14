@@ -3,9 +3,9 @@
 
 
 Network Working Group                                    Y. Shafranovich
-Internet-Draft                                  Nightwatch Cybersecurity
-Intended status: Informational                             19 March 2022
-Expires: 20 September 2022
+Internet-Draft                                 Amazon Web Services (AWS)
+Intended status: Informational                         14 September 2022
+Expires: 18 March 2023
 
 
    Common Format and MIME Type for Comma-Separated Values (CSV) Files
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 September 2022.
+   This Internet-Draft will expire on 18 March 2023.
 
 Copyright Notice
 
@@ -63,6 +63,7 @@ Table of Contents
      3.7.  Other field separators
      3.8.  Escaping double quotes
      3.9.  BOM header
+     3.10. Bidirectional text
    4.  Update to MIME Type Registration of text/csv
      4.1.  IANA Considerations
    5.  Security Considerations
@@ -73,7 +74,8 @@ Table of Contents
    Appendix A.  Major changes since RFC4180
    Appendix B.  Changes since the -00 draft
    Appendix C.  Changes since the -01 draft
-   Appendix D.  Note to Readers
+   Appendix D.  Changes since the -02 draft
+   Appendix E.  Note to Readers
    Author's Address
 
 1.  Introduction
@@ -253,7 +255,8 @@ WSP = SP / HTAB ; as per section B.1 of [RFC5234]
 
 UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
 
-   Note that the authoritative definition of UTF-8 is in [UNICODE].
+   Note that the authoritative definition of UTF-8 is in section 2.5 of
+   [UNICODE].
 
 3.  Common implementation concerns
 
@@ -266,7 +269,8 @@ UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
 
    Some implementations (such as databases) treat empty fields and null
    values differently.  For these implementations, there is a need to
-   define a special value representing a null.
+   define a special value representing a null.  However, this
+   specification does not attempt to define a default value for nulls.
 
    Example of a CSV file with nulls (if "NULL" is used to mark nulls):
 
@@ -277,15 +281,16 @@ UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
 3.2.  Empty files
 
    Implementers should be aware that in accordance to this specification
-   a file does not need to contain any comments or records (empty file
-   with zero bytes).
+   a file does not need to contain any comments or records.  Therefore,
+   an empty file with zero bytes is considered valid.
 
 3.3.  Empty lines
 
    This specification recommends but doesn't require having the same
    number of fields in every line.  This allows CSV files to have empty
-   lines without any fields at all.  Some implementations can be
-   configured to skip empty lines instead of parsing them.
+   lines without any fields at all.  Implementors may choose to to skip
+   empty lines instead of parsing them but this specification does not
+   dictate such behavior.
 
    Example of a CSV file with empty lines:
 
@@ -345,6 +350,14 @@ UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
    applications might be able to read and properly interpret such a
    header, others could break.  Implementors should review section 6 of
    [RFC3629] and section 23.8 of [UNICODE].
+
+3.10.  Bidirectional text
+
+   While most of the world's written languages are displayed left-to-
+   right, many languages such as ones based on Hebrew or Arabic scripts
+   are displayed primarily right-to-left.  Implementers should consult
+   the "bidirectional display" part in section 5 of [RFC6365] for
+   further guidance.
 
 4.  Update to MIME Type Registration of text/csv
 
@@ -490,16 +503,17 @@ UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
    [CREATIVYST]
               Repici, J., "HOW-TO: The Comma Separated Value (CSV) File
               Format", 2010,
-              <http://www.creativyst.com/Doc/Articles/CSV/CSV01.htm>.
+              <https://www.creativyst.com/Doc/Articles/CSV/CSV01.htm>.
 
-   [CSVW]     W3C, "CSV on the Web Working Group", 2016,
-              <https://www.w3.org/2013/csvw/wiki/Main_Page>.
+   [CSVW]     W3C, "Model for Tabular Data and Metadata on the Web",
+              December 2015,
+              <https://www.w3.org/TR/tabular-data-model/>.
 
    [EDOCEO]   Edoceo, Inc., "Comma Separated Values (CSV) Standard File
               Format", 2020, <https://edoceo.com/dev/csv-file-format>.
 
-   [RFC0793]  Postel, J., "Transmission Control Protocol", STD 7,
-              RFC 793, DOI 10.17487/RFC0793, September 1981,
+   [RFC0793]  Postel, J., "Transmission Control Protocol", RFC 793,
+              DOI 10.17487/RFC0793, September 1981,
               <https://www.rfc-editor.org/info/rfc793>.
 
    [RFC1796]  Huitema, C., Postel, J., and S. Crocker, "Not All RFCs are
@@ -523,9 +537,14 @@ UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
               Identifiers (IRIs)", RFC 3987, DOI 10.17487/RFC3987,
               January 2005, <https://www.rfc-editor.org/info/rfc3987>.
 
+   [RFC6365]  Hoffman, P. and J. Klensin, "Terminology Used in
+              Internationalization in the IETF", BCP 166, RFC 6365,
+              DOI 10.17487/RFC6365, September 2011,
+              <https://www.rfc-editor.org/info/rfc6365>.
+
    [UNICODE]  The Unicode Consortium, "The Unicode Standard, Version
-              13.0.0", March 2020,
-              <https://www.unicode.org/versions/Unicode13.0.0/>.
+              15.0.0", September 2022,
+              <https://www.unicode.org/versions/Unicode15.0.0/>.
 
 Appendix A.  Major changes since [RFC4180]
 
@@ -560,13 +579,23 @@ Appendix C.  Changes since the -01 draft
 
    *  No changes yet, refreshed to keep draft alive
 
-Appendix D.  Note to Readers
+Appendix D.  Changes since the -02 draft
+
+   *  Refreshed to keep draft alive
+
+   *  Contact information and Github link changes
+
+   *  Minor updates on language
+
+   *  Added a section on bidi handling
+
+Appendix E.  Note to Readers
 
       *Note to the RFC Editor:* Please remove this section prior to
       publication.
 
    Development of this draft takes place on Github at:
-   https://github.com/nightwatchcybersecurity/rfc4180-bis
+   https://github.com/yakovsh/rfc4180-bis
 
    Comments can also be sent to the ART mailing list at:
    https://www.ietf.org/mailman/listinfo/art
@@ -577,6 +606,5 @@ Appendix D.  Note to Readers
 Author's Address
 
    Yakov Shafranovich
-   Nightwatch Cybersecurity
-
-   Email: yakov+ietf@nightwatchcybersecurity.com
+   Amazon Web Services (AWS)
+   Email: yakovsh@amazon.com
