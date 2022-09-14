@@ -46,7 +46,7 @@ informative:
     title: The Unicode Standard, Version 15.0.0
     author:
       org: The Unicode Consortium
-    date: March 2020
+    date: September 2022
     target: https://www.unicode.org/versions/Unicode15.0.0/
 
 --- abstract
