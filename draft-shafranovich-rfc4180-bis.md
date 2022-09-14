@@ -13,8 +13,8 @@ pi:
 author:
 - ins: Y. Shafranovich
   name: Yakov Shafranovich
-  organization: Nightwatch Cybersecurity
-  email: yakov+ietf@nightwatchcybersecurity.com
+  organization: Amazon Web Services (AWS)
+  email: yakovsh@amazon.com
 
 informative:
   ART:
@@ -29,13 +29,13 @@ informative:
         name: J. Repici
         org: Creativyst, Inc.
     date: 2010
-    target: http://www.creativyst.com/Doc/Articles/CSV/CSV01.htm
+    target: https://www.creativyst.com/Doc/Articles/CSV/CSV01.htm
   CSVW:
-    title: CSV on the Web Working Group
+    title: Model for Tabular Data and Metadata on the Web
     author:
         org: W3C
-    date: 2016
-    target: https://www.w3.org/2013/csvw/wiki/Main_Page
+    date: December 17th, 2015
+    target: https://www.w3.org/TR/tabular-data-model/
   EDOCEO:
     title: Comma Separated Values (CSV) Standard File Format
     author:
@@ -43,11 +43,11 @@ informative:
     date: 2020
     target: https://edoceo.com/dev/csv-file-format
   UNICODE:
-    title: The Unicode Standard, Version 13.0.0
+    title: The Unicode Standard, Version 15.0.0
     author:
       org: The Unicode Consortium
     date: March 2020
-    target: https://www.unicode.org/versions/Unicode13.0.0/
+    target: https://www.unicode.org/versions/Unicode15.0.0/
 
 --- abstract
 This RFC documents the common format used for Comma-Separated Values (CSV)
@@ -219,7 +219,7 @@ WSP = SP / HTAB ; as per section B.1 of [RFC5234]
 UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
 ~~~~~~~~~~
 
-Note that the authoritative definition of UTF-8 is in {{UNICODE}}.
+Note that the authoritative definition of UTF-8 is in section 2.5 of {{UNICODE}}.
 
 # Common implementation concerns
 This section describes some common concerns that may arise when
@@ -230,7 +230,8 @@ these use cases such as {{CSVW}}.
 ## Null values
 Some implementations (such as databases) treat empty fields and null values differently.
 For these implementations, there is a need to define a special value representing
-a null.
+a null. However, this specification does not attempt to define a default value
+for nulls.
 
 Example of a CSV file with nulls (if "NULL" is used to mark nulls):
 
@@ -240,13 +241,14 @@ Example of a CSV file with nulls (if "NULL" is used to mark nulls):
 
 ## Empty files
 Implementers should be aware that in accordance to this specification a file
-does not need to contain any comments or records (empty file with zero bytes).
+does not need to contain any comments or records. Therefore, an empty file with
+zero bytes is considered valid.
 
 ## Empty lines
 This specification recommends but doesn't require having the same number of fields
 in every line. This allows CSV files to have empty lines without
-any fields at all. Some implementations can be configured to skip empty lines
-instead of parsing them.
+any fields at all. Implementors may choose to to skip empty lines
+instead of parsing them but this specification does not dictate such behavior.
 
 Example of a CSV file with empty lines:
 
@@ -296,6 +298,12 @@ a BOM (byte order mark) header in order to support multiple unicode encodings
 (like UTF-16 and UTF-32). Some applications might be able to read and properly
 interpret such a header, others could break. Implementors should review
 section 6 of {{?RFC3629}} and section 23.8 of {{UNICODE}}.
+
+## Bidirectional text
+While most of the world's written languages are displayed left-to-right,
+many languages such as ones based on Hebrew or Arabic scripts are displayed
+primarily right-to-left. Implementers should consult the "bidirectional display"
+part in section 5 of {{?RFC6365}} for further guidance.
 
 # Update to MIME Type Registration of text/csv {#registration}
 
@@ -403,12 +411,18 @@ A special thank you to L.T.S.
 # Changes since the -01 draft
 - No changes yet, refreshed to keep draft alive
 
+# Changes since the -02 draft
+- Refreshed to keep draft alive
+- Contact information and Github link changes
+- Minor updates on language
+- Added a section on bidi handling
+
 # Note to Readers
 
 > **Note to the RFC Editor:** Please remove this section prior
 > to publication.
 
-Development of this draft takes place on Github at: https://github.com/nightwatchcybersecurity/rfc4180-bis
+Development of this draft takes place on Github at: https://github.com/yakovsh/rfc4180-bis
 
 Comments can also be sent to the ART mailing list at: https://www.ietf.org/mailman/listinfo/art
 
