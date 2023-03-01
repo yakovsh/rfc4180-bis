@@ -434,19 +434,19 @@ Table of Contents
       differences among implementations.  Implementers should "be
       conservative in what you do, be liberal in what you accept from
       others" ([RFC0793]) when processing CSV files.  An attempt at a
-      common definition can be found in section 2 of [[to be replaced
-      with the RFC number]].
+      common definition can be found in section 2 of (to be replaced
+      with the RFC number).
 
       There are numerous differences between different CSV
-      implementations, many of which are addressed in section 4 of [[to
-      be replaced with the RFC number of this document]].
+      implementations, many of which are addressed in section 4 of (to
+      be replaced with the RFC number of this document).
 
    Published specification:
 
       While numerous private specifications exist for various programs
       and systems, there is no single "master" specification for this
       format.  An attempt at a common definition can be found in
-      Section 2 of [[to be replaced with the RFC number]].
+      Section 2 of (to be replaced with the RFC number).
 
    Applications that use this media type:
 
@@ -455,7 +455,7 @@ Table of Contents
    Fragment identifier considerations:
 
       Fragment identification for text/csv is supported by using
-         fragment identifiers as specified by [RFC7111].
+      fragment identifiers as specified by [RFC7111].
 
    Additional information:
 
@@ -467,8 +467,8 @@ Table of Contents
 
    Person & email address to contact for further information:
 
-      Yakov Shafranovich yakovsh@amazon.com (mailto:yakovsh@amazon.com)
-      and Erik Wilde dret@berkeley.edu (mailto:dret@berkeley.edu)
+      Yakov Shafranovich (ietf@shaftek.org) and Erik Wilde
+      (dret@berkeley.edu)
 
    Intended usage: COMMON
 
@@ -476,8 +476,8 @@ Table of Contents
 
    Author:
 
-      Yakov Shafranovich yakovsh@amazon.com (mailto:yakovsh@amazon.com)
-      and Erik Wilde dret@berkeley.edu (mailto:dret@berkeley.edu)
+      Yakov Shafranovich (ietf@shaftek.org) and Erik Wilde
+      (dret@berkeley.edu)
 
    Change controller: IESG
 
@@ -665,4 +665,4 @@ Author's Address
 
    Yakov Shafranovich
    Amazon Web Services (AWS)
-   Email: ietf@shaftek.org
+   Email: yakovsh@amazon.com

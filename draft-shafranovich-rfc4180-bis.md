@@ -15,7 +15,6 @@ author:
   name: Yakov Shafranovich
   organization: Amazon Web Services (AWS)
   email: yakovsh@amazon.com
-  email: ietf@shaftek.org
 
 informative:
   ART:
@@ -151,7 +150,7 @@ Since the initial publication of {{!RFC4180}}, the default charset for "text/*" 
 has been changed to UTF-8 (as per {{!RFC6657}}) and {{!RFC7111}}.
 This document reflects this change and the default charset for CSV files is now UTF-8.
 
-As per section 4.2.1 of {{!RFC6838}}, the "text/*" media types are defined as those reasonable to present 
+As per section 4.2.1 of {{!RFC6838}}, the "text/*" media types are defined as those reasonable to present
 to the user. While {{!RFC4180}} restricted CSV contents to printable ASCII only,
 {{!RFC7111}} updated the MIME registration to allow binary content in CSV entities.
 Therefore, this document has been updated to allow binary content within CSV files.
@@ -370,28 +369,26 @@ Interoperability considerations:
 > implementations. Implementers should "be conservative in what you
 > do, be liberal in what you accept from others" ({{!RFC0793}})
 > when processing CSV files. An attempt at a common definition can
-> be found in section 2 of [[to be replaced with the RFC number]].
+> be found in section 2 of (to be replaced with the RFC number).
 
 > There are numerous differences between different CSV implementations, many of which
-> are addressed in section 4 of [[to be replaced with the RFC number of this document]].
+> are addressed in section 4 of (to be replaced with the RFC number of this document).
 
 Published specification:
 
 > While numerous private specifications exist
 > for various programs and systems, there is no single "master"
 > specification for this format.  An attempt at a common definition
-> can be found in Section 2 of [[to be replaced with the RFC number]].
+> can be found in Section 2 of (to be replaced with the RFC number).
 
 Applications that use this media type:
 
->> Spreadsheet programs and
->> various data conversion utilities.
+> Spreadsheet programs and various data conversion utilities.
 
 Fragment identifier considerations:
 
->> Fragment identification for
->> text/csv is supported by using fragment identifiers as specified
->> by {{!RFC7111}}.
+> Fragment identification for text/csv is supported by using fragment identifiers as specified
+> by {{!RFC7111}}.
 
 Additional information:
 
@@ -403,7 +400,7 @@ Additional information:
 
 Person & email address to contact for further information:
 
-> Yakov Shafranovich <yakovsh@amazon.com> and Erik Wilde <dret@berkeley.edu>
+> Yakov Shafranovich (ietf@shaftek.org) and Erik Wilde (dret@berkeley.edu)
 
 Intended usage:  COMMON
 
@@ -411,7 +408,7 @@ Restrictions on usage:  none
 
 Author:
 
-> Yakov Shafranovich <yakovsh@amazon.com> and Erik Wilde <dret@berkeley.edu>
+> Yakov Shafranovich (ietf@shaftek.org) and Erik Wilde (dret@berkeley.edu)
 
 Change controller:  IESG
 
