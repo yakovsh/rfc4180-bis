@@ -4,12 +4,12 @@
 
 Network Working Group                                    Y. Shafranovich
 Internet-Draft                                 Amazon Web Services (AWS)
-Intended status: Informational                         14 September 2022
-Expires: 18 March 2023
+Intended status: Informational                          28 February 2023
+Expires: 1 September 2023
 
 
    Common Format and MIME Type for Comma-Separated Values (CSV) Files
-                   draft-shafranovich-rfc4180-bis-02
+                   draft-shafranovich-rfc4180-bis-04
 
 Abstract
 
@@ -31,11 +31,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 March 2023.
+   This Internet-Draft will expire on 1 September 2023.
 
 Copyright Notice
 
-   Copyright (c) 2022 IETF Trust and the persons identified as the
+   Copyright (c) 2023 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -51,7 +51,7 @@ Table of Contents
      1.2.  Motivation For and Status of This Document
    2.  Definition of the CSV Format
      2.1.  High level description
-     2.2.  Default charset and line break values
+     2.2.  Default charset, binary content and line break values
      2.3.  ABNF Grammar
    3.  Common implementation concerns
      3.1.  Null values
@@ -64,8 +64,9 @@ Table of Contents
      3.8.  Escaping double quotes
      3.9.  BOM header
      3.10. Bidirectional text
+     3.11. Comments
+     3.12. IANA Considerations
    4.  Update to MIME Type Registration of text/csv
-     4.1.  IANA Considerations
    5.  Security Considerations
    6.  Acknowledgments
    7.  References
@@ -75,7 +76,8 @@ Table of Contents
    Appendix B.  Changes since the -00 draft
    Appendix C.  Changes since the -01 draft
    Appendix D.  Changes since the -02 draft
-   Appendix E.  Note to Readers
+   Appendix E.  Changes since the -03 draft
+   Appendix F.  Note to Readers
    Author's Address
 
 1.  Introduction
@@ -121,42 +123,48 @@ Table of Contents
    prior to publication of [RFC4180] there is no attempt to provide a
    common specification.  This section documents the format that seems
    to be followed by most implementations (incorporating changes since
-   the publication of [RFC4180]).
+   the publication of [RFC4180] and listing common implementation
+   concerns).
 
 2.1.  High level description
 
+   The CSV format uses line breaks to separate records, and commas to
+   separate fields within a given record.  The format is described as
+   follows:
+
    1.  Each record is located on a separate line, ended by a line break
-       (CR, LF or CRLF).  For example:
+       (CR, LF or CRLF) indicating the end of a record.  For example:
 
        aaa,bbb,cccCRLF
        zzz,yyy,xxxCRLF
 
-   2.  The last record in the file MUST have an ending line break.  For
-       example:
+   2.  The last record in the file MUST have an ending line break
+       indicating the end of a record.  For example:
 
        aaa,bbb,cccCRLF
        zzz,yyy,xxxCRLF
 
-   3.  The first record in the file MAY be an optional header with the
-       same format as normal records.  This header will contain names
-       corresponding to the fields in the file and SHOULD contain the
-       same number of fields as the records in the rest of the file.
-       For example:
+   3.  The first record in the file MAY be an optional header and MUST
+       follow the same format as normal records.  This header usually
+       contains names corresponding to the fields in the file and SHOULD
+       contain the same number of fields as the records in the rest of
+       the file.  For example:
 
        field_name_1,field_name_2,field_name_3CRLF
        aaa,bbb,cccCRLF
        zzz,yyy,xxxCRLF
 
-   4.  Within each record, there MAY be one or more fields, separated by
-       commas.  Each record SHOULD contain the same number of fields
+   4.  Within each record, there MAY be zero or more fields, separated
+       by commas.  Each record SHOULD contain the same number of fields
        throughout the file.  Spaces are considered part of a field and
        SHOULD NOT be ignored.  The last field in the record MUST NOT be
-       followed by a comma.  For example:
+       followed by a comma (since this will indicate an empty field
+       following the comma).  For example:
 
        aaa,bbb,cccCRLF
 
-   5.  Each field MAY be enclosed in double quotes (however some
-       programs, do not use double quotes at all).  If fields are not
+   5.  Each field MAY be enclosed in double quotes (however, some
+       programs do not use double quotes at all).  If fields are not
        enclosed with double quotes, then double quotes MUST NOT appear
        inside the fields.  For example:
 
@@ -164,9 +172,7 @@ Table of Contents
        zzz,yyy,xxxCRLF
 
    6.  Fields containing line breaks (CR, LF or CRLF), double quotes, or
-       commas MUST be enclosed in double-quotes.  The same applies for
-       the first field of a record that starts with a hash to avoid the
-       field from being parsed as a comment.  For example:
+       commas MUST be enclosed in double-quotes.  For example:
 
        "aaa","b CRLF
        bb","ccc"CRLF
@@ -178,27 +184,19 @@ Table of Contents
 
        "aaa","b""bb","ccc"CRLF
 
-   8.  A hash sign MAY be used to mark lines that are meant to be
-       commented lines.  A commented line can contain any whitespace or
-       visible character until it is terminated by a line break (CR, LF
-       or CRLF).  A comment line MAY appear in any line of the file
-       (before or after an OPTIONAL header) but MUST NOT be mistaken
-       with a subsequent line of a multi-line field.  Subsequent lines
-       of multi-line fields can start with a hash sign and MUST NOT
-       interpreted as comments.  For example:
-
-       #commentCRLF
-       aaa,bbb,cccCRLF
-       #comment 2CRLF
-       "aaa","this is CRLF
-       # not a comment","ccc"CRLF
-
-2.2.  Default charset and line break values
+2.2.  Default charset, binary content and line break values
 
    Since the initial publication of [RFC4180], the default charset for
    "text/*" media types has been changed to UTF-8 (as per [RFC6657]) and
    [RFC7111].  This document reflects this change and the default
    charset for CSV files is now UTF-8.
+
+   As per section 4.2.1 of [RFC6838], the "text/*" media types are
+   defined as those reasonable to present to the user.  While [RFC4180]
+   restricted CSV contents to printable ASCII only, [RFC7111] updated
+   the MIME registration to allow binary content in CSV entities.
+   Therefore, this document has been updated to allow binary content
+   within CSV files.
 
    Although section 4.1.1. of [RFC2046] defines CRLF to denote line
    breaks, implementers MAY recognize a single CR or LF as a line break
@@ -209,51 +207,34 @@ Table of Contents
 
    The ABNF grammar (as per [RFC5234]) appears as follows:
 
-file = *((comment / record) linebreak)
+  file = [header] *(record)
 
-comment = hash *comment-data
+  header = [field] *(COMMA field) linebreak
 
-record = first-field *(comma field)
+  record = [field] *(COMMA field) linebreak
 
-linebreak = CR / LF / CRLF
+  field = (escaped / non-escaped)
 
-first-field = (escaped / first-non-escaped)
+  escaped = DQUOTE *(textdata / COMMA / CR / LF / 2DQUOTE) DQUOTE
 
-field = (escaped / non-escaped)
+  non-escaped = *(textdata)
 
-escaped = DQUOTE *(data-with-hash / comma / CR / LF / 2DQUOTE) DQUOTE
+  textdata = %x00-09 / %x0B-0C / %x0E-21 / %x23-2B / %x2D-7F / UTF8-data
+           ; all ASCII data except LF, CR, DQUOTE and COMMA
 
-first-non-escaped = [data *data-with-hash]
+  linebreak = CR / LF / CRLF
 
-non-escaped = *data-with-hash
+  COMMA = %x2C
 
-comma = %x2C
+  CR = %x0D ; as per section B.1 of [RFC5234]
 
-hash = %x23
+  CRLF = CR LF ; as per section B.1 of [RFC5234]
 
-comment-data = WSP / %x21-7E / UTF8-data
-         ; characters without control characters
+  DQUOTE = %x22 ; as per section B.1 of [RFC5234]
 
-data = WSP / %x21 / %x24-2B / %x2D-7E / UTF8-data
-         ; characters without control characters, comma, hash and DQUOTE
+  LF = %x0A ; as per section B.1 of [RFC5234]
 
-data-with-hash = data / hash
-
-CR = %x0D ; as per section B.1 of [RFC5234]
-
-DQUOTE = %x22 ; as per section B.1 of [RFC5234]
-
-LF = %x0A ; as per section B.1 of [RFC5234]
-
-CRLF = CR LF ; as per section B.1 of [RFC5234]
-
-HTAB = %x09 ; as per section B.1 of [RFC5234]
-
-SP = %x20 ; as per section B.1 of [RFC5234]
-
-WSP = SP / HTAB ; as per section B.1 of [RFC5234]
-
-UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
+  UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
 
    Note that the authoritative definition of UTF-8 is in section 2.5 of
    [UNICODE].
@@ -359,36 +340,65 @@ UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
    the "bidirectional display" part in section 5 of [RFC6365] for
    further guidance.
 
+3.11.  Comments
+
+   Some implementations may use the hash sign ("#") to mark lines that
+   are meant to be commented lines.  Such lines may contain any
+   whitespace or visible character until terminated by a line break (CR,
+   LF or CRLF) and might appear in any line of the file (before or after
+   the header).  Comments should not be confused with a subsequent line
+   of a multi-line field.  If a first field of a record contains a hash,
+   it should be surrounded with double quotes to avoid being mistaked
+   for a comment as per Section 2.1.
+
+   Example of a CSV file containing comments:
+
+   #commentCRLF<br/>
+   aaa,bbb,cccCRLF<br/>
+   #comment 2CRLF<br/>
+   "aaa","this is CRLF<br/>
+   # not a comment","ccc"CRLF
+
+3.12.  IANA Considerations
+
+   As per [RFC6838], IANA is directed to update the MIME type
+   registration for "text/csv" with the content in Section 4 and add a
+   reference to this document within the registration.
+
+   The update to the media type registration is copied from the current
+   one which consists of the original registration from [RFC4180] as
+   updated by [RFC7111].  The text has been updated based on this
+   document.
+
 4.  Update to MIME Type Registration of text/csv
 
-   The media type registration of "text/csv" should be updated as per
-   specific fields below:
+   Type name: text
 
-   Encoding considerations:
+   Subtype name: csv
 
-      CSV MIME entities can consist of binary data as per section 4.8 of
-      [RFC6838].  Although section 4.1.1. of [RFC2046] defines CRLF to
-      denote line breaks, implementers MAY recognize a single CR or LF
-      as a line break (similar to section 3.1.1.3 of [RFC7231]).
-      However, some implementations may use other values.
-
-   Published specification:
-
-      While numerous private specifications exist for various programs
-      and systems, there is no single "master" specification for this
-      format.  An attempt at a common definition can be found in
-      [RFC4180] and this document.  Implementers should note that both
-      documents are informational in nature and are not standards.
+   Required parameters: none
 
    Optional parameters: charset
 
       The "charset" parameter specifies the charset employed by the CSV
-      content.  In accordance with [RFC6657], the charset parameter
-      SHOULD be used, and if it is not present, UTF-8 SHOULD be assumed
-      as the default (this implies that US- ASCII CSV will work, even
-      when not specifying the "charset" parameter).  Any charset defined
-      by IANA for the "text" tree may be used in conjunction with the
-      "charset" parameter.
+      content.  In accordance with RFC 6657 [RFC6657], the charset
+      parameter SHOULD be used, and if it is not present, UTF-8 SHOULD
+      be assumed as the default (this implies that US- ASCII CSV will
+      work, even when not specifying the "charset" parameter).  Any
+      charset defined by IANA for the "text" tree may be used in
+      conjunction with the "charset" parameter.
+
+      The "header" parameter defined in [RFC4180] is deprecated and
+      SHOULD NOT be used.
+
+   Encoding considerations:
+
+      CSV files and CSV MIME entities can consist of binary data as per
+      section 4.8 of [RFC6838].  Although section 4.1.1. of [RFC2046]
+      defines CRLF to denote line breaks, implementers MAY also
+      recognize a single CR or LF as a line break (similar to section
+      3.1.1.3 of [RFC7231]).  However, some implementations may use
+      other values.
 
    Security considerations:
 
@@ -424,13 +434,52 @@ UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
       differences among implementations.  Implementers should "be
       conservative in what you do, be liberal in what you accept from
       others" ([RFC0793]) when processing CSV files.  An attempt at a
-      common definition can be found in Section 2.
+      common definition can be found in section 2 of [[to be replaced
+      with the RFC number]].
 
-4.1.  IANA Considerations
+      There are numerous differences between different CSV
+      implementations, many of which are addressed in section 4 of [[to
+      be replaced with the RFC number of this document]].
 
-   IANA is directed to update the MIME type registration for "text/csv"
-   as per instructions provided in Section 4 of this document and
-   include a reference to this document within the registration.
+   Published specification:
+
+      While numerous private specifications exist for various programs
+      and systems, there is no single "master" specification for this
+      format.  An attempt at a common definition can be found in
+      Section 2 of [[to be replaced with the RFC number]].
+
+   Applications that use this media type:
+
+      Spreadsheet programs and various data conversion utilities.
+
+   Fragment identifier considerations:
+
+      Fragment identification for text/csv is supported by using
+         fragment identifiers as specified by [RFC7111].
+
+   Additional information:
+
+   Magic number(s): none
+
+   File extension(s): CSV
+
+   Macintosh file type code(s): TEXT
+
+   Person & email address to contact for further information:
+
+      Yakov Shafranovich yakovsh@amazon.com (mailto:yakovsh@amazon.com)
+      and Erik Wilde dret@berkeley.edu (mailto:dret@berkeley.edu)
+
+   Intended usage: COMMON
+
+   Restrictions on usage: none
+
+   Author:
+
+      Yakov Shafranovich yakovsh@amazon.com (mailto:yakovsh@amazon.com)
+      and Erik Wilde dret@berkeley.edu (mailto:dret@berkeley.edu)
+
+   Change controller: IESG
 
 5.  Security Considerations
 
@@ -448,6 +497,10 @@ UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
 7.  References
 
 7.1.  Normative References
+
+   [RFC0793]  Postel, J., "Transmission Control Protocol", RFC 793,
+              DOI 10.17487/RFC0793, September 1981,
+              <https://www.rfc-editor.org/info/rfc793>.
 
    [RFC2046]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part Two: Media Types", RFC 2046,
@@ -512,10 +565,6 @@ UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
    [EDOCEO]   Edoceo, Inc., "Comma Separated Values (CSV) Standard File
               Format", 2020, <https://edoceo.com/dev/csv-file-format>.
 
-   [RFC0793]  Postel, J., "Transmission Control Protocol", RFC 793,
-              DOI 10.17487/RFC0793, September 1981,
-              <https://www.rfc-editor.org/info/rfc793>.
-
    [RFC1796]  Huitema, C., Postel, J., and S. Crocker, "Not All RFCs are
               Standards", RFC 1796, DOI 10.17487/RFC1796, April 1995,
               <https://www.rfc-editor.org/info/rfc1796>.
@@ -556,14 +605,12 @@ Appendix A.  Major changes since [RFC4180]
 
    *  Allowing CR, LF and CRLF for line breaks
 
-   *  Allowing HTAB in text data
+   *  Allowing binary content including HTAB in CSV files
 
    *  Mandating a line break at the end of the last line in the file
 
    *  Making records and headers optional, thus allowing for an empty
       file
-
-   *  Adding definition of commented lines
 
    *  Adding a section on common implementation concerns
 
@@ -571,7 +618,7 @@ Appendix A.  Major changes since [RFC4180]
 
 Appendix B.  Changes since the -00 draft
 
-   *  Added CSV injection to security considerations (#30
+   *  Added CSV injection to security considerations (#30)
 
    *  Added a reference to RFC 7111 (#27)
 
@@ -589,7 +636,18 @@ Appendix D.  Changes since the -02 draft
 
    *  Added a section on bidi handling
 
-Appendix E.  Note to Readers
+Appendix E.  Changes since the -03 draft
+
+   *  Moved comments to the common practices section and removed from
+      the ABNF grammar (#32)
+
+   *  Added more clarifications to the format section
+
+   *  Made ABNF grammar match the document
+
+   *  Added a note about text content to the format section
+
+Appendix F.  Note to Readers
 
       *Note to the RFC Editor:* Please remove this section prior to
       publication.
@@ -607,4 +665,4 @@ Author's Address
 
    Yakov Shafranovich
    Amazon Web Services (AWS)
-   Email: yakovsh@amazon.com
+   Email: ietf@shaftek.org
