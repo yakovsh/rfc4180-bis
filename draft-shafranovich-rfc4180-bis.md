@@ -137,8 +137,7 @@ MUST be enclosed in double-quotes. For example:
 
    "aaa","b CRLF<br/>
    bb","ccc"CRLF<br/>
-   zzz,yyy,xxxCRLF<br/>
-   "#aaa",#bbb,cccCRLF
+   zzz,yyy,xxxCRLF
 
 7. A double-quote appearing inside a field MUST be escaped by preceding it with
 another double quote. For example:
@@ -294,7 +293,8 @@ Example of a CSV file containing comments:
     aaa,bbb,cccCRLF<br/>
     #comment 2CRLF<br/>
     "aaa","this is CRLF<br/>
-    # not a comment","ccc"CRLF
+    # not a comment","ccc"CRLF<br/>
+    "#aaa",#bbb,cccCRLF
 
 ## IANA Considerations
 As per {{!RFC6838}}, IANA is directed to update
