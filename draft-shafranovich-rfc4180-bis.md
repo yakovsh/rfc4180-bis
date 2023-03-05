@@ -80,7 +80,7 @@ This document continues to do the same, and updates the original document to ref
 current practices for generating and consuming of CSV files.
 
 Both {{!RFC4180}} and this document are published as informational RFC for the benefit
-of the Internet community and and not intended to be used as formal standards.
+of the Internet community and not intended to be used as formal standards.
 Implementers should consult {{?RFC1796}} and {{?RFC2026}} for crucial differences
 between IETF standards and informational RFCs.
 
@@ -222,7 +222,7 @@ zero bytes is considered valid.
 ## Empty lines
 This specification recommends but doesn't require having the same number of fields
 in every line. This allows CSV files to have empty lines without
-any fields at all. Implementors may choose to to skip empty lines
+any fields at all. Implementors may choose to skip empty lines
 instead of parsing them but this specification does not dictate such behavior.
 
 Example of a CSV file with empty lines:
@@ -251,7 +251,7 @@ even when line breaks appear within such field.
 Implementers should be aware that some applications may treat header values as unique
 (either case-sensitive or case-insensitive).
 
-## Whitespace outside of quoted fields
+## Whitespace outside quoted fields
 When quoted fields are used, this document does not allow whitespace
 between double quotes and commas. Implementers should be aware that some applications
 may be more lenient and allow whitespace outside the double quotes.
@@ -286,7 +286,7 @@ be commented lines. Such lines may contain any whitespace or visible character u
 terminated by a line break (CR, LF or CRLF) and might appear in any line of the file
 (before or after the header). Comments should not be confused with a subsequent line
 of a multi-line field. If a first field of a record contains a hash, it should be surrounded
-with double quotes to avoid being mistaked for a comment as per {{desc}}.
+with double quotes to avoid being mistaken for a comment as per {{desc}}.
 
 Example of a CSV file containing comments:
 
@@ -445,7 +445,7 @@ A special thank you to L.T.S.
 
 # Changes since the -02 draft
 - Refreshed to keep draft alive
-- Contact information and Github link changes
+- Contact information and GitHub link changes
 - Minor updates on language
 - Added a section on bidi handling
 
