@@ -238,7 +238,7 @@ as database exports/imports.
 
 Example of a CSV file with empty lines and only one field per record:
 
-aaa<br/>
+aaaCRLF<br/>
 CRLF<br/>
 bbbCRLF
 
