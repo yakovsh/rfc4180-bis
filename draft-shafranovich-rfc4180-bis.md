@@ -14,7 +14,7 @@ author:
 - ins: Y. Shafranovich
   name: Yakov Shafranovich
   organization: Amazon Web Services (AWS)
-  email: yakovsh@amazon.com
+  email: yakovsh@amazon.com or ietf@shaftek.org
 
 informative:
   ART:
@@ -96,7 +96,7 @@ The CSV format uses line breaks to separate records, and commas to separate fiel
 The format is described as follows:
 
 1. Each record is located on a separate line, ended by a line break (CR, LF or CRLF) indicating
-the end of a record. For example:
+the end of this record. For example:
 
    aaa,bbb,cccCRLF<br/>
    zzz,yyy,xxxCRLF
@@ -108,7 +108,7 @@ the end of a record. For example:
 
 3. The first record in the file MAY be an optional header and MUST follow
 the same format as normal records. This
-header usually contains names corresponding to the fields in the file
+header contains names corresponding to the fields in the file
 and SHOULD contain the same number of fields as the records in
 the rest of the file. For example:
 
@@ -176,7 +176,7 @@ escaped = DQUOTE *(textdata / COMMA / CR / LF / 2DQUOTE) DQUOTE
 non-escaped = *(textdata)
 
 textdata = %x00-09 / %x0B-0C / %x0E-21 / %x23-2B / %x2D-7F / UTF8-data
-         ; all ASCII data except LF, CR, DQUOTE and COMMA
+         ; all characters except LF, CR, DQUOTE and COMMA
 
 linebreak = CR / LF / CRLF
 
@@ -197,9 +197,9 @@ Note that the authoritative definition of UTF-8 is in section 2.5 of {{UNICODE}}
 
 # Common implementation concerns
 This section describes some common concerns that may arise when
-producing or parsing CSV files. All of these remain out of scope for this document
-and are included for awareness. Implementers may also use other means to handle
-these use cases such as {{CSVW}}.
+producing or parsing CSV files. These are not part of the formal definition of CSV
+and are included for awareness only. Implementers may also use other means to handle
+these use cases including approaches like {{CSVW}}.
 
 ## Null values
 Some implementations (such as databases) treat empty fields and null values differently.
@@ -281,10 +281,10 @@ part in section 5 of {{?RFC6365}} for further guidance.
 
 ## Comments
 Some implementations may use the hash sign ("#") to mark lines that are meant to
-be commented lines. Such lines may contain any whitespace or visible character until
+be commented lines. Such lines may contain any character until
 terminated by a line break (CR, LF or CRLF) and might appear in any line of the file
 (before or after the header). Comments should not be confused with a subsequent line
-of a multi-line field. If a first field of a record contains a hash, it should be surrounded
+of a multi-line field. If a first field of a record starts with a hash, it should be surrounded
 with double quotes to avoid being mistaken for a comment as per {{desc}}.
 
 Example of a CSV file containing comments:
@@ -294,7 +294,7 @@ Example of a CSV file containing comments:
     #comment 2CRLF<br/>
     "aaa","this is CRLF<br/>
     # not a comment","ccc"CRLF<br/>
-    "#aaa",#bbb,cccCRLF
+    "#aaa",bbb,cccCRLF
 
 ## IANA Considerations
 As per {{!RFC6838}}, IANA is directed to update
@@ -303,7 +303,7 @@ add a reference to this document within the registration.
 
 The update to the media type registration is copied from the current
 one which consists of the original registration from {{!RFC4180}} as
-updated by {{!RFC7111}}. The text has been updated based on this document.
+updated by {{!RFC7111}} and updated based on this document.
 
 # Update to MIME Type Registration of text/csv {#registration}
 

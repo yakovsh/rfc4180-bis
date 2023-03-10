@@ -4,8 +4,8 @@
 
 Network Working Group                                    Y. Shafranovich
 Internet-Draft                                 Amazon Web Services (AWS)
-Intended status: Informational                          28 February 2023
-Expires: 1 September 2023
+Intended status: Informational                             10 March 2023
+Expires: 11 September 2023
 
 
    Common Format and MIME Type for Comma-Separated Values (CSV) Files
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 September 2023.
+   This Internet-Draft will expire on 11 September 2023.
 
 Copyright Notice
 
@@ -59,7 +59,7 @@ Table of Contents
      3.3.  Empty lines
      3.4.  Fields spanning multiple lines
      3.5.  Unique header names
-     3.6.  Whitespace outside of quoted fields
+     3.6.  Whitespace outside quoted fields
      3.7.  Other field separators
      3.8.  Escaping double quotes
      3.9.  BOM header
@@ -111,8 +111,8 @@ Table of Contents
    consuming of CSV files.
 
    Both [RFC4180] and this document are published as informational RFC
-   for the benefit of the Internet community and and not intended to be
-   used as formal standards.  Implementers should consult [RFC1796] and
+   for the benefit of the Internet community and not intended to be used
+   as formal standards.  Implementers should consult [RFC1796] and
    [RFC2026] for crucial differences between IETF standards and
    informational RFCs.
 
@@ -133,7 +133,7 @@ Table of Contents
    follows:
 
    1.  Each record is located on a separate line, ended by a line break
-       (CR, LF or CRLF) indicating the end of a record.  For example:
+       (CR, LF or CRLF) indicating the end of this record.  For example:
 
        aaa,bbb,cccCRLF
        zzz,yyy,xxxCRLF
@@ -145,10 +145,10 @@ Table of Contents
        zzz,yyy,xxxCRLF
 
    3.  The first record in the file MAY be an optional header and MUST
-       follow the same format as normal records.  This header usually
-       contains names corresponding to the fields in the file and SHOULD
-       contain the same number of fields as the records in the rest of
-       the file.  For example:
+       follow the same format as normal records.  This header contains
+       names corresponding to the fields in the file and SHOULD contain
+       the same number of fields as the records in the rest of the file.
+       For example:
 
        field_name_1,field_name_2,field_name_3CRLF
        aaa,bbb,cccCRLF
@@ -177,7 +177,6 @@ Table of Contents
        "aaa","b CRLF
        bb","ccc"CRLF
        zzz,yyy,xxxCRLF
-       "#aaa",#bbb,cccCRLF
 
    7.  A double-quote appearing inside a field MUST be escaped by
        preceding it with another double quote.  For example:
@@ -220,7 +219,7 @@ Table of Contents
   non-escaped = *(textdata)
 
   textdata = %x00-09 / %x0B-0C / %x0E-21 / %x23-2B / %x2D-7F / UTF8-data
-           ; all ASCII data except LF, CR, DQUOTE and COMMA
+           ; all characters except LF, CR, DQUOTE and COMMA
 
   linebreak = CR / LF / CRLF
 
@@ -242,9 +241,10 @@ Table of Contents
 3.  Common implementation concerns
 
    This section describes some common concerns that may arise when
-   producing or parsing CSV files.  All of these remain out of scope for
-   this document and are included for awareness.  Implementers may also
-   use other means to handle these use cases such as [CSVW].
+   producing or parsing CSV files.  These are not part of the formal
+   definition of CSV and are included for awareness only.  Implementers
+   may also use other means to handle these use cases including
+   approaches like [CSVW].
 
 3.1.  Null values
 
@@ -269,7 +269,7 @@ Table of Contents
 
    This specification recommends but doesn't require having the same
    number of fields in every line.  This allows CSV files to have empty
-   lines without any fields at all.  Implementors may choose to to skip
+   lines without any fields at all.  Implementors may choose to skip
    empty lines instead of parsing them but this specification does not
    dictate such behavior.
 
@@ -287,7 +287,7 @@ Table of Contents
 
    Example of a CSV file with empty lines and only one field per record:
 
-   aaa
+   aaaCRLF
    CRLF
    bbbCRLF
 
@@ -301,7 +301,7 @@ Table of Contents
    Implementers should be aware that some applications may treat header
    values as unique (either case-sensitive or case-insensitive).
 
-3.6.  Whitespace outside of quoted fields
+3.6.  Whitespace outside quoted fields
 
    When quoted fields are used, this document does not allow whitespace
    between double quotes and commas.  Implementers should be aware that
@@ -344,12 +344,12 @@ Table of Contents
 
    Some implementations may use the hash sign ("#") to mark lines that
    are meant to be commented lines.  Such lines may contain any
-   whitespace or visible character until terminated by a line break (CR,
-   LF or CRLF) and might appear in any line of the file (before or after
-   the header).  Comments should not be confused with a subsequent line
-   of a multi-line field.  If a first field of a record contains a hash,
-   it should be surrounded with double quotes to avoid being mistaked
-   for a comment as per Section 2.1.
+   character until terminated by a line break (CR, LF or CRLF) and might
+   appear in any line of the file (before or after the header).
+   Comments should not be confused with a subsequent line of a multi-
+   line field.  If a first field of a record starts with a hash, it
+   should be surrounded with double quotes to avoid being mistaken for a
+   comment as per Section 2.1.
 
    Example of a CSV file containing comments:
 
@@ -357,7 +357,8 @@ Table of Contents
    aaa,bbb,cccCRLF<br/>
    #comment 2CRLF<br/>
    "aaa","this is CRLF<br/>
-   # not a comment","ccc"CRLF
+   # not a comment","ccc"CRLF<br/>
+   "#aaa",bbb,cccCRLF
 
 3.12.  IANA Considerations
 
@@ -367,8 +368,7 @@ Table of Contents
 
    The update to the media type registration is copied from the current
    one which consists of the original registration from [RFC4180] as
-   updated by [RFC7111].  The text has been updated based on this
-   document.
+   updated by [RFC7111] and updated based on this document.
 
 4.  Update to MIME Type Registration of text/csv
 
@@ -630,7 +630,7 @@ Appendix D.  Changes since the -02 draft
 
    *  Refreshed to keep draft alive
 
-   *  Contact information and Github link changes
+   *  Contact information and GitHub link changes
 
    *  Minor updates on language
 
@@ -665,4 +665,4 @@ Author's Address
 
    Yakov Shafranovich
    Amazon Web Services (AWS)
-   Email: yakovsh@amazon.com
+   Email: yakovsh@amazon.com or ietf@shaftek.org

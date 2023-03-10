@@ -1047,11 +1047,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">rfc4180-bis</td>
-<td class="right">February 2023</td>
+<td class="right">March 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Shafranovich</td>
-<td class="center">Expires 1 September 2023</td>
+<td class="center">Expires 11 September 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1064,12 +1064,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-shafranovich-rfc4180-bis-04</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-02-28" class="published">28 February 2023</time>
+<time datetime="2023-03-10" class="published">10 March 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-09-01">1 September 2023</time></dd>
+<dd class="expires"><time datetime="2023-09-11">11 September 2023</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1104,7 +1104,7 @@ files and updates the associated MIME type "text/csv".<a href="#section-abstract
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 1 September 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 11 September 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1174,7 +1174,7 @@ files and updates the associated MIME type "text/csv".<a href="#section-abstract
                 <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-unique-header-names" class="internal xref">Unique header names</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.6">
-                <p id="section-toc.1-1.3.2.6.1"><a href="#section-3.6" class="auto internal xref">3.6</a>.  <a href="#name-whitespace-outside-of-quote" class="internal xref">Whitespace outside of quoted fields</a></p>
+                <p id="section-toc.1-1.3.2.6.1"><a href="#section-3.6" class="auto internal xref">3.6</a>.  <a href="#name-whitespace-outside-quoted-f" class="internal xref">Whitespace outside quoted fields</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.7">
                 <p id="section-toc.1-1.3.2.7.1"><a href="#section-3.7" class="auto internal xref">3.7</a>.  <a href="#name-other-field-separators" class="internal xref">Other field separators</a></p>
@@ -1276,7 +1276,7 @@ existing practices at the time based on the approaches used by most implementati
 This document continues to do the same, and updates the original document to reflect
 current practices for generating and consuming of CSV files.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 <p id="section-1.2-2">Both <span>[<a href="#RFC4180" class="cite xref">RFC4180</a>]</span> and this document are published as informational RFC for the benefit
-of the Internet community and and not intended to be used as formal standards.
+of the Internet community and not intended to be used as formal standards.
 Implementers should consult <span>[<a href="#RFC1796" class="cite xref">RFC1796</a>]</span> and <span>[<a href="#RFC2026" class="cite xref">RFC2026</a>]</span> for crucial differences
 between IETF standards and informational RFCs.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
 </section>
@@ -1303,7 +1303,7 @@ The format is described as follows:<a href="#section-2.1-1" class="pilcrow">¶</
 <ol start="1" type="1" class="normal type-1" id="section-2.1-2">
 <li id="section-2.1-2.1">
             <p id="section-2.1-2.1.1">Each record is located on a separate line, ended by a line break (CR, LF or CRLF) indicating
-the end of a record. For example:<a href="#section-2.1-2.1.1" class="pilcrow">¶</a></p>
+the end of this record. For example:<a href="#section-2.1-2.1.1" class="pilcrow">¶</a></p>
 <p id="section-2.1-2.1.2">
 aaa,bbb,cccCRLF<br>
 zzz,yyy,xxxCRLF<a href="#section-2.1-2.1.2" class="pilcrow">¶</a></p>
@@ -1317,7 +1317,7 @@ zzz,yyy,xxxCRLF<a href="#section-2.1-2.2.2" class="pilcrow">¶</a></p>
           <li id="section-2.1-2.3">
             <p id="section-2.1-2.3.1">The first record in the file MAY be an optional header and MUST follow
 the same format as normal records. This
-header usually contains names corresponding to the fields in the file
+header contains names corresponding to the fields in the file
 and SHOULD contain the same number of fields as the records in
 the rest of the file. For example:<a href="#section-2.1-2.3.1" class="pilcrow">¶</a></p>
 <p id="section-2.1-2.3.2">
@@ -1349,8 +1349,7 @@ MUST be enclosed in double-quotes. For example:<a href="#section-2.1-2.6.1" clas
 <p id="section-2.1-2.6.2">
 "aaa","b CRLF<br>
 bb","ccc"CRLF<br>
-zzz,yyy,xxxCRLF<br>
-"#aaa",#bbb,cccCRLF<a href="#section-2.1-2.6.2" class="pilcrow">¶</a></p>
+zzz,yyy,xxxCRLF<a href="#section-2.1-2.6.2" class="pilcrow">¶</a></p>
 </li>
           <li id="section-2.1-2.7">
             <p id="section-2.1-2.7.1">A double-quote appearing inside a field MUST be escaped by preceding it with
@@ -1399,7 +1398,7 @@ escaped = DQUOTE *(textdata / COMMA / CR / LF / 2DQUOTE) DQUOTE
 non-escaped = *(textdata)
 
 textdata = %x00-09 / %x0B-0C / %x0E-21 / %x23-2B / %x2D-7F / UTF8-data
-         ; all ASCII data except LF, CR, DQUOTE and COMMA
+         ; all characters except LF, CR, DQUOTE and COMMA
 
 linebreak = CR / LF / CRLF
 
@@ -1427,9 +1426,9 @@ UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-common-implementation-conce" class="section-name selfRef">Common implementation concerns</a>
       </h2>
 <p id="section-3-1">This section describes some common concerns that may arise when
-producing or parsing CSV files. All of these remain out of scope for this document
-and are included for awareness. Implementers may also use other means to handle
-these use cases such as <span>[<a href="#CSVW" class="cite xref">CSVW</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
+producing or parsing CSV files. These are not part of the formal definition of CSV
+and are included for awareness only. Implementers may also use other means to handle
+these use cases including approaches like <span>[<a href="#CSVW" class="cite xref">CSVW</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div id="null-values">
 <section id="section-3.1">
         <h3 id="name-null-values">
@@ -1462,7 +1461,7 @@ zero bytes is considered valid.<a href="#section-3.2-1" class="pilcrow">¶</a></
         </h3>
 <p id="section-3.3-1">This specification recommends but doesn't require having the same number of fields
 in every line. This allows CSV files to have empty lines without
-any fields at all. Implementors may choose to to skip empty lines
+any fields at all. Implementors may choose to skip empty lines
 instead of parsing them but this specification does not dictate such behavior.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <p id="section-3.3-2">Example of a CSV file with empty lines:<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 <p id="section-3.3-3">field_name_1,field_name_2,field_name_3CRLF<br>
@@ -1474,7 +1473,7 @@ differentiate between an empty line, and an empty and unquoted field. This
 differentiation might play an important role in some implementations such
 as database exports/imports.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
 <p id="section-3.3-5">Example of a CSV file with empty lines and only one field per record:<a href="#section-3.3-5" class="pilcrow">¶</a></p>
-<p id="section-3.3-6">aaa<br>
+<p id="section-3.3-6">aaaCRLF<br>
 CRLF<br>
 bbbCRLF<a href="#section-3.3-6" class="pilcrow">¶</a></p>
 </section>
@@ -1497,10 +1496,10 @@ even when line breaks appear within such field.<a href="#section-3.4-1" class="p
 (either case-sensitive or case-insensitive).<a href="#section-3.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="whitespace-outside-of-quoted-fields">
+<div id="whitespace-outside-quoted-fields">
 <section id="section-3.6">
-        <h3 id="name-whitespace-outside-of-quote">
-<a href="#section-3.6" class="section-number selfRef">3.6. </a><a href="#name-whitespace-outside-of-quote" class="section-name selfRef">Whitespace outside of quoted fields</a>
+        <h3 id="name-whitespace-outside-quoted-f">
+<a href="#section-3.6" class="section-number selfRef">3.6. </a><a href="#name-whitespace-outside-quoted-f" class="section-name selfRef">Whitespace outside quoted fields</a>
         </h3>
 <p id="section-3.6-1">When quoted fields are used, this document does not allow whitespace
 between double quotes and commas. Implementers should be aware that some applications
@@ -1557,11 +1556,11 @@ part in section 5 of <span>[<a href="#RFC6365" class="cite xref">RFC6365</a>]</s
 <a href="#section-3.11" class="section-number selfRef">3.11. </a><a href="#name-comments" class="section-name selfRef">Comments</a>
         </h3>
 <p id="section-3.11-1">Some implementations may use the hash sign ("#") to mark lines that are meant to
-be commented lines. Such lines may contain any whitespace or visible character until
+be commented lines. Such lines may contain any character until
 terminated by a line break (CR, LF or CRLF) and might appear in any line of the file
 (before or after the header). Comments should not be confused with a subsequent line
-of a multi-line field. If a first field of a record contains a hash, it should be surrounded
-with double quotes to avoid being mistaked for a comment as per <a href="#desc" class="auto internal xref">Section 2.1</a>.<a href="#section-3.11-1" class="pilcrow">¶</a></p>
+of a multi-line field. If a first field of a record starts with a hash, it should be surrounded
+with double quotes to avoid being mistaken for a comment as per <a href="#desc" class="auto internal xref">Section 2.1</a>.<a href="#section-3.11-1" class="pilcrow">¶</a></p>
 <p id="section-3.11-2">Example of a CSV file containing comments:<a href="#section-3.11-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3.11-3">
 <pre>
@@ -1569,7 +1568,8 @@ with double quotes to avoid being mistaked for a comment as per <a href="#desc" 
 aaa,bbb,cccCRLF&lt;br/&gt;
 #comment 2CRLF&lt;br/&gt;
 "aaa","this is CRLF&lt;br/&gt;
-# not a comment","ccc"CRLF
+# not a comment","ccc"CRLF&lt;br/&gt;
+"#aaa",bbb,cccCRLF
 </pre><a href="#section-3.11-3" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1584,7 +1584,7 @@ the MIME type registration for "text/csv" with the content in <a href="#registra
 add a reference to this document within the registration.<a href="#section-3.12-1" class="pilcrow">¶</a></p>
 <p id="section-3.12-2">The update to the media type registration is copied from the current
 one which consists of the original registration from <span>[<a href="#RFC4180" class="cite xref">RFC4180</a>]</span> as
-updated by <span>[<a href="#RFC7111" class="cite xref">RFC7111</a>]</span>. The text has been updated based on this document.<a href="#section-3.12-2" class="pilcrow">¶</a></p>
+updated by <span>[<a href="#RFC7111" class="cite xref">RFC7111</a>]</span> and updated based on this document.<a href="#section-3.12-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1907,7 +1907,7 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class=
 <ul class="normal">
 <li class="normal" id="appendix-D-1.1">Refreshed to keep draft alive<a href="#appendix-D-1.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="appendix-D-1.2">Contact information and Github link changes<a href="#appendix-D-1.2" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-D-1.2">Contact information and GitHub link changes<a href="#appendix-D-1.2" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="appendix-D-1.3">Minor updates on language<a href="#appendix-D-1.3" class="pilcrow">¶</a>
 </li>
@@ -1960,7 +1960,7 @@ https://tools.ietf.org/html/draft-shafranovich-rfc4180-bis<a href="#appendix-F-4
 <div dir="auto" class="left"><span class="org">Amazon Web Services (AWS)</span></div>
 <div class="email">
 <span>Email:</span>
-<a href="mailto:yakovsh@amazon.com" class="email">yakovsh@amazon.com</a>
+<a href="mailto:yakovsh@amazon.com%20or%20ietf@shaftek.org" class="email">yakovsh@amazon.com or ietf@shaftek.org</a>
 </div>
 </address>
 </section>
