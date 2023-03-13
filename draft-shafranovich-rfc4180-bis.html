@@ -10,25 +10,25 @@
        This RFC documents the common format used for Comma-Separated Values (CSV)
 files and updates the associated MIME type "text/csv". 
     ' name="description">
-<meta content="xml2rfc 3.14.2" name="generator">
-<meta content="draft-shafranovich-rfc4180-bis-02" name="ietf.draft">
+<meta content="xml2rfc 3.16.0" name="generator">
+<meta content="draft-shafranovich-rfc4180-bis-04" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.14.2
-    Python 3.9.13
+  xml2rfc 3.16.0
+    Python 3.9.16
     appdirs 1.4.4
     ConfigArgParse 1.5.3
     google-i18n-address 2.5.2
     html5lib 1.1
     intervaltree 3.1.0
     Jinja2 3.1.2
-    kitchen 1.2.6
-    lxml 4.9.1
-    MarkupSafe 2.1.1
+    lxml 4.9.2
+    MarkupSafe 2.1.2
     pycountry 22.3.5
     PyYAML 6.0
-    requests 2.28.1
-    setuptools 65.3.0
+    requests 2.28.2
+    setuptools 67.4.0
     six 1.16.0
+    wcwidth 0.2.6
 -->
 <link href="draft-shafranovich-rfc4180-bis.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -359,7 +359,7 @@ ul.empty li, .ulEmpty li {
   margin-top: 0.5em;
 }
 :is(ul, ol).compact, .ulCompact, .olCompact {
-  line-height: 100%;
+  line-height: 1;
   margin: 0 0 0 2em;
 }
 
@@ -369,10 +369,13 @@ dl {
   --indent: 3ch;
   /* --indent: attr(indent ch); not supported in any browser, but we can dream */
 }
+dl.olPercent {
+  --indent: 5ch;
+}
 dl > dt {
   float: left;
-  margin-right: 1em;
-  min-width: 20ch;
+  margin-right: 2ch;
+  min-width: 8ch;
 }
 dl.dlNewline > dt {
   float: none;
@@ -381,6 +384,9 @@ dl > dd {
   margin-bottom: .8em;
   margin-left: var(--indent) !important; /* stupid element overrides */
   min-height: 2ex;
+}
+dl.olPercent > dt {
+  min-width: calc(var(--indent) - 2ch);
 }
 :is(dl.compact, .dlCompact) > dd {
   margin-bottom: 0;
@@ -395,7 +401,7 @@ dl > dd > dl {
   margin-top: 0.5em;
   margin-bottom: 0;
 }
-dl .break {
+:is(dd, span).break {
   display: none;
 }
 
@@ -403,11 +409,11 @@ dl .break {
 a, a[href].selfRef:hover {
   text-decoration: none;
 }
-a[href].selfRef {
-  color: var(--text-color);
-}
 a[href] {
   color: var(--link-color);
+}
+a[href].selfRef, .iref + a[href].internal {
+  color: var(--text-color);
 }
 a[href]:hover {
   text-decoration: underline;
@@ -415,7 +421,7 @@ a[href]:hover {
 a[href].selfRef:hover {
   background-color: var(--highlight-color);
 }
-a.xref {
+a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
   white-space: nowrap;
 }
 
@@ -427,7 +433,9 @@ tt, code, pre {
 tt, code {
   /* changing the font for inline elements leads to different ascender
      and descender heights; as we want to retain baseline alignment,
-     remove leading to avoid altering the final height of lines */
+     remove leading to avoid altering the final height of lines
+     note: this fails if these blocks take an entire line,
+     a different solution would be great */
   line-height: 0;
 }
 :is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
@@ -579,10 +587,14 @@ hr {
 .bcp14 {
   font-variant: small-caps;
   font-weight: 600;
-  font-size: 14.5px;
+  font-size: var(--small-font-size);
 }
 .role {
   font-variant: all-small-caps;
+}
+sub, sup {
+  line-height: 1;
+  font-size: 80%;
 }
 
 /* info block */
@@ -1024,22 +1036,22 @@ svg :is([stroke="white"], [stroke^="#fff"]) {
 svg :is([fill="black"], [fill^="#000"], :not([fill])) {
   fill: var(--text-color);
 }
-svg :is([stroke="fill"], [fill^="#fff"]) {
+svg :is([fill="white"], [fill^="#fff"]) {
   fill: var(--background-color);
 }
 </style>
 
 </head>
-<body>
+<body class="xml2rfc">
 <table class="ears">
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">rfc4180-bis</td>
-<td class="right">September 2022</td>
+<td class="right">March 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Shafranovich</td>
-<td class="center">Expires 18 March 2023</td>
+<td class="center">Expires 14 September 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1049,15 +1061,15 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">Network Working Group</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-shafranovich-rfc4180-bis-02</dd>
+<dd class="internet-draft">draft-shafranovich-rfc4180-bis-04</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-09-14" class="published">14 September 2022</time>
+<time datetime="2023-03-13" class="published">13 March 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-03-18">18 March 2023</time></dd>
+<dd class="expires"><time datetime="2023-09-14">14 September 2023</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1092,7 +1104,7 @@ files and updates the associated MIME type "text/csv".<a href="#section-abstract
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 18 March 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 14 September 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1101,7 +1113,7 @@ files and updates the associated MIME type "text/csv".<a href="#section-abstract
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2022 IETF Trust and the persons identified as the
+            Copyright (c) 2023 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1119,107 +1131,111 @@ files and updates the associated MIME type "text/csv".<a href="#section-abstract
         </h2>
 <nav class="toc"><ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
-            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a></p>
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="xref">1.1</a>.  <a href="#name-terminology" class="xref">Terminology</a></p>
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
-                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="xref">1.2</a>.  <a href="#name-motivation-for-and-status-o" class="xref">Motivation For and Status of This Document</a></p>
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-motivation-for-and-status-o" class="internal xref">Motivation For and Status of This Document</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1"><a href="#section-2" class="xref">2</a>.  <a href="#name-definition-of-the-csv-forma" class="xref">Definition of the CSV Format</a></p>
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-definition-of-the-csv-forma" class="internal xref">Definition of the CSV Format</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
-                <p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1" class="xref">2.1</a>.  <a href="#name-high-level-description" class="xref">High level description</a></p>
+                <p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-high-level-description" class="internal xref">High level description</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
-                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="xref">2.2</a>.  <a href="#name-default-charset-and-line-br" class="xref">Default charset and line break values</a></p>
+                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-default-charset-binary-cont" class="internal xref">Default charset, binary content and line break values</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3">
-                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="xref">2.3</a>.  <a href="#name-abnf-grammar" class="xref">ABNF Grammar</a></p>
+                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="auto internal xref">2.3</a>.  <a href="#name-abnf-grammar" class="internal xref">ABNF Grammar</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-common-implementation-conce" class="xref">Common implementation concerns</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-common-implementation-conce" class="internal xref">Common implementation concerns</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="xref">3.1</a>.  <a href="#name-null-values" class="xref">Null values</a></p>
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-null-values" class="internal xref">Null values</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="xref">3.2</a>.  <a href="#name-empty-files" class="xref">Empty files</a></p>
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-empty-files" class="internal xref">Empty files</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="xref">3.3</a>.  <a href="#name-empty-lines" class="xref">Empty lines</a></p>
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-empty-lines" class="internal xref">Empty lines</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
-                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="xref">3.4</a>.  <a href="#name-fields-spanning-multiple-li" class="xref">Fields spanning multiple lines</a></p>
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-fields-spanning-multiple-li" class="internal xref">Fields spanning multiple lines</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5">
-                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="xref">3.5</a>.  <a href="#name-unique-header-names" class="xref">Unique header names</a></p>
+                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-unique-header-names" class="internal xref">Unique header names</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.6">
-                <p id="section-toc.1-1.3.2.6.1"><a href="#section-3.6" class="xref">3.6</a>.  <a href="#name-whitespace-outside-of-quote" class="xref">Whitespace outside of quoted fields</a></p>
+                <p id="section-toc.1-1.3.2.6.1"><a href="#section-3.6" class="auto internal xref">3.6</a>.  <a href="#name-whitespace-outside-quoted-f" class="internal xref">Whitespace outside quoted fields</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.7">
-                <p id="section-toc.1-1.3.2.7.1"><a href="#section-3.7" class="xref">3.7</a>.  <a href="#name-other-field-separators" class="xref">Other field separators</a></p>
+                <p id="section-toc.1-1.3.2.7.1"><a href="#section-3.7" class="auto internal xref">3.7</a>.  <a href="#name-other-field-separators" class="internal xref">Other field separators</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.8">
-                <p id="section-toc.1-1.3.2.8.1"><a href="#section-3.8" class="xref">3.8</a>.  <a href="#name-escaping-double-quotes" class="xref">Escaping double quotes</a></p>
+                <p id="section-toc.1-1.3.2.8.1"><a href="#section-3.8" class="auto internal xref">3.8</a>.  <a href="#name-escaping-double-quotes" class="internal xref">Escaping double quotes</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.9">
-                <p id="section-toc.1-1.3.2.9.1"><a href="#section-3.9" class="xref">3.9</a>.  <a href="#name-bom-header" class="xref">BOM header</a></p>
+                <p id="section-toc.1-1.3.2.9.1"><a href="#section-3.9" class="auto internal xref">3.9</a>.  <a href="#name-bom-header" class="internal xref">BOM header</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.10">
-                <p id="section-toc.1-1.3.2.10.1"><a href="#section-3.10" class="xref">3.10</a>. <a href="#name-bidirectional-text" class="xref">Bidirectional text</a></p>
+                <p id="section-toc.1-1.3.2.10.1"><a href="#section-3.10" class="auto internal xref">3.10</a>. <a href="#name-bidirectional-text" class="internal xref">Bidirectional text</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.11">
+                <p id="section-toc.1-1.3.2.11.1"><a href="#section-3.11" class="auto internal xref">3.11</a>. <a href="#name-comments" class="internal xref">Comments</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.12">
+                <p id="section-toc.1-1.3.2.12.1"><a href="#section-3.12" class="auto internal xref">3.12</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-update-to-mime-type-registr" class="xref">Update to MIME Type Registration of text/csv</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="xref">4.1</a>.  <a href="#name-iana-considerations" class="xref">IANA Considerations</a></p>
-</li>
-            </ul>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-update-to-mime-type-registr" class="internal xref">Update to MIME Type Registration of text/csv</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-security-considerations" class="xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-acknowledgments" class="xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-references" class="xref">References</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-references" class="internal xref">References</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="xref">7.1</a>.  <a href="#name-normative-references" class="xref">Normative References</a></p>
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="xref">7.2</a>.  <a href="#name-informative-references" class="xref">Informative References</a></p>
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="xref">Appendix A</a>.  <a href="#name-major-changes-since" class="xref">Major changes since RFC4180</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-major-changes-since" class="internal xref">Major changes since RFC4180</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="xref">Appendix B</a>.  <a href="#name-changes-since-the-00-draft" class="xref">Changes since the -00 draft</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-changes-since-the-00-draft" class="internal xref">Changes since the -00 draft</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-C" class="xref">Appendix C</a>.  <a href="#name-changes-since-the-01-draft" class="xref">Changes since the -01 draft</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-changes-since-the-01-draft" class="internal xref">Changes since the -01 draft</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-D" class="xref">Appendix D</a>.  <a href="#name-changes-since-the-02-draft" class="xref">Changes since the -02 draft</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-changes-since-the-02-draft" class="internal xref">Changes since the -02 draft</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-E" class="xref">Appendix E</a>.  <a href="#name-note-to-readers" class="xref">Note to Readers</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-E" class="auto internal xref">Appendix E</a>.  <a href="#name-changes-since-the-03-draft" class="internal xref">Changes since the -03 draft</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-F" class="xref"></a><a href="#name-authors-address" class="xref">Author's Address</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#appendix-F" class="auto internal xref">Appendix F</a>.  <a href="#name-note-to-readers" class="internal xref">Note to Readers</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#appendix-G" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
 </li>
         </ul>
 </nav>
@@ -1234,8 +1250,8 @@ files and updates the associated MIME type "text/csv".<a href="#section-abstract
 to exchange data between disparate systems and applications for many years.
 Surprisingly, while this format is very popular, it has never been formally
 documented and didn't have a media type registered. This was addressed in 2005 via publication
-of <span>[<a href="#RFC4180" class="xref">RFC4180</a>]</span> and the concurrent registration of the "text/csv" media type.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">Since the publication of <span>[<a href="#RFC4180" class="xref">RFC4180</a>]</span>, the CSV format has evolved and this specification
+of <span>[<a href="#RFC4180" class="cite xref">RFC4180</a>]</span> and the concurrent registration of the "text/csv" media type.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">Since the publication of <span>[<a href="#RFC4180" class="cite xref">RFC4180</a>]</span>, the CSV format has evolved and this specification
 seeks to reflect these changes as well as update the "text/csv" media type registration.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <div id="terminology">
 <section id="section-1.1">
@@ -1245,7 +1261,7 @@ seeks to reflect these changes as well as update the "text/csv" media type regis
 <p id="section-1.1-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
 "OPTIONAL" in this document are to be interpreted as described in
-BCP 14 <span>[<a href="#RFC2119" class="xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="xref">RFC8174</a>]</span> when, and only when, they appear in all
+BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in all
 capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1254,14 +1270,14 @@ capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
         <h3 id="name-motivation-for-and-status-o">
 <a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-motivation-for-and-status-o" class="section-name selfRef">Motivation For and Status of This Document</a>
         </h3>
-<p id="section-1.2-1">The original motivation of <span>[<a href="#RFC4180" class="xref">RFC4180</a>]</span> was to provide a reference
+<p id="section-1.2-1">The original motivation of <span>[<a href="#RFC4180" class="cite xref">RFC4180</a>]</span> was to provide a reference
 in order to register the media type "text/csv". It tried to document
 existing practices at the time based on the approaches used by most implementations.
 This document continues to do the same, and updates the original document to reflect
 current practices for generating and consuming of CSV files.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
-<p id="section-1.2-2">Both <span>[<a href="#RFC4180" class="xref">RFC4180</a>]</span> and this document are published as informational RFC for the benefit
-of the Internet community and and not intended to be used as formal standards.
-Implementers should consult <span>[<a href="#RFC1796" class="xref">RFC1796</a>]</span> and <span>[<a href="#RFC2026" class="xref">RFC2026</a>]</span> for crucial differences
+<p id="section-1.2-2">Both <span>[<a href="#RFC4180" class="cite xref">RFC4180</a>]</span> and this document are published as informational RFC for the benefit
+of the Internet community and not intended to be used as formal standards.
+Implementers should consult <span>[<a href="#RFC1796" class="cite xref">RFC1796</a>]</span> and <span>[<a href="#RFC2026" class="cite xref">RFC2026</a>]</span> for crucial differences
 between IETF standards and informational RFCs.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1273,103 +1289,91 @@ between IETF standards and informational RFCs.<a href="#section-1.2-2" class="pi
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-definition-of-the-csv-forma" class="section-name selfRef">Definition of the CSV Format</a>
       </h2>
 <p id="section-2-1">While there had been various specifications and implementations for the
-CSV format (for ex. <span>[<a href="#CREATIVYST" class="xref">CREATIVYST</a>]</span>, <span>[<a href="#EDOCEO" class="xref">EDOCEO</a>]</span>, <span>[<a href="#CSVW" class="xref">CSVW</a>]</span> and <span>[<a href="#ART" class="xref">ART</a>]</span>)), prior to publication
-of <span>[<a href="#RFC4180" class="xref">RFC4180</a>]</span> there is no attempt to provide a common specification. This section documents
+CSV format (for ex. <span>[<a href="#CREATIVYST" class="cite xref">CREATIVYST</a>]</span>, <span>[<a href="#EDOCEO" class="cite xref">EDOCEO</a>]</span>, <span>[<a href="#CSVW" class="cite xref">CSVW</a>]</span> and <span>[<a href="#ART" class="cite xref">ART</a>]</span>)), prior to publication
+of <span>[<a href="#RFC4180" class="cite xref">RFC4180</a>]</span> there is no attempt to provide a common specification. This section documents
 the format that seems to be followed by most implementations (incorporating
-changes since the publication of <span>[<a href="#RFC4180" class="xref">RFC4180</a>]</span>).<a href="#section-2-1" class="pilcrow">¶</a></p>
-<div id="high-level-description">
+changes since the publication of <span>[<a href="#RFC4180" class="cite xref">RFC4180</a>]</span> and listing common implementation concerns).<a href="#section-2-1" class="pilcrow">¶</a></p>
+<div id="desc">
 <section id="section-2.1">
         <h3 id="name-high-level-description">
 <a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-high-level-description" class="section-name selfRef">High level description</a>
         </h3>
-<ol start="1" type="1" class="normal type-1" id="section-2.1-1">
-<li id="section-2.1-1.1">
-            <p id="section-2.1-1.1.1">Each record is located on a separate line, ended by a line break (CR, LF or CRLF). For example:<a href="#section-2.1-1.1.1" class="pilcrow">¶</a></p>
-<p id="section-2.1-1.1.2">
+<p id="section-2.1-1">The CSV format uses line breaks to separate records, and commas to separate fields within a given record.
+The format is described as follows:<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-2.1-2">
+<li id="section-2.1-2.1">
+            <p id="section-2.1-2.1.1">Each record is located on a separate line, ended by a line break (CR, LF or CRLF) indicating
+the end of this record. For example:<a href="#section-2.1-2.1.1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2.1.2">
 aaa,bbb,cccCRLF<br>
-zzz,yyy,xxxCRLF<a href="#section-2.1-1.1.2" class="pilcrow">¶</a></p>
+zzz,yyy,xxxCRLF<a href="#section-2.1-2.1.2" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-2.1-1.2">
-            <p id="section-2.1-1.2.1">The last record in the file MUST have an ending line break. For example:<a href="#section-2.1-1.2.1" class="pilcrow">¶</a></p>
-<p id="section-2.1-1.2.2">
+          <li id="section-2.1-2.2">
+            <p id="section-2.1-2.2.1">The last record in the file MUST have an ending line break indicating the end of a record. For example:<a href="#section-2.1-2.2.1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2.2.2">
 aaa,bbb,cccCRLF<br>
-zzz,yyy,xxxCRLF<a href="#section-2.1-1.2.2" class="pilcrow">¶</a></p>
+zzz,yyy,xxxCRLF<a href="#section-2.1-2.2.2" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-2.1-1.3">
-            <p id="section-2.1-1.3.1">The first record in the file MAY be an optional header
-with the same format as normal records. This
-header will contain names corresponding to the fields in the file
+          <li id="section-2.1-2.3">
+            <p id="section-2.1-2.3.1">The first record in the file MAY be an optional header and MUST follow
+the same format as normal records. This
+header contains names corresponding to the fields in the file
 and SHOULD contain the same number of fields as the records in
-the rest of the file. For example:<a href="#section-2.1-1.3.1" class="pilcrow">¶</a></p>
-<p id="section-2.1-1.3.2">
+the rest of the file. For example:<a href="#section-2.1-2.3.1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2.3.2">
 field_name_1,field_name_2,field_name_3CRLF<br>
 aaa,bbb,cccCRLF<br>
-zzz,yyy,xxxCRLF<a href="#section-2.1-1.3.2" class="pilcrow">¶</a></p>
+zzz,yyy,xxxCRLF<a href="#section-2.1-2.3.2" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-2.1-1.4">
-            <p id="section-2.1-1.4.1">Within each record, there MAY be one or more
-fields, separated by commas. Each record SHOULD contain the same
+          <li id="section-2.1-2.4">
+            <p id="section-2.1-2.4.1">Within each record, there MAY be zero or more fields, separated by commas. Each record SHOULD contain the same
 number of fields throughout the file. Spaces are considered part
 of a field and SHOULD NOT be ignored. The last field in the
-record MUST NOT be followed by a comma. For example:<a href="#section-2.1-1.4.1" class="pilcrow">¶</a></p>
-<p id="section-2.1-1.4.2">
-aaa,bbb,cccCRLF<a href="#section-2.1-1.4.2" class="pilcrow">¶</a></p>
+record MUST NOT be followed by a comma (since this will indicate an empty field following the comma).
+For example:<a href="#section-2.1-2.4.1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2.4.2">
+aaa,bbb,cccCRLF<a href="#section-2.1-2.4.2" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-2.1-1.5">
-            <p id="section-2.1-1.5.1">Each field MAY be enclosed in double quotes (however
-some programs, do not use double quotes at all). If fields are not
+          <li id="section-2.1-2.5">
+            <p id="section-2.1-2.5.1">Each field MAY be enclosed in double quotes. If fields are not
 enclosed with double quotes, then double quotes MUST NOT appear inside the fields.
-For example:<a href="#section-2.1-1.5.1" class="pilcrow">¶</a></p>
-<p id="section-2.1-1.5.2">
+For example:<a href="#section-2.1-2.5.1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2.5.2">
 "aaa","bbb","ccc"CRLF<br>
-zzz,yyy,xxxCRLF<a href="#section-2.1-1.5.2" class="pilcrow">¶</a></p>
+zzz,yyy,xxxCRLF<a href="#section-2.1-2.5.2" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-2.1-1.6">
-            <p id="section-2.1-1.6.1">Fields containing line breaks (CR, LF or CRLF), double quotes, or commas
-MUST be enclosed in double-quotes. The same applies for the first field of
-a record that starts with a hash to avoid the field from being parsed as a comment.
-For example:<a href="#section-2.1-1.6.1" class="pilcrow">¶</a></p>
-<p id="section-2.1-1.6.2">
+          <li id="section-2.1-2.6">
+            <p id="section-2.1-2.6.1">Fields containing line breaks (CR, LF or CRLF), double quotes, or commas
+MUST be enclosed in double quotes. For example:<a href="#section-2.1-2.6.1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2.6.2">
 "aaa","b CRLF<br>
 bb","ccc"CRLF<br>
-zzz,yyy,xxxCRLF<br>
-"#aaa",#bbb,cccCRLF<a href="#section-2.1-1.6.2" class="pilcrow">¶</a></p>
+zzz,yyy,xxxCRLF<a href="#section-2.1-2.6.2" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-2.1-1.7">
-            <p id="section-2.1-1.7.1">A double-quote appearing inside a field MUST be escaped by preceding it with
-another double quote. For example:<a href="#section-2.1-1.7.1" class="pilcrow">¶</a></p>
-<p id="section-2.1-1.7.2">
-"aaa","b""bb","ccc"CRLF<a href="#section-2.1-1.7.2" class="pilcrow">¶</a></p>
-</li>
-          <li id="section-2.1-1.8">
-            <p id="section-2.1-1.8.1">A hash sign MAY be used to mark lines that are meant to be commented lines.
-A commented line can contain any whitespace or visible character until it is
-terminated by a line break (CR, LF or CRLF).
-A comment line MAY appear in any line of the file (before or after an
-OPTIONAL header) but MUST NOT be mistaken with a subsequent line of a multi-line
-field. Subsequent lines of multi-line fields can start with a hash sign and
-MUST NOT interpreted as comments. For example:<a href="#section-2.1-1.8.1" class="pilcrow">¶</a></p>
-<p id="section-2.1-1.8.2">
-#commentCRLF<br>
- aaa,bbb,cccCRLF<br>
- #comment 2CRLF<br>
- "aaa","this is CRLF<br>
- # not a comment","ccc"CRLF<a href="#section-2.1-1.8.2" class="pilcrow">¶</a></p>
+          <li id="section-2.1-2.7">
+            <p id="section-2.1-2.7.1">A double quote appearing inside a field MUST be escaped by preceding it with
+another double quote. For example:<a href="#section-2.1-2.7.1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2.7.2">
+"aaa","b""bb","ccc"CRLF<a href="#section-2.1-2.7.2" class="pilcrow">¶</a></p>
 </li>
         </ol>
 </section>
 </div>
-<div id="default-charset-and-line-break-values">
+<div id="default-charset-binary-content-and-line-break-values">
 <section id="section-2.2">
-        <h3 id="name-default-charset-and-line-br">
-<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-default-charset-and-line-br" class="section-name selfRef">Default charset and line break values</a>
+        <h3 id="name-default-charset-binary-cont">
+<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-default-charset-binary-cont" class="section-name selfRef">Default charset, binary content and line break values</a>
         </h3>
-<p id="section-2.2-1">Since the initial publication of <span>[<a href="#RFC4180" class="xref">RFC4180</a>]</span>, the default charset for "text/*" media types
-has been changed to UTF-8 (as per <span>[<a href="#RFC6657" class="xref">RFC6657</a>]</span>) and <span>[<a href="#RFC7111" class="xref">RFC7111</a>]</span>.
+<p id="section-2.2-1">Since the initial publication of <span>[<a href="#RFC4180" class="cite xref">RFC4180</a>]</span>, the default charset for "text/*" media types
+has been changed to UTF-8 (as per <span>[<a href="#RFC6657" class="cite xref">RFC6657</a>]</span>) and <span>[<a href="#RFC7111" class="cite xref">RFC7111</a>]</span>.
 This document reflects this change and the default charset for CSV files is now UTF-8.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2-2">Although section 4.1.1. of <span>[<a href="#RFC2046" class="xref">RFC2046</a>]</span> defines CRLF to denote line breaks,
+<p id="section-2.2-2">As per section 4.2.1 of <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>, the "text/*" media types are defined as those reasonable to present
+to the user. While <span>[<a href="#RFC4180" class="cite xref">RFC4180</a>]</span> restricted CSV contents to printable ASCII only,
+<span>[<a href="#RFC7111" class="cite xref">RFC7111</a>]</span> updated the MIME registration to allow binary content in CSV entities.
+Therefore, this document has been updated to allow binary content within CSV files.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.2-3">Although section 4.1.1. of <span>[<a href="#RFC2046" class="cite xref">RFC2046</a>]</span> defines CRLF to denote line breaks,
 implementers MAY recognize a single CR or LF as a line break (similar to section 3.1.1.3
-of <span>[<a href="#RFC7231" class="xref">RFC7231</a>]</span>). However, some implementations MAY use other values.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+of <span>[<a href="#RFC7231" class="cite xref">RFC7231</a>]</span>). However, some implementations MAY use other values.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="abnf-grammar">
@@ -1377,57 +1381,40 @@ of <span>[<a href="#RFC7231" class="xref">RFC7231</a>]</span>). However, some im
         <h3 id="name-abnf-grammar">
 <a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-abnf-grammar" class="section-name selfRef">ABNF Grammar</a>
         </h3>
-<p id="section-2.3-1">The ABNF grammar (as per <span>[<a href="#RFC5234" class="xref">RFC5234</a>]</span>) appears as follows:<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.3-1">The ABNF grammar (as per <span>[<a href="#RFC5234" class="cite xref">RFC5234</a>]</span>) appears as follows:<a href="#section-2.3-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-2.3-2">
 <pre>
-file = *((comment / record) linebreak)
+file = [header] *(record)
 
-comment = hash *comment-data
+header = [field] *(COMMA field) linebreak
 
-record = first-field *(comma field)
-
-linebreak = CR / LF / CRLF
-
-first-field = (escaped / first-non-escaped)
+record = [field] *(COMMA field) linebreak
 
 field = (escaped / non-escaped)
 
-escaped = DQUOTE *(data-with-hash / comma / CR / LF / 2DQUOTE) DQUOTE
+escaped = DQUOTE *(textdata / COMMA / CR / LF / 2DQUOTE) DQUOTE
 
-first-non-escaped = [data *data-with-hash]
+non-escaped = *(textdata)
 
-non-escaped = *data-with-hash
+textdata = %x00-09 / %x0B-0C / %x0E-21 / %x23-2B / %x2D-7F / UTF8-data
+         ; all characters except LF, CR, DQUOTE and COMMA
 
-comma = %x2C
+linebreak = CR / LF / CRLF
 
-hash = %x23
-
-comment-data = WSP / %x21-7E / UTF8-data
-         ; characters without control characters
-
-data = WSP / %x21 / %x24-2B / %x2D-7E / UTF8-data
-         ; characters without control characters, comma, hash and DQUOTE
-
-data-with-hash = data / hash
+COMMA = %x2C
 
 CR = %x0D ; as per section B.1 of [RFC5234]
+
+CRLF = CR LF ; as per section B.1 of [RFC5234]
 
 DQUOTE = %x22 ; as per section B.1 of [RFC5234]
 
 LF = %x0A ; as per section B.1 of [RFC5234]
 
-CRLF = CR LF ; as per section B.1 of [RFC5234]
-
-HTAB = %x09 ; as per section B.1 of [RFC5234]
-
-SP = %x20 ; as per section B.1 of [RFC5234]
-
-WSP = SP / HTAB ; as per section B.1 of [RFC5234]
-
 UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
 </pre><a href="#section-2.3-2" class="pilcrow">¶</a>
 </div>
-<p id="section-2.3-3">Note that the authoritative definition of UTF-8 is in section 2.5 of <span>[<a href="#UNICODE" class="xref">UNICODE</a>]</span>.<a href="#section-2.3-3" class="pilcrow">¶</a></p>
+<p id="section-2.3-3">Note that the authoritative definition of UTF-8 is in section 2.5 of <span>[<a href="#UNICODE" class="cite xref">UNICODE</a>]</span>.<a href="#section-2.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1438,9 +1425,9 @@ UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-common-implementation-conce" class="section-name selfRef">Common implementation concerns</a>
       </h2>
 <p id="section-3-1">This section describes some common concerns that may arise when
-producing or parsing CSV files. All of these remain out of scope for this document
-and are included for awareness. Implementers may also use other means to handle
-these use cases such as <span>[<a href="#CSVW" class="xref">CSVW</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
+producing or parsing CSV files. These are not part of the formal definition of CSV
+and are included for awareness only. Implementers may also use other means to handle
+these use cases including approaches like <span>[<a href="#CSVW" class="cite xref">CSVW</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div id="null-values">
 <section id="section-3.1">
         <h3 id="name-null-values">
@@ -1473,7 +1460,7 @@ zero bytes is considered valid.<a href="#section-3.2-1" class="pilcrow">¶</a></
         </h3>
 <p id="section-3.3-1">This specification recommends but doesn't require having the same number of fields
 in every line. This allows CSV files to have empty lines without
-any fields at all. Implementors may choose to to skip empty lines
+any fields at all. Implementors may choose to skip empty lines
 instead of parsing them but this specification does not dictate such behavior.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <p id="section-3.3-2">Example of a CSV file with empty lines:<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 <p id="section-3.3-3">field_name_1,field_name_2,field_name_3CRLF<br>
@@ -1485,9 +1472,11 @@ differentiate between an empty line, and an empty and unquoted field. This
 differentiation might play an important role in some implementations such
 as database exports/imports.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
 <p id="section-3.3-5">Example of a CSV file with empty lines and only one field per record:<a href="#section-3.3-5" class="pilcrow">¶</a></p>
-<p id="section-3.3-6">aaa<br>
+<p id="section-3.3-6">aaaCRLF<br>
 CRLF<br>
 bbbCRLF<a href="#section-3.3-6" class="pilcrow">¶</a></p>
+<p id="section-3.3-7">Note that some implementations may interpret the presence of a line break
+after the last record in the file as a start of a new but empty record.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="fields-spanning-multiple-lines">
@@ -1508,10 +1497,10 @@ even when line breaks appear within such field.<a href="#section-3.4-1" class="p
 (either case-sensitive or case-insensitive).<a href="#section-3.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="whitespace-outside-of-quoted-fields">
+<div id="whitespace-outside-quoted-fields">
 <section id="section-3.6">
-        <h3 id="name-whitespace-outside-of-quote">
-<a href="#section-3.6" class="section-number selfRef">3.6. </a><a href="#name-whitespace-outside-of-quote" class="section-name selfRef">Whitespace outside of quoted fields</a>
+        <h3 id="name-whitespace-outside-quoted-f">
+<a href="#section-3.6" class="section-number selfRef">3.6. </a><a href="#name-whitespace-outside-quoted-f" class="section-name selfRef">Whitespace outside quoted fields</a>
         </h3>
 <p id="section-3.6-1">When quoted fields are used, this document does not allow whitespace
 between double quotes and commas. Implementers should be aware that some applications
@@ -1526,7 +1515,7 @@ may be more lenient and allow whitespace outside the double quotes.<a href="#sec
 <p id="section-3.7-1">This document defines a comma as a field separator but implementers should be aware
 that some applications may use different values, especially with non-English languages.
 Those are outside the scope of this document and implementers should consult other
-efforts such as <span>[<a href="#CSVW" class="xref">CSVW</a>]</span>.<a href="#section-3.7-1" class="pilcrow">¶</a></p>
+efforts such as <span>[<a href="#CSVW" class="cite xref">CSVW</a>]</span>.<a href="#section-3.7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="escaping-double-quotes">
@@ -1534,7 +1523,7 @@ efforts such as <span>[<a href="#CSVW" class="xref">CSVW</a>]</span>.<a href="#s
         <h3 id="name-escaping-double-quotes">
 <a href="#section-3.8" class="section-number selfRef">3.8. </a><a href="#name-escaping-double-quotes" class="section-name selfRef">Escaping double quotes</a>
         </h3>
-<p id="section-3.8-1">This document prescribes that a double-quote appearing inside a field
+<p id="section-3.8-1">This document prescribes that a double quote appearing inside a field
 must be escaped by preceding it with another double quote. Implementers should
 be aware that some applications may choose to use a different escaping mechanism.<a href="#section-3.8-1" class="pilcrow">¶</a></p>
 </section>
@@ -1548,7 +1537,7 @@ be aware that some applications may choose to use a different escaping mechanism
 a BOM (byte order mark) header in order to support multiple unicode encodings
 (like UTF-16 and UTF-32). Some applications might be able to read and properly
 interpret such a header, others could break. Implementors should review
-section 6 of <span>[<a href="#RFC3629" class="xref">RFC3629</a>]</span> and section 23.8 of <span>[<a href="#UNICODE" class="xref">UNICODE</a>]</span>.<a href="#section-3.9-1" class="pilcrow">¶</a></p>
+section 6 of <span>[<a href="#RFC3629" class="cite xref">RFC3629</a>]</span> and section 23.8 of <span>[<a href="#UNICODE" class="cite xref">UNICODE</a>]</span>.<a href="#section-3.9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="bidirectional-text">
@@ -1559,7 +1548,44 @@ section 6 of <span>[<a href="#RFC3629" class="xref">RFC3629</a>]</span> and sect
 <p id="section-3.10-1">While most of the world's written languages are displayed left-to-right,
 many languages such as ones based on Hebrew or Arabic scripts are displayed
 primarily right-to-left. Implementers should consult the "bidirectional display"
-part in section 5 of <span>[<a href="#RFC6365" class="xref">RFC6365</a>]</span> for further guidance.<a href="#section-3.10-1" class="pilcrow">¶</a></p>
+part in section 5 of <span>[<a href="#RFC6365" class="cite xref">RFC6365</a>]</span> for further guidance.<a href="#section-3.10-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="comments">
+<section id="section-3.11">
+        <h3 id="name-comments">
+<a href="#section-3.11" class="section-number selfRef">3.11. </a><a href="#name-comments" class="section-name selfRef">Comments</a>
+        </h3>
+<p id="section-3.11-1">Some implementations may use the hash sign ("#") to mark lines that are meant to
+be commented lines. Such lines may contain any character until
+terminated by a line break (CR, LF or CRLF) and might appear in any line of the file
+(before or after the header). Comments should not be confused with a subsequent line
+of a multi-line field. If a first field of a record starts with a hash, it should be surrounded
+with double quotes to avoid being mistaken for a comment as per <a href="#desc" class="auto internal xref">Section 2.1</a>.<a href="#section-3.11-1" class="pilcrow">¶</a></p>
+<p id="section-3.11-2">Example of a CSV file containing comments:<a href="#section-3.11-2" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.11-3">
+<pre>
+#commentCRLF&lt;br/&gt;
+aaa,bbb,cccCRLF&lt;br/&gt;
+#comment 2CRLF&lt;br/&gt;
+"aaa","this is CRLF&lt;br/&gt;
+# not a comment","ccc"CRLF&lt;br/&gt;
+"#aaa",bbb,cccCRLF
+</pre><a href="#section-3.11-3" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-3.12">
+        <h3 id="name-iana-considerations">
+<a href="#section-3.12" class="section-number selfRef">3.12. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+        </h3>
+<p id="section-3.12-1">As per <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>, IANA is directed to update
+the MIME type registration for "text/csv" with the content in <a href="#registration" class="auto internal xref">Section 4</a> and
+add a reference to this document within the registration.<a href="#section-3.12-1" class="pilcrow">¶</a></p>
+<p id="section-3.12-2">The update to the media type registration is copied from the current
+one which consists of the original registration from <span>[<a href="#RFC4180" class="cite xref">RFC4180</a>]</span> as
+updated by <span>[<a href="#RFC7111" class="cite xref">RFC7111</a>]</span> and updated based on this document.<a href="#section-3.12-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1569,103 +1595,137 @@ part in section 5 of <span>[<a href="#RFC6365" class="xref">RFC6365</a>]</span> 
       <h2 id="name-update-to-mime-type-registr">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-update-to-mime-type-registr" class="section-name selfRef">Update to MIME Type Registration of text/csv</a>
       </h2>
-<p id="section-4-1">The media type registration of "text/csv" should be updated as per specific
-fields below:<a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2">Encoding considerations:<a href="#section-4-2" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-4-3.1">
-          <p id="section-4-3.1.1">CSV MIME entities can consist of binary data
-as per section 4.8 of <span>[<a href="#RFC6838" class="xref">RFC6838</a>]</span>. Although section 4.1.1. of <span>[<a href="#RFC2046" class="xref">RFC2046</a>]</span> defines
-CRLF to denote line breaks, implementers MAY recognize a single CR or LF
-as a line break (similar to section 3.1.1.3 of <span>[<a href="#RFC7231" class="xref">RFC7231</a>]</span>).
-However, some implementations may use other values.<a href="#section-4-3.1.1" class="pilcrow">¶</a></p>
-</li>
-      </ul>
-<p id="section-4-4">Published specification:<a href="#section-4-4" class="pilcrow">¶</a></p>
+<p id="section-4-1">Type name:  text<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">Subtype name:  csv<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-4-3">Required parameters:  none<a href="#section-4-3" class="pilcrow">¶</a></p>
+<p id="section-4-4">Optional parameters:  charset<a href="#section-4-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-4-5.1">
-          <p id="section-4-5.1.1">While numerous private specifications exist for various programs
-and systems, there is no single "master" specification for this
-format. An attempt at a common definition can be found in <span>[<a href="#RFC4180" class="xref">RFC4180</a>]</span>
-and this document. Implementers should note that both documents are informational
-in nature and are not standards.<a href="#section-4-5.1.1" class="pilcrow">¶</a></p>
-</li>
-      </ul>
-<p id="section-4-6">Optional parameters:  charset<a href="#section-4-6" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-4-7.1">
-          <p id="section-4-7.1.1">The "charset" parameter specifies the charset employed by the
-CSV content. In accordance with <span>[<a href="#RFC6657" class="xref">RFC6657</a>]</span>, the
+          <p id="section-4-5.1.1">The "charset" parameter specifies the charset employed by the
+CSV content.  In accordance with RFC 6657 <span>[<a href="#RFC6657" class="cite xref">RFC6657</a>]</span>, the
 charset parameter SHOULD be used, and if it is not present,
 UTF-8 SHOULD be assumed as the default (this implies that US-
 ASCII CSV will work, even when not specifying the "charset"
-parameter). Any charset defined by IANA for the "text" tree
-may be used in conjunction with the "charset" parameter.<a href="#section-4-7.1.1" class="pilcrow">¶</a></p>
+parameter).  Any charset defined by IANA for the "text" tree
+may be used in conjunction with the "charset" parameter.<a href="#section-4-5.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-4-8">Security considerations:<a href="#section-4-8" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-4-9.1">
-          <p id="section-4-9.1.1">Text/csv consists of nothing but passive text data that should
+<li class="normal ulEmpty" id="section-4-6.1">
+          <p id="section-4-6.1.1">The "header" parameter defined in <span>[<a href="#RFC4180" class="cite xref">RFC4180</a>]</span> is deprecated
+and SHOULD NOT be used.<a href="#section-4-6.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-4-7">Encoding considerations:<a href="#section-4-7" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-4-8.1">
+          <p id="section-4-8.1.1">CSV files and CSV MIME entities can consist of binary data
+as per section 4.8 of <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>. Although section 4.1.1. of <span>[<a href="#RFC2046" class="cite xref">RFC2046</a>]</span> defines
+CRLF to denote line breaks, implementers MAY also recognize a single CR or LF
+as a line break (similar to section 3.1.1.3 of <span>[<a href="#RFC7231" class="cite xref">RFC7231</a>]</span>).
+However, some implementations may use other values.<a href="#section-4-8.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-4-9">Security considerations:<a href="#section-4-9" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-4-10.1">
+          <p id="section-4-10.1.1">Text/csv consists of nothing but passive text data that should
 not pose any direct risks.  However, it is possible that
 malicious data may be included in order to exploit buffer
 overruns or other bugs in the program processing the text/csv
-data.<a href="#section-4-9.1.1" class="pilcrow">¶</a></p>
-</li>
-      </ul>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-4-10.1">
-          <p id="section-4-10.1.1">Implementers and users should also be aware that some software
-applications may interpret certain characters in the beginning of CSV
-fields as referring to code or formulas, thus resulting in malicious
-code execution. This is known as "CSV injection" and users consuming
-CSV files should filter out such characters.<a href="#section-4-10.1.1" class="pilcrow">¶</a></p>
+data.<a href="#section-4-10.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-4-11.1">
-          <p id="section-4-11.1.1">The text/csv format provides no confidentiality or integrity
-protection, so if such protections are needed they must be
-supplied externally.<a href="#section-4-11.1.1" class="pilcrow">¶</a></p>
+          <p id="section-4-11.1.1">Implementers and users should also be aware that some software
+applications may interpret certain characters in the beginning of CSV
+fields as referring to code or formulas, thus resulting in malicious
+code execution. This is known as "CSV injection" and users consuming
+CSV files should filter out such characters.<a href="#section-4-11.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-4-12.1">
-          <p id="section-4-12.1.1">The fact that software implementing fragment identifiers for
-CSV and software not implementing them differs in behavior, and
-the fact that different software may show documents or
-fragments to users in different ways, can lead to
-misunderstandings on the part of users.  Such misunderstandings
-might be exploited in a way similar to spoofing or phishing.<a href="#section-4-12.1.1" class="pilcrow">¶</a></p>
+          <p id="section-4-12.1.1">The text/csv format provides no confidentiality or integrity
+protection, so if such protections are needed they must be
+supplied externally.<a href="#section-4-12.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-4-13.1">
-          <p id="section-4-13.1.1">Implementers and users of fragment identifiers for CSV text
-should also be aware of the security considerations in RFC 3986
-<span>[<a href="#RFC3986" class="xref">RFC3986</a>]</span> and RFC 3987 <span>[<a href="#RFC3987" class="xref">RFC3987</a>]</span>.<a href="#section-4-13.1.1" class="pilcrow">¶</a></p>
+          <p id="section-4-13.1.1">The fact that software implementing fragment identifiers for
+CSV and software not implementing them differs in behavior, and
+the fact that different software may show documents or
+fragments to users in different ways, can lead to
+misunderstandings on the part of users.  Such misunderstandings
+might be exploited in a way similar to spoofing or phishing.<a href="#section-4-13.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-4-14">Interoperability considerations:<a href="#section-4-14" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-4-15.1">
-          <p id="section-4-15.1.1">Due to lack of a single specification, there are considerable differences among
-implementations. Implementers should "be conservative in what you
-do, be liberal in what you accept from others" (<span>[<a href="#RFC0793" class="xref">RFC0793</a>]</span>)
-when processing CSV files. An attempt at a common definition can
-be found in Section 2.<a href="#section-4-15.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-4-14.1">
+          <p id="section-4-14.1.1">Implementers and users of fragment identifiers for CSV text
+should also be aware of the security considerations in RFC 3986
+<span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> and RFC 3987 <span>[<a href="#RFC3987" class="cite xref">RFC3987</a>]</span>.<a href="#section-4-14.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<div id="iana-considerations">
-<section id="section-4.1">
-        <h3 id="name-iana-considerations">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
-        </h3>
-<p id="section-4.1-1">IANA is directed to update the MIME type registration for "text/csv"
-as per instructions provided in <a href="#registration" class="xref">Section 4</a> of this document
-and include a reference to this document within the registration.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-</section>
-</div>
+<p id="section-4-15">Interoperability considerations:<a href="#section-4-15" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-4-16.1">
+          <p id="section-4-16.1.1">Due to lack of a single specification, there are considerable differences among
+implementations. Implementers should "be conservative in what you
+do, be liberal in what you accept from others" (<span>[<a href="#RFC0793" class="cite xref">RFC0793</a>]</span>)
+when processing CSV files. An attempt at a common definition can
+be found in section 2 of (to be replaced with the RFC number).<a href="#section-4-16.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-4-17.1">
+          <p id="section-4-17.1.1">There are numerous differences between different CSV implementations, many of which
+are addressed in section 4 of (to be replaced with the RFC number of this document).<a href="#section-4-17.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-4-18">Published specification:<a href="#section-4-18" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-4-19.1">
+          <p id="section-4-19.1.1">While numerous private specifications exist
+for various programs and systems, there is no single "master"
+specification for this format.  An attempt at a common definition
+can be found in Section 2 of (to be replaced with the RFC number).<a href="#section-4-19.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-4-20">Applications that use this media type:<a href="#section-4-20" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-4-21.1">
+          <p id="section-4-21.1.1">Spreadsheet programs and various data conversion utilities.<a href="#section-4-21.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-4-22">Fragment identifier considerations:<a href="#section-4-22" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-4-23.1">
+          <p id="section-4-23.1.1">Fragment identification for text/csv is supported by using fragment identifiers as specified
+by <span>[<a href="#RFC7111" class="cite xref">RFC7111</a>]</span>.<a href="#section-4-23.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-4-24">Additional information:<a href="#section-4-24" class="pilcrow">¶</a></p>
+<p id="section-4-25">Magic number(s):  none<a href="#section-4-25" class="pilcrow">¶</a></p>
+<p id="section-4-26">File extension(s):  CSV<a href="#section-4-26" class="pilcrow">¶</a></p>
+<p id="section-4-27">Macintosh file type code(s):  TEXT<a href="#section-4-27" class="pilcrow">¶</a></p>
+<p id="section-4-28">Person &amp; email address to contact for further information:<a href="#section-4-28" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-4-29.1">
+          <p id="section-4-29.1.1">Yakov Shafranovich (ietf@shaftek.org) and Erik Wilde (dret@berkeley.edu)<a href="#section-4-29.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-4-30">Intended usage:  COMMON<a href="#section-4-30" class="pilcrow">¶</a></p>
+<p id="section-4-31">Restrictions on usage:  none<a href="#section-4-31" class="pilcrow">¶</a></p>
+<p id="section-4-32">Author:<a href="#section-4-32" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-4-33.1">
+          <p id="section-4-33.1.1">Yakov Shafranovich (ietf@shaftek.org) and Erik Wilde (dret@berkeley.edu)<a href="#section-4-33.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-4-34">Change controller:  IESG<a href="#section-4-34" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
@@ -1673,7 +1733,7 @@ and include a reference to this document within the registration.<a href="#secti
       <h2 id="name-security-considerations">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-5-1">All security considerations discussed in <a href="#registration" class="xref">Section 4</a> still apply.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">All security considerations discussed in <a href="#registration" class="auto internal xref">Section 4</a> still apply.<a href="#section-5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="acknowledgments">
@@ -1681,7 +1741,7 @@ and include a reference to this document within the registration.<a href="#secti
       <h2 id="name-acknowledgments">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="section-6-1">In addition to everyone thanked previously in <span>[<a href="#RFC4180" class="xref">RFC4180</a>]</span>, the author would like to thank
+<p id="section-6-1">In addition to everyone thanked previously in <span>[<a href="#RFC4180" class="cite xref">RFC4180</a>]</span>, the author would like to thank
 acknowledge the contributions of the following people to this document:
 Alperen Belgic, Abed BenBrahim, Damon Koach, Barry Leiba,
 Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class="pilcrow">¶</a></p>
@@ -1697,6 +1757,10 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class=
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
+<dt id="RFC0793">[RFC0793]</dt>
+        <dd>
+<span class="refAuthor">Postel, J.</span>, <span class="refTitle">"Transmission Control Protocol"</span>, <span class="seriesInfo">RFC 793</span>, <span class="seriesInfo">DOI 10.17487/RFC0793</span>, <time datetime="1981-09" class="refDate">September 1981</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc793">https://www.rfc-editor.org/info/rfc793</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC2046">[RFC2046]</dt>
         <dd>
 <span class="refAuthor">Freed, N.</span> and <span class="refAuthor">N. Borenstein</span>, <span class="refTitle">"Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types"</span>, <span class="seriesInfo">RFC 2046</span>, <span class="seriesInfo">DOI 10.17487/RFC2046</span>, <time datetime="1996-11" class="refDate">November 1996</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2046">https://www.rfc-editor.org/info/rfc2046</a>&gt;</span>. </dd>
@@ -1756,10 +1820,6 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class=
         <dd>
 <span class="refAuthor">Edoceo, Inc.</span>, <span class="refTitle">"Comma Separated Values (CSV) Standard File Format"</span>, <time datetime="2020" class="refDate">2020</time>, <span>&lt;<a href="https://edoceo.com/dev/csv-file-format">https://edoceo.com/dev/csv-file-format</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC0793">[RFC0793]</dt>
-        <dd>
-<span class="refAuthor">Postel, J.</span>, <span class="refTitle">"Transmission Control Protocol"</span>, <span class="seriesInfo">RFC 793</span>, <span class="seriesInfo">DOI 10.17487/RFC0793</span>, <time datetime="1981-09" class="refDate">September 1981</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc793">https://www.rfc-editor.org/info/rfc793</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC1796">[RFC1796]</dt>
         <dd>
 <span class="refAuthor">Huitema, C.</span>, <span class="refAuthor">Postel, J.</span>, and <span class="refAuthor">S. Crocker</span>, <span class="refTitle">"Not All RFCs are Standards"</span>, <span class="seriesInfo">RFC 1796</span>, <span class="seriesInfo">DOI 10.17487/RFC1796</span>, <time datetime="1995-04" class="refDate">April 1995</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc1796">https://www.rfc-editor.org/info/rfc1796</a>&gt;</span>. </dd>
@@ -1794,7 +1854,7 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class=
 <div id="major-changes-since-rfc4180">
 <section id="appendix-A">
       <h2 id="name-major-changes-since">
-<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-major-changes-since" class="section-name selfRef">Major changes since <em class="xref">[RFC4180]</em></a>
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-major-changes-since" class="section-name selfRef">Major changes since <em class="cite xref">[RFC4180]</em></a>
       </h2>
 <ul class="normal">
 <li class="normal" id="appendix-A-1.1">Added a section clarifying motivation for this document and standards status<a href="#appendix-A-1.1" class="pilcrow">¶</a>
@@ -1803,17 +1863,15 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class=
 </li>
         <li class="normal" id="appendix-A-1.3">Allowing CR, LF and CRLF for line breaks<a href="#appendix-A-1.3" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="appendix-A-1.4">Allowing HTAB in text data<a href="#appendix-A-1.4" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-A-1.4">Allowing binary content including HTAB in CSV files<a href="#appendix-A-1.4" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="appendix-A-1.5">Mandating a line break at the end of the last line in the file<a href="#appendix-A-1.5" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="appendix-A-1.6">Making records and headers optional, thus allowing for an empty file<a href="#appendix-A-1.6" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="appendix-A-1.7">Adding definition of commented lines<a href="#appendix-A-1.7" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-A-1.7">Adding a section on common implementation concerns<a href="#appendix-A-1.7" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="appendix-A-1.8">Adding a section on common implementation concerns<a href="#appendix-A-1.8" class="pilcrow">¶</a>
-</li>
-        <li class="normal" id="appendix-A-1.9">Removed "header" parameter for the MIME type since it is not used<a href="#appendix-A-1.9" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-A-1.8">Removed "header" parameter for the MIME type since it is not used<a href="#appendix-A-1.8" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
@@ -1824,7 +1882,7 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class=
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-changes-since-the-00-draft" class="section-name selfRef">Changes since the -00 draft</a>
       </h2>
 <ul class="normal">
-<li class="normal" id="appendix-B-1.1">Added CSV injection to security considerations (#30<a href="#appendix-B-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-B-1.1">Added CSV injection to security considerations (#30)<a href="#appendix-B-1.1" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="appendix-B-1.2">Added a reference to RFC 7111 (#27)<a href="#appendix-B-1.2" class="pilcrow">¶</a>
 </li>
@@ -1850,7 +1908,7 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class=
 <ul class="normal">
 <li class="normal" id="appendix-D-1.1">Refreshed to keep draft alive<a href="#appendix-D-1.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="appendix-D-1.2">Contact information and Github link changes<a href="#appendix-D-1.2" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-D-1.2">Contact information and GitHub link changes<a href="#appendix-D-1.2" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="appendix-D-1.3">Minor updates on language<a href="#appendix-D-1.3" class="pilcrow">¶</a>
 </li>
@@ -1859,25 +1917,42 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class=
       </ul>
 </section>
 </div>
-<div id="note-to-readers">
+<div id="changes-since-the-03-draft">
 <section id="appendix-E">
-      <h2 id="name-note-to-readers">
-<a href="#appendix-E" class="section-number selfRef">Appendix E. </a><a href="#name-note-to-readers" class="section-name selfRef">Note to Readers</a>
+      <h2 id="name-changes-since-the-03-draft">
+<a href="#appendix-E" class="section-number selfRef">Appendix E. </a><a href="#name-changes-since-the-03-draft" class="section-name selfRef">Changes since the -03 draft</a>
       </h2>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="appendix-E-1.1">
-          <p id="appendix-E-1.1.1"><strong>Note to the RFC Editor:</strong> Please remove this section prior
-to publication.<a href="#appendix-E-1.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-E-1.1">Moved comments to the common practices section and removed from the ABNF grammar (#32)<a href="#appendix-E-1.1" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="appendix-E-1.2">Added more clarifications to the format section<a href="#appendix-E-1.2" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="appendix-E-1.3">Made ABNF grammar match the document<a href="#appendix-E-1.3" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="appendix-E-1.4">Added a note about text content to the format section<a href="#appendix-E-1.4" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-E-2">Development of this draft takes place on Github at: https://github.com/yakovsh/rfc4180-bis<a href="#appendix-E-2" class="pilcrow">¶</a></p>
-<p id="appendix-E-3">Comments can also be sent to the ART mailing list at: https://www.ietf.org/mailman/listinfo/art<a href="#appendix-E-3" class="pilcrow">¶</a></p>
-<p id="appendix-E-4">Full list of changes can be viewed via the IETF document tracker:
-https://tools.ietf.org/html/draft-shafranovich-rfc4180-bis<a href="#appendix-E-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="note-to-readers">
+<section id="appendix-F">
+      <h2 id="name-note-to-readers">
+<a href="#appendix-F" class="section-number selfRef">Appendix F. </a><a href="#name-note-to-readers" class="section-name selfRef">Note to Readers</a>
+      </h2>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="appendix-F-1.1">
+          <p id="appendix-F-1.1.1"><strong>Note to the RFC Editor:</strong> Please remove this section prior
+to publication.<a href="#appendix-F-1.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="appendix-F-2">Development of this draft takes place on Github at: https://github.com/yakovsh/rfc4180-bis<a href="#appendix-F-2" class="pilcrow">¶</a></p>
+<p id="appendix-F-3">Comments can also be sent to the ART mailing list at: https://www.ietf.org/mailman/listinfo/art<a href="#appendix-F-3" class="pilcrow">¶</a></p>
+<p id="appendix-F-4">Full list of changes can be viewed via the IETF document tracker:
+https://tools.ietf.org/html/draft-shafranovich-rfc4180-bis<a href="#appendix-F-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-F">
+<section id="appendix-G">
       <h2 id="name-authors-address">
 <a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
       </h2>
@@ -1886,7 +1961,7 @@ https://tools.ietf.org/html/draft-shafranovich-rfc4180-bis<a href="#appendix-E-4
 <div dir="auto" class="left"><span class="org">Amazon Web Services (AWS)</span></div>
 <div class="email">
 <span>Email:</span>
-<a href="mailto:yakovsh@amazon.com" class="email">yakovsh@amazon.com</a>
+<a href="mailto:yakovsh@amazon.com%20or%20ietf@shaftek.org" class="email">yakovsh@amazon.com or ietf@shaftek.org</a>
 </div>
 </address>
 </section>
