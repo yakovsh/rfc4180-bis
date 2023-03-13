@@ -124,8 +124,7 @@ For example:
 
    aaa,bbb,cccCRLF
 
-5. Each field MAY be enclosed in double quotes (however,
-some programs do not use double quotes at all). If fields are not
+5. Each field MAY be enclosed in double quotes. If fields are not
 enclosed with double quotes, then double quotes MUST NOT appear inside the fields.
 For example:
 
@@ -133,13 +132,13 @@ For example:
    zzz,yyy,xxxCRLF
 
 6. Fields containing line breaks (CR, LF or CRLF), double quotes, or commas
-MUST be enclosed in double-quotes. For example:
+MUST be enclosed in double quotes. For example:
 
    "aaa","b CRLF<br/>
    bb","ccc"CRLF<br/>
    zzz,yyy,xxxCRLF
 
-7. A double-quote appearing inside a field MUST be escaped by preceding it with
+7. A double quote appearing inside a field MUST be escaped by preceding it with
 another double quote. For example:
 
    "aaa","b""bb","ccc"CRLF
@@ -242,6 +241,9 @@ aaaCRLF<br/>
 CRLF<br/>
 bbbCRLF
 
+Note that some implementations may interpret the presence of a line break
+after the last record in the file as a start of a new but empty record.
+
 ## Fields spanning multiple lines
 When quoted fields are used, it is possible for a field to span multiple lines,
 even when line breaks appear within such field.
@@ -262,7 +264,7 @@ Those are outside the scope of this document and implementers should consult oth
 efforts such as {{CSVW}}.
 
 ## Escaping double quotes
-This document prescribes that a double-quote appearing inside a field
+This document prescribes that a double quote appearing inside a field
 must be escaped by preceding it with another double quote. Implementers should
 be aware that some applications may choose to use a different escaping mechanism.
 

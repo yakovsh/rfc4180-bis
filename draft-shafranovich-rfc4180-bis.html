@@ -1051,7 +1051,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Shafranovich</td>
-<td class="center">Expires 11 September 2023</td>
+<td class="center">Expires 14 September 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1064,12 +1064,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-shafranovich-rfc4180-bis-04</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-03-10" class="published">10 March 2023</time>
+<time datetime="2023-03-13" class="published">13 March 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-09-11">11 September 2023</time></dd>
+<dd class="expires"><time datetime="2023-09-14">14 September 2023</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1104,7 +1104,7 @@ files and updates the associated MIME type "text/csv".<a href="#section-abstract
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 11 September 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 14 September 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1335,8 +1335,7 @@ For example:<a href="#section-2.1-2.4.1" class="pilcrow">¶</a></p>
 aaa,bbb,cccCRLF<a href="#section-2.1-2.4.2" class="pilcrow">¶</a></p>
 </li>
           <li id="section-2.1-2.5">
-            <p id="section-2.1-2.5.1">Each field MAY be enclosed in double quotes (however,
-some programs do not use double quotes at all). If fields are not
+            <p id="section-2.1-2.5.1">Each field MAY be enclosed in double quotes. If fields are not
 enclosed with double quotes, then double quotes MUST NOT appear inside the fields.
 For example:<a href="#section-2.1-2.5.1" class="pilcrow">¶</a></p>
 <p id="section-2.1-2.5.2">
@@ -1345,14 +1344,14 @@ zzz,yyy,xxxCRLF<a href="#section-2.1-2.5.2" class="pilcrow">¶</a></p>
 </li>
           <li id="section-2.1-2.6">
             <p id="section-2.1-2.6.1">Fields containing line breaks (CR, LF or CRLF), double quotes, or commas
-MUST be enclosed in double-quotes. For example:<a href="#section-2.1-2.6.1" class="pilcrow">¶</a></p>
+MUST be enclosed in double quotes. For example:<a href="#section-2.1-2.6.1" class="pilcrow">¶</a></p>
 <p id="section-2.1-2.6.2">
 "aaa","b CRLF<br>
 bb","ccc"CRLF<br>
 zzz,yyy,xxxCRLF<a href="#section-2.1-2.6.2" class="pilcrow">¶</a></p>
 </li>
           <li id="section-2.1-2.7">
-            <p id="section-2.1-2.7.1">A double-quote appearing inside a field MUST be escaped by preceding it with
+            <p id="section-2.1-2.7.1">A double quote appearing inside a field MUST be escaped by preceding it with
 another double quote. For example:<a href="#section-2.1-2.7.1" class="pilcrow">¶</a></p>
 <p id="section-2.1-2.7.2">
 "aaa","b""bb","ccc"CRLF<a href="#section-2.1-2.7.2" class="pilcrow">¶</a></p>
@@ -1476,6 +1475,8 @@ as database exports/imports.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
 <p id="section-3.3-6">aaaCRLF<br>
 CRLF<br>
 bbbCRLF<a href="#section-3.3-6" class="pilcrow">¶</a></p>
+<p id="section-3.3-7">Note that some implementations may interpret the presence of a line break
+after the last record in the file as a start of a new but empty record.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="fields-spanning-multiple-lines">
@@ -1522,7 +1523,7 @@ efforts such as <span>[<a href="#CSVW" class="cite xref">CSVW</a>]</span>.<a hre
         <h3 id="name-escaping-double-quotes">
 <a href="#section-3.8" class="section-number selfRef">3.8. </a><a href="#name-escaping-double-quotes" class="section-name selfRef">Escaping double quotes</a>
         </h3>
-<p id="section-3.8-1">This document prescribes that a double-quote appearing inside a field
+<p id="section-3.8-1">This document prescribes that a double quote appearing inside a field
 must be escaped by preceding it with another double quote. Implementers should
 be aware that some applications may choose to use a different escaping mechanism.<a href="#section-3.8-1" class="pilcrow">¶</a></p>
 </section>

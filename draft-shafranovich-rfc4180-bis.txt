@@ -4,8 +4,8 @@
 
 Network Working Group                                    Y. Shafranovich
 Internet-Draft                                 Amazon Web Services (AWS)
-Intended status: Informational                             10 March 2023
-Expires: 11 September 2023
+Intended status: Informational                             13 March 2023
+Expires: 14 September 2023
 
 
    Common Format and MIME Type for Comma-Separated Values (CSV) Files
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 September 2023.
+   This Internet-Draft will expire on 14 September 2023.
 
 Copyright Notice
 
@@ -163,8 +163,7 @@ Table of Contents
 
        aaa,bbb,cccCRLF
 
-   5.  Each field MAY be enclosed in double quotes (however, some
-       programs do not use double quotes at all).  If fields are not
+   5.  Each field MAY be enclosed in double quotes.  If fields are not
        enclosed with double quotes, then double quotes MUST NOT appear
        inside the fields.  For example:
 
@@ -172,13 +171,13 @@ Table of Contents
        zzz,yyy,xxxCRLF
 
    6.  Fields containing line breaks (CR, LF or CRLF), double quotes, or
-       commas MUST be enclosed in double-quotes.  For example:
+       commas MUST be enclosed in double quotes.  For example:
 
        "aaa","b CRLF
        bb","ccc"CRLF
        zzz,yyy,xxxCRLF
 
-   7.  A double-quote appearing inside a field MUST be escaped by
+   7.  A double quote appearing inside a field MUST be escaped by
        preceding it with another double quote.  For example:
 
        "aaa","b""bb","ccc"CRLF
@@ -291,6 +290,10 @@ Table of Contents
    CRLF
    bbbCRLF
 
+   Note that some implementations may interpret the presence of a line
+   break after the last record in the file as a start of a new but empty
+   record.
+
 3.4.  Fields spanning multiple lines
 
    When quoted fields are used, it is possible for a field to span
@@ -318,7 +321,7 @@ Table of Contents
 
 3.8.  Escaping double quotes
 
-   This document prescribes that a double-quote appearing inside a field
+   This document prescribes that a double quote appearing inside a field
    must be escaped by preceding it with another double quote.
    Implementers should be aware that some applications may choose to use
    a different escaping mechanism.
