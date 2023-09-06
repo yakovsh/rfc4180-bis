@@ -428,6 +428,7 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.
 A special thank you to L.T.S.
 
 --- back
+
 # Major changes since {{!RFC4180}}
 - Added a section clarifying motivation for this document and standards status
 - Changing default encoding to UTF-8 and adding Unicode to the ABNF grammar
@@ -458,7 +459,7 @@ A special thank you to L.T.S.
 - Added a note about text content to the format section
 
 # Changes since the -04 draft
-- TBD
+- No changes yet, refreshed to keep draft alive
 
 # Note to Readers
 
