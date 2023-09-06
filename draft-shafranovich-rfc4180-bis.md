@@ -1,7 +1,7 @@
 ---
 title: Common Format and MIME Type for Comma-Separated Values (CSV) Files
 abbrev: rfc4180-bis
-docname: draft-shafranovich-rfc4180-bis-05
+docname: draft-shafranovich-rfc4180-bis-06
 ipr: trust200902
 cat: info
 submissionType: independent
@@ -460,6 +460,9 @@ A special thank you to L.T.S.
 
 # Changes since the -04 draft
 - No changes yet, refreshed to keep draft alive
+
+# Changes since the -05 draft
+- TBD
 
 # Note to Readers
 
