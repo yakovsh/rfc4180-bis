@@ -135,7 +135,7 @@ For example:
 MUST be enclosed in double quotes. For example:
 
    "aaa","b CRLF<br/>
-   bb","ccc"CRLF<br/>
+   bb","c,c,c"CRLF<br/>
    zzz,yyy,xxxCRLF
 
 7. A double quote appearing inside a field MUST be escaped by preceding it with
