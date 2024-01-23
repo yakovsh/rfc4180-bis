@@ -28,7 +28,7 @@ informative:
     author:
         name: J. Repici
         org: Creativyst, Inc.
-    date: 2010
+    date: 2022
     target: https://www.creativyst.com/Doc/Articles/CSV/CSV01.htm
   CSVW:
     title: Model for Tabular Data and Metadata on the Web
@@ -43,11 +43,11 @@ informative:
     date: 2020
     target: https://edoceo.com/dev/csv-file-format
   UNICODE:
-    title: The Unicode Standard, Version 15.0.0
+    title: The Unicode Standard, Version 15.1.0
     author:
       org: The Unicode Consortium
-    date: September 2022
-    target: https://www.unicode.org/versions/Unicode15.0.0/
+    date: September 2023
+    target: https://www.unicode.org/versions/Unicode15.1.0/
 
 --- abstract
 This RFC documents the common format used for Comma-Separated Values (CSV)
@@ -77,17 +77,17 @@ The original motivation of {{!RFC4180}} was to provide a reference
 in order to register the media type "text/csv". It tried to document
 existing practices at the time based on the approaches used by most implementations.
 This document continues to do the same, and updates the original document to reflect
-current practices for generating and consuming of CSV files.
+current practices for generation and parsing of CSV files.
 
-Both {{!RFC4180}} and this document are published as informational RFC for the benefit
-of the Internet community and not intended to be used as formal standards.
-Implementers should consult {{?RFC1796}} and {{?RFC2026}} for crucial differences
+Both {{!RFC4180}} and this document are published as informational RFCs for the benefit
+of the Internet community and are not intended to be used as formal standards.
+Implementers should consult {{?RFC1796}} and {{?RFC2026}} for differences
 between IETF standards and informational RFCs.
 
 # Definition of the CSV Format {#format}
 While there had been various specifications and implementations for the
 CSV format (for ex. {{CREATIVYST}}, {{EDOCEO}}, {{CSVW}} and {{ART}})), prior to publication
-of {{!RFC4180}} there is no attempt to provide a common specification. This section documents
+of {{!RFC4180}} there was no attempt to provide a common specification. This section documents
 the format that seems to be followed by most implementations (incorporating
 changes since the publication of {{!RFC4180}} and listing common implementation concerns).
 
@@ -175,7 +175,7 @@ escaped = DQUOTE *(textdata / COMMA / CR / LF / 2DQUOTE) DQUOTE
 non-escaped = *(textdata)
 
 textdata = %x00-09 / %x0B-0C / %x0E-21 / %x23-2B / %x2D-7F / UTF8-data
-         ; all characters except LF, CR, DQUOTE and COMMA
+         ; all characters except CR, LF, DQUOTE and COMMA
 
 linebreak = CR / LF / CRLF
 
@@ -195,9 +195,9 @@ UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
 Note that the authoritative definition of UTF-8 is in section 2.5 of {{UNICODE}}.
 
 # Common implementation concerns
-This section describes some common concerns that may arise when
-producing or parsing CSV files. These are not part of the formal definition of CSV
-and are included for awareness only. Implementers may also use other means to handle
+This section describes some common concerns that may arise during
+generation or parsing CSV files. These are not part of the formal definition of CSV
+and are included for awareness. Implementers may also use other means to handle
 these use cases including approaches like {{CSVW}}.
 
 ## Null values
@@ -230,8 +230,8 @@ Example of a CSV file with empty lines:
    CRLF<br/>
    zzz,yyy,xxxCRLF
 
-However, if the records are only made up of one field it is not possible to
-differentiate between an empty line, and an empty and unquoted field. This
+However, if the records are only made up of one field, it is not possible to
+differentiate between an empty line, and an empty unquoted field. This
 differentiation might play an important role in some implementations such
 as database exports/imports.
 
@@ -254,7 +254,7 @@ Implementers should be aware that some applications may treat header values as u
 
 ## Whitespace outside quoted fields
 When quoted fields are used, this document does not allow whitespace
-between double quotes and commas. Implementers should be aware that some applications
+between double quotes and commas. Implementers should be aware that some applications 
 may be more lenient and allow whitespace outside the double quotes.
 
 ## Other field separators
@@ -278,7 +278,8 @@ section 6 of {{?RFC3629}} and section 23.8 of {{UNICODE}}.
 ## Bidirectional text
 While most of the world's written languages are displayed left-to-right,
 many languages such as ones based on Hebrew or Arabic scripts are displayed
-primarily right-to-left. Implementers should consult the "bidirectional display" part in section 5 of {{?RFC6365}} for further guidance.
+primarily right-to-left. Implementers should consult the "bidirectional display"
+part in section 5 of {{?RFC6365}} for further guidance.
 
 One example of how bidirectional text can be handled in CSV files can be found in section 6.5.1 of {{CSVW}}.
 
@@ -348,7 +349,7 @@ Security considerations:
 > Implementers and users should also be aware that some software
 > applications may interpret certain characters in the beginning of CSV
 > fields as referring to code or formulas, thus resulting in malicious
-> code execution. This is known as "CSV injection" and users consuming
+> code execution. This is known as "CSV injection" and users parsing
 > CSV files should filter out such characters.
 
 > The text/csv format provides no confidentiality or integrity
@@ -375,14 +376,14 @@ Interoperability considerations:
 > be found in section 2 of (to be replaced with the RFC number).
 
 > There are numerous differences between different CSV implementations, many of which
-> are addressed in section 4 of (to be replaced with the RFC number of this document).
+> are discussed in (to be replaced with the RFC number of this document).
 
 Published specification:
 
 > While numerous private specifications exist
 > for various programs and systems, there is no single "master"
 > specification for this format.  An attempt at a common definition
-> can be found in Section 2 of (to be replaced with the RFC number).
+> can be found in (to be replaced with the RFC number).
 
 Applications that use this media type:
 
@@ -463,7 +464,8 @@ A special thank you to L.T.S.
 - No changes yet, refreshed to keep draft alive
 
 # Changes since the -05 draft
-- TBD
+- Grammar changes
+- Added another reference for section 3.10 (Bidi)
 
 # Note to Readers
 

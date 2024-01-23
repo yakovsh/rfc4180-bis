@@ -1258,10 +1258,10 @@ capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 in order to register the media type "text/csv". It tried to document
 existing practices at the time based on the approaches used by most implementations.
 This document continues to do the same, and updates the original document to reflect
-current practices for generating and consuming of CSV files.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
-<p id="section-1.2-2">Both <span>[<a href="#RFC4180" class="cite xref">RFC4180</a>]</span> and this document are published as informational RFC for the benefit
-of the Internet community and not intended to be used as formal standards.
-Implementers should consult <span>[<a href="#RFC1796" class="cite xref">RFC1796</a>]</span> and <span>[<a href="#RFC2026" class="cite xref">RFC2026</a>]</span> for crucial differences
+current practices for generation and parsing of CSV files.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.2-2">Both <span>[<a href="#RFC4180" class="cite xref">RFC4180</a>]</span> and this document are published as informational RFCs for the benefit
+of the Internet community and are not intended to be used as formal standards.
+Implementers should consult <span>[<a href="#RFC1796" class="cite xref">RFC1796</a>]</span> and <span>[<a href="#RFC2026" class="cite xref">RFC2026</a>]</span> for differences
 between IETF standards and informational RFCs.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1274,7 +1274,7 @@ between IETF standards and informational RFCs.<a href="#section-1.2-2" class="pi
       </h2>
 <p id="section-2-1">While there had been various specifications and implementations for the
 CSV format (for ex. <span>[<a href="#CREATIVYST" class="cite xref">CREATIVYST</a>]</span>, <span>[<a href="#EDOCEO" class="cite xref">EDOCEO</a>]</span>, <span>[<a href="#CSVW" class="cite xref">CSVW</a>]</span> and <span>[<a href="#ART" class="cite xref">ART</a>]</span>)), prior to publication
-of <span>[<a href="#RFC4180" class="cite xref">RFC4180</a>]</span> there is no attempt to provide a common specification. This section documents
+of <span>[<a href="#RFC4180" class="cite xref">RFC4180</a>]</span> there was no attempt to provide a common specification. This section documents
 the format that seems to be followed by most implementations (incorporating
 changes since the publication of <span>[<a href="#RFC4180" class="cite xref">RFC4180</a>]</span> and listing common implementation concerns).<a href="#section-2-1" class="pilcrow">¶</a></p>
 <div id="desc">
@@ -1381,7 +1381,7 @@ escaped = DQUOTE *(textdata / COMMA / CR / LF / 2DQUOTE) DQUOTE
 non-escaped = *(textdata)
 
 textdata = %x00-09 / %x0B-0C / %x0E-21 / %x23-2B / %x2D-7F / UTF8-data
-         ; all characters except LF, CR, DQUOTE and COMMA
+         ; all characters except CR, LF, DQUOTE and COMMA
 
 linebreak = CR / LF / CRLF
 
@@ -1408,9 +1408,9 @@ UTF8-data = UTF8-2 / UTF8-3 / UTF8-4 ; as per section 4 of [RFC3629]
       <h2 id="name-common-implementation-conce">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-common-implementation-conce" class="section-name selfRef">Common implementation concerns</a>
       </h2>
-<p id="section-3-1">This section describes some common concerns that may arise when
-producing or parsing CSV files. These are not part of the formal definition of CSV
-and are included for awareness only. Implementers may also use other means to handle
+<p id="section-3-1">This section describes some common concerns that may arise during
+generation or parsing CSV files. These are not part of the formal definition of CSV
+and are included for awareness. Implementers may also use other means to handle
 these use cases including approaches like <span>[<a href="#CSVW" class="cite xref">CSVW</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div id="null-values">
 <section id="section-3.1">
@@ -1451,8 +1451,8 @@ instead of parsing them but this specification does not dictate such behavior.<a
    aaa,bbb,cccCRLF<br>
    CRLF<br>
    zzz,yyy,xxxCRLF<a href="#section-3.3-3" class="pilcrow">¶</a></p>
-<p id="section-3.3-4">However, if the records are only made up of one field it is not possible to
-differentiate between an empty line, and an empty and unquoted field. This
+<p id="section-3.3-4">However, if the records are only made up of one field, it is not possible to
+differentiate between an empty line, and an empty unquoted field. This
 differentiation might play an important role in some implementations such
 as database exports/imports.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
 <p id="section-3.3-5">Example of a CSV file with empty lines and only one field per record:<a href="#section-3.3-5" class="pilcrow">¶</a></p>
@@ -1487,7 +1487,7 @@ even when line breaks appear within such field.<a href="#section-3.4-1" class="p
 <a href="#section-3.6" class="section-number selfRef">3.6. </a><a href="#name-whitespace-outside-quoted-f" class="section-name selfRef">Whitespace outside quoted fields</a>
         </h3>
 <p id="section-3.6-1">When quoted fields are used, this document does not allow whitespace
-between double quotes and commas. Implementers should be aware that some applications
+between double quotes and commas. Implementers should be aware that some applications 
 may be more lenient and allow whitespace outside the double quotes.<a href="#section-3.6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1531,7 +1531,8 @@ section 6 of <span>[<a href="#RFC3629" class="cite xref">RFC3629</a>]</span> and
         </h3>
 <p id="section-3.10-1">While most of the world's written languages are displayed left-to-right,
 many languages such as ones based on Hebrew or Arabic scripts are displayed
-primarily right-to-left. Implementers should consult the "bidirectional display" part in section 5 of <span>[<a href="#RFC6365" class="cite xref">RFC6365</a>]</span> for further guidance.<a href="#section-3.10-1" class="pilcrow">¶</a></p>
+primarily right-to-left. Implementers should consult the "bidirectional display"
+part in section 5 of <span>[<a href="#RFC6365" class="cite xref">RFC6365</a>]</span> for further guidance.<a href="#section-3.10-1" class="pilcrow">¶</a></p>
 <p id="section-3.10-2">One example of how bidirectional text can be handled in CSV files can be found in section 6.5.1 of <span>[<a href="#CSVW" class="cite xref">CSVW</a>]</span>.<a href="#section-3.10-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1625,7 +1626,7 @@ data.<a href="#section-4-10.1.1" class="pilcrow">¶</a></p>
           <p id="section-4-11.1.1">Implementers and users should also be aware that some software
 applications may interpret certain characters in the beginning of CSV
 fields as referring to code or formulas, thus resulting in malicious
-code execution. This is known as "CSV injection" and users consuming
+code execution. This is known as "CSV injection" and users parsing
 CSV files should filter out such characters.<a href="#section-4-11.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
@@ -1666,7 +1667,7 @@ be found in section 2 of (to be replaced with the RFC number).<a href="#section-
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-4-17.1">
           <p id="section-4-17.1.1">There are numerous differences between different CSV implementations, many of which
-are addressed in section 4 of (to be replaced with the RFC number of this document).<a href="#section-4-17.1.1" class="pilcrow">¶</a></p>
+are discussed in (to be replaced with the RFC number of this document).<a href="#section-4-17.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-4-18">Published specification:<a href="#section-4-18" class="pilcrow">¶</a></p>
@@ -1675,7 +1676,7 @@ are addressed in section 4 of (to be replaced with the RFC number of this docume
           <p id="section-4-19.1.1">While numerous private specifications exist
 for various programs and systems, there is no single "master"
 specification for this format.  An attempt at a common definition
-can be found in Section 2 of (to be replaced with the RFC number).<a href="#section-4-19.1.1" class="pilcrow">¶</a></p>
+can be found in (to be replaced with the RFC number).<a href="#section-4-19.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-4-20">Applications that use this media type:<a href="#section-4-20" class="pilcrow">¶</a></p>
@@ -1797,7 +1798,7 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class=
 <dd class="break"></dd>
 <dt id="CREATIVYST">[CREATIVYST]</dt>
         <dd>
-<span class="refAuthor">Repici, J.</span>, <span class="refTitle">"HOW-TO: The Comma Separated Value (CSV) File Format"</span>, <time datetime="2010" class="refDate">2010</time>, <span>&lt;<a href="https://www.creativyst.com/Doc/Articles/CSV/CSV01.htm">https://www.creativyst.com/Doc/Articles/CSV/CSV01.htm</a>&gt;</span>. </dd>
+<span class="refAuthor">Repici, J.</span>, <span class="refTitle">"HOW-TO: The Comma Separated Value (CSV) File Format"</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://www.creativyst.com/Doc/Articles/CSV/CSV01.htm">https://www.creativyst.com/Doc/Articles/CSV/CSV01.htm</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="CSVW">[CSVW]</dt>
         <dd>
@@ -1833,7 +1834,7 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class=
 <dd class="break"></dd>
 <dt id="UNICODE">[UNICODE]</dt>
       <dd>
-<span class="refAuthor">The Unicode Consortium</span>, <span class="refTitle">"The Unicode Standard, Version 15.0.0"</span>, <time datetime="2022-09" class="refDate">September 2022</time>, <span>&lt;<a href="https://www.unicode.org/versions/Unicode15.0.0/">https://www.unicode.org/versions/Unicode15.0.0/</a>&gt;</span>. </dd>
+<span class="refAuthor">The Unicode Consortium</span>, <span class="refTitle">"The Unicode Standard, Version 15.1.0"</span>, <time datetime="2023-09" class="refDate">September 2023</time>, <span>&lt;<a href="https://www.unicode.org/versions/Unicode15.1.0/">https://www.unicode.org/versions/Unicode15.1.0/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1960,7 +1961,10 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class=
       </h2>
 <ul class="normal">
 <li class="normal" id="appendix-G-1.1">
-          <p id="appendix-G-1.1.1">TBD<a href="#appendix-G-1.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-G-1.1.1">Grammar changes<a href="#appendix-G-1.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-G-1.2">
+          <p id="appendix-G-1.2.1">Added another reference for section 3.10 (Bidi)<a href="#appendix-G-1.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
