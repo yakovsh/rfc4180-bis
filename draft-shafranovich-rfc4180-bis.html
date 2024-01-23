@@ -10,23 +10,23 @@
        This RFC documents the common format used for Comma-Separated Values (CSV)
 files and updates the associated MIME type "text/csv". 
     ' name="description">
-<meta content="xml2rfc 3.18.0" name="generator">
-<meta content="draft-shafranovich-rfc4180-bis-05" name="ietf.draft">
+<meta content="xml2rfc 3.19.1" name="generator">
+<meta content="draft-shafranovich-rfc4180-bis-06" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.18.0
-    Python 3.11.4
+  xml2rfc 3.19.1
+    Python 3.11.6
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
-    lxml 4.9.3
-    platformdirs 3.10.0
-    pycountry 22.3.5
+    lxml 4.9.4
+    platformdirs 4.1.0
+    pycountry 23.12.11
     PyYAML 6.0.1
     requests 2.31.0
-    setuptools 68.1.2
+    setuptools 69.0.3
     six 1.16.0
-    wcwidth 0.2.6
+    wcwidth 0.2.13
 -->
 <link href="draft-shafranovich-rfc4180-bis.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -649,7 +649,7 @@ sub, sup {
 }
 #toc nav li {
   line-height: 1.3em;
-  margin: 0.75em 0;
+  margin: 2px 0;
   padding-left: 1.2em;
   text-indent: -1.2em;
 }
@@ -742,7 +742,7 @@ hr.addr {
     z-index: 2;
     top: 0;
     right: 0;
-    padding: 0;
+    padding: 1px 0 0 0;
     margin: 0;
     border-bottom: 1px solid #ccc;
     opacity: 0.6;
@@ -866,16 +866,13 @@ hr.addr {
     border-top: none;
     padding-top: 0;
   }
-  figure, pre {
+  figure, pre, .vcard {
     page-break-inside: avoid;
-  }
-  figure {
-    overflow: scroll;
   }
   h1, h2, h3, h4, h5, h6 {
     page-break-after: avoid;
   }
-  h2+*, h3+*, h4+*, h5+*, h6+* {
+  :is(h2, h3, h4, h5, h6)+*, dd {
     page-break-before: avoid;
   }
   pre {
@@ -888,6 +885,9 @@ hr.addr {
   }
   td {
     border-top: 1px solid #ddd;
+  }
+  .toplink {
+    display: none;
   }
 }
 
@@ -989,28 +989,6 @@ address div.right {
   text-align: right;
 }
 
-/* Give the table caption label the same styling as the figcaption */
-
-@media print {
-  .toplink {
-    display: none;
-  }
-
-  /* avoid overwriting the top border line with the ToC header */
-  #toc {
-    padding-top: 1px;
-  }
-
-  /* Avoid page breaks inside dl and author address entries */
-  dd {
-    page-break-before: avoid;
-  }
-  .vcard {
-    page-break-inside: avoid;
-  }
-
-}
-
 /* Dark mode. */
 @media (prefers-color-scheme: dark) {
 :root {
@@ -1047,11 +1025,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">rfc4180-bis</td>
-<td class="right">September 2023</td>
+<td class="right">January 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Shafranovich</td>
-<td class="center">Expires 8 March 2024</td>
+<td class="center">Expires 26 July 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1061,15 +1039,15 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">Network Working Group</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-shafranovich-rfc4180-bis-05</dd>
+<dd class="internet-draft">draft-shafranovich-rfc4180-bis-06</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-09-05" class="published">5 September 2023</time>
+<time datetime="2024-01-23" class="published">23 January 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-03-08">8 March 2024</time></dd>
+<dd class="expires"><time datetime="2024-07-26">26 July 2024</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1104,7 +1082,7 @@ files and updates the associated MIME type "text/csv".<a href="#section-abstract
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 8 March 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 26 July 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1113,7 +1091,7 @@ files and updates the associated MIME type "text/csv".<a href="#section-abstract
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2023 IETF Trust and the persons identified as the
+            Copyright (c) 2024 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1235,10 +1213,13 @@ files and updates the associated MIME type "text/csv".<a href="#section-abstract
             <p id="section-toc.1-1.13.1"><a href="#appendix-F" class="auto internal xref">Appendix F</a>.  <a href="#name-changes-since-the-04-draft" class="internal xref">Changes since the -04 draft</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#appendix-G" class="auto internal xref">Appendix G</a>.  <a href="#name-note-to-readers" class="internal xref">Note to Readers</a></p>
+            <p id="section-toc.1-1.14.1"><a href="#appendix-G" class="auto internal xref">Appendix G</a>.  <a href="#name-changes-since-the-05-draft" class="internal xref">Changes since the -05 draft</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15">
-            <p id="section-toc.1-1.15.1"><a href="#appendix-H" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.15.1"><a href="#appendix-H" class="auto internal xref">Appendix H</a>.  <a href="#name-note-to-readers" class="internal xref">Note to Readers</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16">
+            <p id="section-toc.1-1.16.1"><a href="#appendix-I" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
 </li>
         </ul>
 </nav>
@@ -1350,7 +1331,7 @@ zzz,yyy,xxxCRLF<a href="#section-2.1-2.5.2" class="pilcrow">¶</a></p>
 MUST be enclosed in double quotes. For example:<a href="#section-2.1-2.6.1" class="pilcrow">¶</a></p>
 <p id="section-2.1-2.6.2">
 "aaa","b CRLF<br>
-bb","ccc"CRLF<br>
+bb","c,c,c"CRLF<br>
 zzz,yyy,xxxCRLF<a href="#section-2.1-2.6.2" class="pilcrow">¶</a></p>
 </li>
           <li id="section-2.1-2.7">
@@ -1550,8 +1531,8 @@ section 6 of <span>[<a href="#RFC3629" class="cite xref">RFC3629</a>]</span> and
         </h3>
 <p id="section-3.10-1">While most of the world's written languages are displayed left-to-right,
 many languages such as ones based on Hebrew or Arabic scripts are displayed
-primarily right-to-left. Implementers should consult the "bidirectional display"
-part in section 5 of <span>[<a href="#RFC6365" class="cite xref">RFC6365</a>]</span> for further guidance.<a href="#section-3.10-1" class="pilcrow">¶</a></p>
+primarily right-to-left. Implementers should consult the "bidirectional display" part in section 5 of <span>[<a href="#RFC6365" class="cite xref">RFC6365</a>]</span> for further guidance.<a href="#section-3.10-1" class="pilcrow">¶</a></p>
+<p id="section-3.10-2">One example of how bidirectional text can be handled in CSV files can be found in section 6.5.1 of <span>[<a href="#CSVW" class="cite xref">CSVW</a>]</span>.<a href="#section-3.10-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="comments">
@@ -1755,6 +1736,7 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class=
       <h2 id="name-references">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
+<div id="sec-normative-references">
 <section id="section-7.1">
         <h3 id="name-normative-references">
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
@@ -1802,6 +1784,8 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class=
 <dd class="break"></dd>
 </dl>
 </section>
+</div>
+<div id="sec-informative-references">
 <section id="section-7.2">
         <h3 id="name-informative-references">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
@@ -1853,28 +1837,37 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class=
 <dd class="break"></dd>
 </dl>
 </section>
+</div>
 </section>
 <div id="major-changes-since-rfc4180">
 <section id="appendix-A">
       <h2 id="name-major-changes-since">
-<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-major-changes-since" class="section-name selfRef">Major changes since <em class="cite xref">[RFC4180]</em></a>
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-major-changes-since" class="section-name selfRef">Major changes since <span class="cite xref">[RFC4180]</span></a>
       </h2>
 <ul class="normal">
-<li class="normal" id="appendix-A-1.1">Added a section clarifying motivation for this document and standards status<a href="#appendix-A-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-A-1.1">
+          <p id="appendix-A-1.1.1">Added a section clarifying motivation for this document and standards status<a href="#appendix-A-1.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-A-1.2">Changing default encoding to UTF-8 and adding Unicode to the ABNF grammar<a href="#appendix-A-1.2" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-A-1.2">
+          <p id="appendix-A-1.2.1">Changing default encoding to UTF-8 and adding Unicode to the ABNF grammar<a href="#appendix-A-1.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-A-1.3">Allowing CR, LF and CRLF for line breaks<a href="#appendix-A-1.3" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-A-1.3">
+          <p id="appendix-A-1.3.1">Allowing CR, LF and CRLF for line breaks<a href="#appendix-A-1.3.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-A-1.4">Allowing binary content including HTAB in CSV files<a href="#appendix-A-1.4" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-A-1.4">
+          <p id="appendix-A-1.4.1">Allowing binary content including HTAB in CSV files<a href="#appendix-A-1.4.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-A-1.5">Mandating a line break at the end of the last line in the file<a href="#appendix-A-1.5" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-A-1.5">
+          <p id="appendix-A-1.5.1">Mandating a line break at the end of the last line in the file<a href="#appendix-A-1.5.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-A-1.6">Making records and headers optional, thus allowing for an empty file<a href="#appendix-A-1.6" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-A-1.6">
+          <p id="appendix-A-1.6.1">Making records and headers optional, thus allowing for an empty file<a href="#appendix-A-1.6.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-A-1.7">Adding a section on common implementation concerns<a href="#appendix-A-1.7" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-A-1.7">
+          <p id="appendix-A-1.7.1">Adding a section on common implementation concerns<a href="#appendix-A-1.7.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-A-1.8">Removed "header" parameter for the MIME type since it is not used<a href="#appendix-A-1.8" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-A-1.8">
+          <p id="appendix-A-1.8.1">Removed "header" parameter for the MIME type since it is not used<a href="#appendix-A-1.8.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
@@ -1885,9 +1878,11 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class=
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-changes-since-the-00-draft" class="section-name selfRef">Changes since the -00 draft</a>
       </h2>
 <ul class="normal">
-<li class="normal" id="appendix-B-1.1">Added CSV injection to security considerations (#30)<a href="#appendix-B-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-B-1.1">
+          <p id="appendix-B-1.1.1">Added CSV injection to security considerations (#30)<a href="#appendix-B-1.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-B-1.2">Added a reference to RFC 7111 (#27)<a href="#appendix-B-1.2" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-B-1.2">
+          <p id="appendix-B-1.2.1">Added a reference to RFC 7111 (#27)<a href="#appendix-B-1.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
@@ -1898,7 +1893,8 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class=
 <a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-changes-since-the-01-draft" class="section-name selfRef">Changes since the -01 draft</a>
       </h2>
 <ul class="normal">
-<li class="normal" id="appendix-C-1.1">No changes yet, refreshed to keep draft alive<a href="#appendix-C-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-C-1.1">
+          <p id="appendix-C-1.1.1">No changes yet, refreshed to keep draft alive<a href="#appendix-C-1.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
@@ -1909,13 +1905,17 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class=
 <a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-changes-since-the-02-draft" class="section-name selfRef">Changes since the -02 draft</a>
       </h2>
 <ul class="normal">
-<li class="normal" id="appendix-D-1.1">Refreshed to keep draft alive<a href="#appendix-D-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-D-1.1">
+          <p id="appendix-D-1.1.1">Refreshed to keep draft alive<a href="#appendix-D-1.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-D-1.2">Contact information and GitHub link changes<a href="#appendix-D-1.2" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-D-1.2">
+          <p id="appendix-D-1.2.1">Contact information and GitHub link changes<a href="#appendix-D-1.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-D-1.3">Minor updates on language<a href="#appendix-D-1.3" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-D-1.3">
+          <p id="appendix-D-1.3.1">Minor updates on language<a href="#appendix-D-1.3.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-D-1.4">Added a section on bidi handling<a href="#appendix-D-1.4" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-D-1.4">
+          <p id="appendix-D-1.4.1">Added a section on bidi handling<a href="#appendix-D-1.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
@@ -1926,13 +1926,17 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class=
 <a href="#appendix-E" class="section-number selfRef">Appendix E. </a><a href="#name-changes-since-the-03-draft" class="section-name selfRef">Changes since the -03 draft</a>
       </h2>
 <ul class="normal">
-<li class="normal" id="appendix-E-1.1">Moved comments to the common practices section and removed from the ABNF grammar (#32)<a href="#appendix-E-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-E-1.1">
+          <p id="appendix-E-1.1.1">Moved comments to the common practices section and removed from the ABNF grammar (#32)<a href="#appendix-E-1.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-E-1.2">Added more clarifications to the format section<a href="#appendix-E-1.2" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-E-1.2">
+          <p id="appendix-E-1.2.1">Added more clarifications to the format section<a href="#appendix-E-1.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-E-1.3">Made ABNF grammar match the document<a href="#appendix-E-1.3" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-E-1.3">
+          <p id="appendix-E-1.3.1">Made ABNF grammar match the document<a href="#appendix-E-1.3.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-E-1.4">Added a note about text content to the format section<a href="#appendix-E-1.4" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-E-1.4">
+          <p id="appendix-E-1.4.1">Added a note about text content to the format section<a href="#appendix-E-1.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
@@ -1943,30 +1947,43 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class=
 <a href="#appendix-F" class="section-number selfRef">Appendix F. </a><a href="#name-changes-since-the-04-draft" class="section-name selfRef">Changes since the -04 draft</a>
       </h2>
 <ul class="normal">
-<li class="normal" id="appendix-F-1.1">No changes yet, refreshed to keep draft alive<a href="#appendix-F-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-F-1.1">
+          <p id="appendix-F-1.1.1">No changes yet, refreshed to keep draft alive<a href="#appendix-F-1.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+</section>
+</div>
+<div id="changes-since-the-05-draft">
+<section id="appendix-G">
+      <h2 id="name-changes-since-the-05-draft">
+<a href="#appendix-G" class="section-number selfRef">Appendix G. </a><a href="#name-changes-since-the-05-draft" class="section-name selfRef">Changes since the -05 draft</a>
+      </h2>
+<ul class="normal">
+<li class="normal" id="appendix-G-1.1">
+          <p id="appendix-G-1.1.1">TBD<a href="#appendix-G-1.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
 </div>
 <div id="note-to-readers">
-<section id="appendix-G">
+<section id="appendix-H">
       <h2 id="name-note-to-readers">
-<a href="#appendix-G" class="section-number selfRef">Appendix G. </a><a href="#name-note-to-readers" class="section-name selfRef">Note to Readers</a>
+<a href="#appendix-H" class="section-number selfRef">Appendix H. </a><a href="#name-note-to-readers" class="section-name selfRef">Note to Readers</a>
       </h2>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="appendix-G-1.1">
-          <p id="appendix-G-1.1.1"><strong>Note to the RFC Editor:</strong> Please remove this section prior
-to publication.<a href="#appendix-G-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="appendix-H-1.1">
+          <p id="appendix-H-1.1.1"><strong>Note to the RFC Editor:</strong> Please remove this section prior
+to publication.<a href="#appendix-H-1.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-G-2">Development of this draft takes place on Github at: https://github.com/yakovsh/rfc4180-bis<a href="#appendix-G-2" class="pilcrow">¶</a></p>
-<p id="appendix-G-3">Comments can also be sent to the ART mailing list at: https://www.ietf.org/mailman/listinfo/art<a href="#appendix-G-3" class="pilcrow">¶</a></p>
-<p id="appendix-G-4">Full list of changes can be viewed via the IETF document tracker:
-https://tools.ietf.org/html/draft-shafranovich-rfc4180-bis<a href="#appendix-G-4" class="pilcrow">¶</a></p>
+<p id="appendix-H-2">Development of this draft takes place on Github at: https://github.com/yakovsh/rfc4180-bis<a href="#appendix-H-2" class="pilcrow">¶</a></p>
+<p id="appendix-H-3">Comments can also be sent to the ART mailing list at: https://www.ietf.org/mailman/listinfo/art<a href="#appendix-H-3" class="pilcrow">¶</a></p>
+<p id="appendix-H-4">Full list of changes can be viewed via the IETF document tracker:
+https://tools.ietf.org/html/draft-shafranovich-rfc4180-bis<a href="#appendix-H-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-H">
+<section id="appendix-I">
       <h2 id="name-authors-address">
 <a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
       </h2>

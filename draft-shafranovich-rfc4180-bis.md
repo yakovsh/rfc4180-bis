@@ -278,8 +278,9 @@ section 6 of {{?RFC3629}} and section 23.8 of {{UNICODE}}.
 ## Bidirectional text
 While most of the world's written languages are displayed left-to-right,
 many languages such as ones based on Hebrew or Arabic scripts are displayed
-primarily right-to-left. Implementers should consult the "bidirectional display"
-part in section 5 of {{?RFC6365}} for further guidance.
+primarily right-to-left. Implementers should consult the "bidirectional display" part in section 5 of {{?RFC6365}} for further guidance.
+
+One example of how bidirectional text can be handled in CSV files can be found in section 6.5.1 of {{CSVW}}.
 
 ## Comments
 Some implementations may use the hash sign ("#") to mark lines that are meant to

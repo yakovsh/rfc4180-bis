@@ -4,12 +4,12 @@
 
 Network Working Group                                    Y. Shafranovich
 Internet-Draft                                 Amazon Web Services (AWS)
-Intended status: Informational                          5 September 2023
-Expires: 8 March 2024
+Intended status: Informational                           23 January 2024
+Expires: 26 July 2024
 
 
    Common Format and MIME Type for Comma-Separated Values (CSV) Files
-                   draft-shafranovich-rfc4180-bis-05
+                   draft-shafranovich-rfc4180-bis-06
 
 Abstract
 
@@ -31,11 +31,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 March 2024.
+   This Internet-Draft will expire on 26 July 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -78,7 +78,8 @@ Table of Contents
    Appendix D.  Changes since the -02 draft
    Appendix E.  Changes since the -03 draft
    Appendix F.  Changes since the -04 draft
-   Appendix G.  Note to Readers
+   Appendix G.  Changes since the -05 draft
+   Appendix H.  Note to Readers
    Author's Address
 
 1.  Introduction
@@ -175,7 +176,7 @@ Table of Contents
        commas MUST be enclosed in double quotes.  For example:
 
        "aaa","b CRLF
-       bb","ccc"CRLF
+       bb","c,c,c"CRLF
        zzz,yyy,xxxCRLF
 
    7.  A double quote appearing inside a field MUST be escaped by
@@ -343,6 +344,9 @@ Table of Contents
    are displayed primarily right-to-left.  Implementers should consult
    the "bidirectional display" part in section 5 of [RFC6365] for
    further guidance.
+
+   One example of how bidirectional text can be handled in CSV files can
+   be found in section 6.5.1 of [CSVW].
 
 3.11.  Comments
 
@@ -655,7 +659,11 @@ Appendix F.  Changes since the -04 draft
 
    *  No changes yet, refreshed to keep draft alive
 
-Appendix G.  Note to Readers
+Appendix G.  Changes since the -05 draft
+
+   *  TBD
+
+Appendix H.  Note to Readers
 
       *Note to the RFC Editor:* Please remove this section prior to
       publication.
