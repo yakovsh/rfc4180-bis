@@ -248,9 +248,21 @@ after the last record in the file as a start of a new but empty record.
 When quoted fields are used, it is possible for a field to span multiple lines,
 even when line breaks appear within such field.
 
+Example of a CSV file with a quoted field spanning multiple lines:
+
+   "aaa","b CRLF<br/>
+   bb","c,c,c"CRLF<br/>
+   zzz,yyy,xxxCRLF
+
 ## Unique header names
 Implementers should be aware that some applications may treat header values as unique
 (either case-sensitive or case-insensitive).
+
+Example of a CSV file with non-unique header names:
+
+   field_name_1,field_name_2,field_name_1CRLF<br/>
+   aaa,bbb,cccCRLF<br/>
+   zzz,yyy,xxxCRLF
 
 ## Whitespace outside quoted fields
 When quoted fields are used, this document does not allow whitespace
