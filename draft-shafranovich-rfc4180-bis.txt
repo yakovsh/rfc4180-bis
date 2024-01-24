@@ -4,8 +4,8 @@
 
 Network Working Group                                    Y. Shafranovich
 Internet-Draft                                 Amazon Web Services (AWS)
-Intended status: Informational                           23 January 2024
-Expires: 26 July 2024
+Intended status: Informational                           24 January 2024
+Expires: 27 July 2024
 
 
    Common Format and MIME Type for Comma-Separated Values (CSV) Files
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 July 2024.
+   This Internet-Draft will expire on 27 July 2024.
 
 Copyright Notice
 
@@ -300,6 +300,10 @@ Table of Contents
 
    When quoted fields are used, it is possible for a field to span
    multiple lines, even when line breaks appear within such field.
+   Implementers should be aware that line breaks appearing in such
+   fields are considered part of the data content of those records, may
+   differ from the line breaks used in the rest of the CSV file and
+   should not be altered.
 
    Example of a CSV file with a quoted field spanning multiple lines:
 
@@ -676,6 +680,8 @@ Appendix G.  Changes since the -05 draft
    *  Grammar changes
 
    *  Added another reference for section 3.10 (Bidi)
+
+   *  Added clarification language on linebreaks (#36)
 
 Appendix H.  Note to Readers
 

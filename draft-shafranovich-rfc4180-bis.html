@@ -1029,7 +1029,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Shafranovich</td>
-<td class="center">Expires 26 July 2024</td>
+<td class="center">Expires 27 July 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1042,12 +1042,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-shafranovich-rfc4180-bis-06</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-01-23" class="published">23 January 2024</time>
+<time datetime="2024-01-24" class="published">24 January 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-07-26">26 July 2024</time></dd>
+<dd class="expires"><time datetime="2024-07-27">27 July 2024</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1082,7 +1082,7 @@ files and updates the associated MIME type "text/csv".<a href="#section-abstract
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 26 July 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 27 July 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1469,7 +1469,10 @@ after the last record in the file as a start of a new but empty record.<a href="
 <a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-fields-spanning-multiple-li" class="section-name selfRef">Fields spanning multiple lines</a>
         </h3>
 <p id="section-3.4-1">When quoted fields are used, it is possible for a field to span multiple lines,
-even when line breaks appear within such field.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+even when line breaks appear within such field. Implementers should be
+aware that line breaks appearing in such fields are considered part of the
+data content of those records, may differ from the line breaks used in the
+rest of the CSV file and should not be altered.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 <p id="section-3.4-2">Example of a CSV file with a quoted field spanning multiple lines:<a href="#section-3.4-2" class="pilcrow">¶</a></p>
 <p id="section-3.4-3">"aaa","b CRLF<br>
    bb","c,c,c"CRLF<br>
@@ -1973,6 +1976,9 @@ Oliver Siegmar, Marco Diniz Sousa and Greg Skinner.<a href="#section-6-1" class=
 </li>
         <li class="normal" id="appendix-G-1.2">
           <p id="appendix-G-1.2.1">Added another reference for section 3.10 (Bidi)<a href="#appendix-G-1.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-G-1.3">
+          <p id="appendix-G-1.3.1">Added clarification language on linebreaks (#36)<a href="#appendix-G-1.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>

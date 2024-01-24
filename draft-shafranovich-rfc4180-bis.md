@@ -246,7 +246,10 @@ after the last record in the file as a start of a new but empty record.
 
 ## Fields spanning multiple lines
 When quoted fields are used, it is possible for a field to span multiple lines,
-even when line breaks appear within such field.
+even when line breaks appear within such field. Implementers should be
+aware that line breaks appearing in such fields are considered part of the
+data content of those records, may differ from the line breaks used in the
+rest of the CSV file and should not be altered.
 
 Example of a CSV file with a quoted field spanning multiple lines:
 
@@ -478,6 +481,7 @@ A special thank you to L.T.S.
 # Changes since the -05 draft
 - Grammar changes
 - Added another reference for section 3.10 (Bidi)
+- Added clarification language on linebreaks (#36)
 
 # Note to Readers
 
