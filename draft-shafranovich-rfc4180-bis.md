@@ -62,8 +62,8 @@ Surprisingly, while this format is very popular, it has never been formally
 documented and didn't have a media type registered. This was addressed in 2005 via publication
 of {{!RFC4180}} and the concurrent registration of the "text/csv" media type.
 
-Since the publication of {{!RFC4180}}, the CSV format has evolved and this specification
-seeks to reflect these changes as well as update the "text/csv" media type registration.
+Since the publication of {{!RFC4180}}, the CSV format has evolved and this document seeks to
+update the "text/csv" media type registration reflecting these changes.
 
 ## Terminology
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -73,10 +73,10 @@ BCP 14 {{!RFC2119}} {{!RFC8174}} when, and only when, they appear in all
 capitals, as shown here.
 
 ## Motivation For and Status of This Document
-The original motivation of {{!RFC4180}} was to provide a reference
+The original motivation of {{!RFC4180}} was to provide a published specification
 in order to register the media type "text/csv". It tried to document
 existing practices at the time based on the approaches used by most implementations.
-This document continues to do the same, and updates the original document to reflect
+This document continues to do the same, and updates media type registration to reflect
 current practices for generation and parsing of CSV files.
 
 Both {{!RFC4180}} and this document are published as informational RFCs for the benefit
@@ -146,14 +146,15 @@ another double quote. For example:
 ## Default charset, binary content and line break values
 Since the initial publication of {{!RFC4180}}, the default charset for "text/*" media types
 has been changed to UTF-8 (as per {{!RFC6657}}) and {{!RFC7111}}.
-This document reflects this change and the default charset for CSV files is now UTF-8.
+This document reflects this change and the default charset for CSV files is now UTF-8
+(as defined in section 2.5 of {{UNICODE}}).
 
 As per section 4.2.1 of {{!RFC6838}}, the "text/*" media types are defined as those reasonable to present
 to the user. While {{!RFC4180}} restricted CSV contents to printable ASCII only,
 {{!RFC7111}} updated the MIME registration to allow binary content in CSV entities.
 Therefore, this document has been updated to allow binary content within CSV files.
 
-Although section 4.1.1. of {{!RFC2046}} defines CRLF to denote line breaks,
+Although section 4.1.1 of {{!RFC2046}} defines CRLF to denote line breaks,
 implementers MAY recognize a single CR or LF as a line break (similar to section 3.1.1.3
 of {{?RFC7231}}). However, some implementations MAY use other values.
 
@@ -203,7 +204,7 @@ these use cases including approaches like {{CSVW}}.
 ## Null values
 Some implementations (such as databases) treat empty fields and null values differently.
 For these implementations, there is a need to define a special value representing
-a null. However, this specification does not attempt to define a default value
+a null. However, this document does not attempt to define a default value
 for nulls.
 
 Example of a CSV file with nulls (if "NULL" is used to mark nulls):
@@ -213,15 +214,15 @@ Example of a CSV file with nulls (if "NULL" is used to mark nulls):
    zzz,NULL,xxxCRLF
 
 ## Empty files
-Implementers should be aware that in accordance to this specification a file
+Implementers should be aware that in accordance to this document a file
 does not need to contain any comments or records. Therefore, an empty file with
 zero bytes is considered valid.
 
 ## Empty lines
-This specification recommends but doesn't require having the same number of fields
+This document recommends but doesn't require having the same number of fields
 in every line. This allows CSV files to have empty lines without
 any fields at all. Implementors may choose to skip empty lines
-instead of parsing them but this specification does not dictate such behavior.
+instead of parsing them but this document does not dictate such behavior.
 
 Example of a CSV file with empty lines:
 
@@ -350,7 +351,7 @@ Encoding considerations:
 > CSV files and CSV MIME entities can consist of binary data
 > as per section 4.8 of {{!RFC6838}}. Although section 4.1.1. of {{!RFC2046}} defines
 > CRLF to denote line breaks, implementers MAY also recognize a single CR or LF
-> as a line break (similar to section 3.1.1.3 of {{!RFC7231}}).
+> as a line break (similar to section 3.1.1.3 of {{?RFC7231}}).
 > However, some implementations may use other values.
 
 Security considerations:
@@ -386,7 +387,7 @@ Interoperability considerations:
 
 > Due to lack of a single specification, there are considerable differences among
 > implementations. Implementers should "be conservative in what you
-> do, be liberal in what you accept from others" ({{!RFC0793}})
+> do, be liberal in what you accept from others" ({{?RFC0793}})
 > when processing CSV files. An attempt at a common definition can
 > be found in section 2 of (to be replaced with the RFC number).
 
@@ -456,30 +457,34 @@ A special thank you to L.T.S.
 - Adding a section on common implementation concerns
 - Removed "header" parameter for the MIME type since it is not used
 
-# Changes since the -00 draft
+# Draft history
+> **Note to the RFC Editor:** Please remove this section prior
+> to publication.
+
+## Changes since the -00 draft
 - Added CSV injection to security considerations (#30)
 - Added a reference to RFC 7111 (#27)
 
-# Changes since the -01 draft
+## Changes since the -01 draft
 - No changes yet, refreshed to keep draft alive
 
-# Changes since the -02 draft
+## Changes since the -02 draft
 - Refreshed to keep draft alive
 - Contact information and GitHub link changes
 - Minor updates on language
 - Added a section on bidi handling
 
-# Changes since the -03 draft
+## Changes since the -03 draft
 - Moved comments to the common practices section and removed from the ABNF grammar (#32)
 - Added more clarifications to the format section
 - Made ABNF grammar match the document
 - Added a note about text content to the format section
 
-# Changes since the -04 draft
+## Changes since the -04 draft
 - No changes yet, refreshed to keep draft alive
 
-# Changes since the -05 draft
-- Grammar changes
+## Changes since the -05 draft
+- Grammar changes and light editing
 - Added another reference for section 3.10 (Bidi)
 - Added clarification language on linebreaks (#36)
 

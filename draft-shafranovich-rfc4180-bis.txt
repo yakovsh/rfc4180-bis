@@ -4,8 +4,8 @@
 
 Network Working Group                                    Y. Shafranovich
 Internet-Draft                                 Amazon Web Services (AWS)
-Intended status: Informational                           24 January 2024
-Expires: 27 July 2024
+Intended status: Informational                           31 January 2024
+Expires: 3 August 2024
 
 
    Common Format and MIME Type for Comma-Separated Values (CSV) Files
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 July 2024.
+   This Internet-Draft will expire on 3 August 2024.
 
 Copyright Notice
 
@@ -73,13 +73,14 @@ Table of Contents
      7.1.  Normative References
      7.2.  Informative References
    Appendix A.  Major changes since RFC4180
-   Appendix B.  Changes since the -00 draft
-   Appendix C.  Changes since the -01 draft
-   Appendix D.  Changes since the -02 draft
-   Appendix E.  Changes since the -03 draft
-   Appendix F.  Changes since the -04 draft
-   Appendix G.  Changes since the -05 draft
-   Appendix H.  Note to Readers
+   Appendix B.  Draft history
+     B.1.  Changes since the -00 draft
+     B.2.  Changes since the -01 draft
+     B.3.  Changes since the -02 draft
+     B.4.  Changes since the -03 draft
+     B.5.  Changes since the -04 draft
+     B.6.  Changes since the -05 draft
+   Appendix C.  Note to Readers
    Author's Address
 
 1.  Introduction
@@ -92,8 +93,8 @@ Table of Contents
    concurrent registration of the "text/csv" media type.
 
    Since the publication of [RFC4180], the CSV format has evolved and
-   this specification seeks to reflect these changes as well as update
-   the "text/csv" media type registration.
+   this document seeks to update the "text/csv" media type registration
+   reflecting these changes.
 
 1.1.  Terminology
 
@@ -105,12 +106,12 @@ Table of Contents
 
 1.2.  Motivation For and Status of This Document
 
-   The original motivation of [RFC4180] was to provide a reference in
-   order to register the media type "text/csv".  It tried to document
-   existing practices at the time based on the approaches used by most
-   implementations.  This document continues to do the same, and updates
-   the original document to reflect current practices for generation and
-   parsing of CSV files.
+   The original motivation of [RFC4180] was to provide a published
+   specification in order to register the media type "text/csv".  It
+   tried to document existing practices at the time based on the
+   approaches used by most implementations.  This document continues to
+   do the same, and updates media type registration to reflect current
+   practices for generation and parsing of CSV files.
 
    Both [RFC4180] and this document are published as informational RFCs
    for the benefit of the Internet community and are not intended to be
@@ -189,7 +190,8 @@ Table of Contents
    Since the initial publication of [RFC4180], the default charset for
    "text/*" media types has been changed to UTF-8 (as per [RFC6657]) and
    [RFC7111].  This document reflects this change and the default
-   charset for CSV files is now UTF-8.
+   charset for CSV files is now UTF-8 (as defined in section 2.5 of
+   [UNICODE]).
 
    As per section 4.2.1 of [RFC6838], the "text/*" media types are
    defined as those reasonable to present to the user.  While [RFC4180]
@@ -198,7 +200,7 @@ Table of Contents
    Therefore, this document has been updated to allow binary content
    within CSV files.
 
-   Although section 4.1.1. of [RFC2046] defines CRLF to denote line
+   Although section 4.1.1 of [RFC2046] defines CRLF to denote line
    breaks, implementers MAY recognize a single CR or LF as a line break
    (similar to section 3.1.1.3 of [RFC7231]).  However, some
    implementations MAY use other values.
@@ -251,8 +253,8 @@ Table of Contents
 
    Some implementations (such as databases) treat empty fields and null
    values differently.  For these implementations, there is a need to
-   define a special value representing a null.  However, this
-   specification does not attempt to define a default value for nulls.
+   define a special value representing a null.  However, this document
+   does not attempt to define a default value for nulls.
 
    Example of a CSV file with nulls (if "NULL" is used to mark nulls):
 
@@ -262,17 +264,17 @@ Table of Contents
 
 3.2.  Empty files
 
-   Implementers should be aware that in accordance to this specification
-   a file does not need to contain any comments or records.  Therefore,
-   an empty file with zero bytes is considered valid.
+   Implementers should be aware that in accordance to this document a
+   file does not need to contain any comments or records.  Therefore, an
+   empty file with zero bytes is considered valid.
 
 3.3.  Empty lines
 
-   This specification recommends but doesn't require having the same
-   number of fields in every line.  This allows CSV files to have empty
-   lines without any fields at all.  Implementors may choose to skip
-   empty lines instead of parsing them but this specification does not
-   dictate such behavior.
+   This document recommends but doesn't require having the same number
+   of fields in every line.  This allows CSV files to have empty lines
+   without any fields at all.  Implementors may choose to skip empty
+   lines instead of parsing them but this document does not dictate such
+   behavior.
 
    Example of a CSV file with empty lines:
 
@@ -522,10 +524,6 @@ Table of Contents
 
 7.1.  Normative References
 
-   [RFC0793]  Postel, J., "Transmission Control Protocol", RFC 793,
-              DOI 10.17487/RFC0793, September 1981,
-              <https://www.rfc-editor.org/info/rfc793>.
-
    [RFC2046]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part Two: Media Types", RFC 2046,
               DOI 10.17487/RFC2046, November 1996,
@@ -561,11 +559,6 @@ Table of Contents
               DOI 10.17487/RFC7111, January 2014,
               <https://www.rfc-editor.org/info/rfc7111>.
 
-   [RFC7231]  Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
-              Protocol (HTTP/1.1): Semantics and Content", RFC 7231,
-              DOI 10.17487/RFC7231, June 2014,
-              <https://www.rfc-editor.org/info/rfc7231>.
-
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
@@ -588,6 +581,10 @@ Table of Contents
 
    [EDOCEO]   Edoceo, Inc., "Comma Separated Values (CSV) Standard File
               Format", 2020, <https://edoceo.com/dev/csv-file-format>.
+
+   [RFC0793]  Postel, J., "Transmission Control Protocol", RFC 793,
+              DOI 10.17487/RFC0793, September 1981,
+              <https://www.rfc-editor.org/info/rfc793>.
 
    [RFC1796]  Huitema, C., Postel, J., and S. Crocker, "Not All RFCs are
               Standards", RFC 1796, DOI 10.17487/RFC1796, April 1995,
@@ -615,6 +612,11 @@ Table of Contents
               DOI 10.17487/RFC6365, September 2011,
               <https://www.rfc-editor.org/info/rfc6365>.
 
+   [RFC7231]  Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
+              Protocol (HTTP/1.1): Semantics and Content", RFC 7231,
+              DOI 10.17487/RFC7231, June 2014,
+              <https://www.rfc-editor.org/info/rfc7231>.
+
    [UNICODE]  The Unicode Consortium, "The Unicode Standard, Version
               15.1.0", September 2023,
               <https://www.unicode.org/versions/Unicode15.1.0/>.
@@ -640,17 +642,22 @@ Appendix A.  Major changes since [RFC4180]
 
    *  Removed "header" parameter for the MIME type since it is not used
 
-Appendix B.  Changes since the -00 draft
+Appendix B.  Draft history
+
+      *Note to the RFC Editor:* Please remove this section prior to
+      publication.
+
+B.1.  Changes since the -00 draft
 
    *  Added CSV injection to security considerations (#30)
 
    *  Added a reference to RFC 7111 (#27)
 
-Appendix C.  Changes since the -01 draft
+B.2.  Changes since the -01 draft
 
    *  No changes yet, refreshed to keep draft alive
 
-Appendix D.  Changes since the -02 draft
+B.3.  Changes since the -02 draft
 
    *  Refreshed to keep draft alive
 
@@ -660,7 +667,7 @@ Appendix D.  Changes since the -02 draft
 
    *  Added a section on bidi handling
 
-Appendix E.  Changes since the -03 draft
+B.4.  Changes since the -03 draft
 
    *  Moved comments to the common practices section and removed from
       the ABNF grammar (#32)
@@ -671,19 +678,19 @@ Appendix E.  Changes since the -03 draft
 
    *  Added a note about text content to the format section
 
-Appendix F.  Changes since the -04 draft
+B.5.  Changes since the -04 draft
 
    *  No changes yet, refreshed to keep draft alive
 
-Appendix G.  Changes since the -05 draft
+B.6.  Changes since the -05 draft
 
-   *  Grammar changes
+   *  Grammar changes and light editing
 
    *  Added another reference for section 3.10 (Bidi)
 
    *  Added clarification language on linebreaks (#36)
 
-Appendix H.  Note to Readers
+Appendix C.  Note to Readers
 
       *Note to the RFC Editor:* Please remove this section prior to
       publication.
