@@ -4,13 +4,8 @@
 
 Network Working Group                                    Y. Shafranovich
 Internet-Draft                                 Amazon Web Services (AWS)
-<<<<<<< HEAD
-Intended status: Informational                           31 January 2024
-Expires: 3 August 2024
-=======
 Intended status: Informational                             2 August 2024
 Expires: 3 February 2025
->>>>>>> develop
 
 
    Common Format and MIME Type for Comma-Separated Values (CSV) Files
@@ -36,11 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-<<<<<<< HEAD
-   This Internet-Draft will expire on 3 August 2024.
-=======
    This Internet-Draft will expire on 3 February 2025.
->>>>>>> develop
 
 Copyright Notice
 
